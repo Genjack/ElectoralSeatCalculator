@@ -1,0 +1,38 @@
+Date started: Thursday, 11th October 2018.
+
+Note on initial notes: Sorting may come down to using a stable sort.
+
+Aim: To find which divisions need to be visited for 'maximum impact'.
+- So visiting swing districts basically - where the race is tight.
+- So find places where 2016 results show close contest with a larger margin of
+error perhaps.
+
+Polling data should be aggregated into divisions. Will be distances between 
+these divisions (in the two csv files provided). 
+- Means weight for graph edges.
+
+MENU
+1) List Nominees
+    - Give list of nominees, with options to FILTER BY any/all of State, Party 
+      or Division.
+    - options to ORDER BY any/all of Surname/State/Party/Division.
+2) Nominee Search
+    - Give full nominee details, searching by a substring, starting with first
+      character of surname, giving options to filter by any/all of State/Party.
+3) List by Margin
+    - Select a party; list all marginal seats within a threshold. Allow default
+      values of +/- 6%, as well as entering custom margins.
+4) Itinerary by Margin
+    - Based on a list by margin, select locations to visit and create an 
+      itinerary to visit all the locations. Assume three hours needed per stop.
+    - Additional marks for minimising on overall travel time.
+0) Quit
+    - May require sub-menus as well (most likely).
+    - Reports shhould be displayed to screen with an option to save to file.
+    - Main menu should be re-displayed after completion of processing.
+
+File should be named 'DSA_Assignment_19390664'
+Requires: code (no class files); input files; README; test harness;
+    documentation; signed and dated cover sheet.
+DOCUMENTATION:
+    - UML; description of classes; justification of major decisions made.
