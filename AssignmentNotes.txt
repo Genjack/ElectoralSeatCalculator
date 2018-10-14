@@ -36,3 +36,5 @@ Requires: code (no class files); input files; README; test harness;
     documentation; signed and dated cover sheet.
 DOCUMENTATION:
     - UML; description of classes; justification of major decisions made.
+
+Look for commas in the file. Split based on these.

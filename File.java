@@ -7,19 +7,37 @@
 import java.util.*;
 import java.io.*;
 
-public class FileClass
+
+public class File
 {
-    public static int [] countPlaces( String fileName, int [] counters )
+
+/**
+* FUNCTION: sanitiseAndCount
+* IMPORTS: String - filename;
+* PURPOSE:
+* HOW IT WORKS:
+*    After I retrieve each line, I need to check for the substring, and if I 
+*    find it, replace it. Then count the line. 
+*    Checking for "Shooters, Farmers".
+*    Try reading, checking, changing and printing each line to a new file.
+* HOW IT RELATES:
+**/
+    public static int sanitiseAndCount( String fileName )
     {
-        // counters[0]: Total number of places;
-        // counters[1]: Total number of countries;
-        // counters[2]: number of states;
-        // counters[3]: number of locations.
-        String line, placeType;
+        String line;
+        int count = 0;
+        String dodgy = "hooters, F";
+        String replacement = "hooters F"; //removes the comma.
+        String oldFile = ""; //String representation of the old file.
+        String newFile = ""; //String representation of modified file.
 
         FileInputStream fileStream = null;
         InputStreamReader rdr;
         BufferedReader bufRdr;
+        //Create a Printwriter object for modification of text file.
+        //Inspiration: javaconceptoftheday.com/modify-replace-string-in-text
+        //-file-in-java/
+        PrintWriter pw;
 
         try
         {
@@ -29,40 +47,20 @@ public class FileClass
             
             line = bufRdr.readLine();
             
-            while( ( line != null ) && (!( line.equals("") ) ) )
-            { 
-                placeType = processLocation( line );
-                if( placeType != null )
-                {
-                    if( placeType.equals( "COUNTRY" ) )
-                    {
-                        counters[0] += 1;
-                        counters[1] += 1;
-                    }
-                    else 
-                    {
-                        if( placeType.equals( "STATE" ) )
-                        {
-                            counters[0] += 1;
-                            counters[2] += 1;
-                        }
-                        else
-                        {
-                            if (placeType.equals( "LOCATION" ) )
-                            {
-                                counters[0] += 1;
-                                counters[3] += 1;
-                            }
-                            else
-                            {
-                                fileStream.close();
-                                throw new IOException( "Invalid file.");
-                            }
-                        }
-                    }
-                }
+            while( ( line != null ) )
+            {
+            //40 offset may as well skip some chars, 100 to be safe.
+                oldFile += line + "\n";        
+                count++;
                 line = bufRdr.readLine(); 
-            } 
+            }
+            if( oldFile.regionMatches(40, dodgy, 0, 100) )
+            {
+                System.out.println( "hey!" );
+                newFile = oldFile.replaceAll( dodgy, replacement );
+            }
+            writer = new FileWriter( fileName );
+            writer.write( newFile );
         }
         catch( IOException e )
         {
@@ -77,23 +75,12 @@ public class FileClass
                     //Empty.
                 }
             }
-            System.out.println( "Error: " + e.getMessage() );
+            e.printStackTrace( System.out );
         }
-        return counters;
+        return count;
     }//End Submodule.
 
-/*******************************************************************************
-SUBMODULE: readFile
-IMPORT: fileName (String), mainCountriesArr (ARRAY OF CountryClass),
-    mainStatesArr (ARRAY OF StateClass), mainLocationsArr (ARRAY OF 
-    LocationClass)
-EXPORT: None.
-DESCRIPTION: This submodule reads the file again, and creates the objects based
-    on how the lines are split. Once they are created, it delegates the storage
-    of these objects into an array and returns to main.
-*******************************************************************************/
-
-    public static void readFile( String fileName, CountryClass []
+    /*public static void readFile( String fileName, CountryClass []
         mainCountriesArr, StateClass [] mainStatesArr, LocationClass []
         mainLocationsArr )
     {
@@ -177,15 +164,10 @@ DESCRIPTION: This submodule reads the file again, and creates the objects based
         }
     }//After completion, all objects should be created and stored.
 
-/*******************************************************************************
-SUBMODULE: processLocation
-IMPORT: line (String)
-EXPORT: location (String)
-DESCRIPTION: This method takes in the line being processed, and splits it
-    according to commas, to return the first element in the array - the
-    location.
-*******************************************************************************/
-    
+
+************ PROCESS LOCATION ***********
+
+
     public static String processLocation( String line )
     {
         String location;
@@ -198,13 +180,7 @@ DESCRIPTION: This method takes in the line being processed, and splits it
     }
  
 
-/*******************************************************************************
-SUBMODULE: processString
-IMPORT: line (String), details (ARRAY OF String)
-EXPORT: None. (Pass by reference)
-DESCRIPTION: This method takes in the line being processed, and breaks it up to
-    return a string of the properties delimited by colons in the csv file.
-*******************************************************************************/
+************ PROCESS STRING ***********
 
     public static String [] processString( String line, String [] details, 
         String delimiter )
@@ -219,6 +195,9 @@ DESCRIPTION: This method takes in the line being processed, and breaks it up to
         return details;
     }
 
+
+************ PROCESS STRING TWO ***********
+
     public static void processStringTwo( String [] details, String [] 
         detailsTwo )
     {
@@ -232,18 +211,8 @@ DESCRIPTION: This method takes in the line being processed, and breaks it up to
         processString( tempStore, detailsTwo, "=" );
     }
 
-        
-/*******************************************************************************
-SUBMODULE: makeNation
-IMPORT: details (ARRAY OF String), numStates (Integer)
-EXPORT: nation (CountryClass)
-DESCRIPTION: This method takes in the required fields from the line previously
-    processed and store in the details array, as well as the reference to the 
-    countries storage array. It formats the data and creates a CountryClass
-    object using the alternate constructor, before returning it. The numStates
-    integer determines the length of the required classfield StateClass array,
-    and is designed this way in order to avoid hardcoding (too many) numbers.
-*******************************************************************************/
+
+************ MAKE NATION ***********
 
     public static CountryClass makeNation( String [] details, int numStates )
     {
@@ -259,17 +228,7 @@ DESCRIPTION: This method takes in the required fields from the line previously
         return nation;
     }
 
-/*******************************************************************************
-SUBMODULE: makeState
-IMPORT: details (ARRAY OF String), numLocations (Integer)
-EXPORT: state (StateClass)
-DESCRIPTION: This method takes in the required fields from the line previously
-    processed and store in the details array, as well as the reference to the 
-    countries storage array. It formats the data and creates a StateClass
-    object using the alternate constructor, before returning it. The 
-    numLocations integer determines the length of the required classfield 
-    LocationClass array. 
-*******************************************************************************/
+************ MAKE STATE ***********
 
     public static StateClass makeState( String [] details, int numLocations )
     {
@@ -285,14 +244,7 @@ DESCRIPTION: This method takes in the required fields from the line previously
         return state;
     }
 
-/*******************************************************************************
-SUBMODULE: makeLocation
-IMPORT: details (ARRAY OF String)
-EXPORT: location (LocationClass)
-DESCRIPTION: This method takes in the required fields from the line previously
-    processed and stored in the details array. It formats the data and creates a 
-    LocationClass object using the alternate constructor, before returning it. 
-*******************************************************************************/
+************ MAKE LOCATION ***********
 
     public static LocationClass makeLocation( String [] details )
     {
@@ -301,13 +253,7 @@ DESCRIPTION: This method takes in the required fields from the line previously
         return location;
     }
 
-/*****************************************************************************
-SUBMODULE: writeFile
-IMPORT: mainArr (ARRAY OF CountryClass)
-EXPORT: None.
-DESCRIPTION: The current array objects are written to file and saved, in csv
-             format.
-*****************************************************************************/
+************ WRITE FILE ***********
 
     public static void writeFile( CountryClass [] mainArr )
     {
@@ -347,14 +293,7 @@ DESCRIPTION: The current array objects are written to file and saved, in csv
         }
     }//End Submodule.
 
-/*****************************************************************************
-SUBMODULE: saveCountries
-IMPORT: containerArr (ARRAY OF CountryClass)
-EXPORT: None.
-DESCRIPTION: This is the serialization method for the existing place objects.
-             The User enters a file name, and the objects are serialized and 
-             saved to this file.
-*****************************************************************************/
+    SAVE COUNTRIES***********************
 
     public static void saveCountries( CountryClass [] containerArr )
     {
@@ -377,14 +316,12 @@ DESCRIPTION: This is the serialization method for the existing place objects.
         }
     }
 
-/*****************************************************************************
 SUBMODULE: load
 IMPORT: None.
 EXPORT: containerArr (ARRAY OF CountryClass)
 DESCRIPTION: This is the serialization method for the existing place objects.
              The User enters a file name, and the objects are de-serialised 
              and returned.
-*****************************************************************************/
 
     public static CountryClass [] load() throws IllegalArgumentException
     {
@@ -413,5 +350,5 @@ DESCRIPTION: This is the serialization method for the existing place objects.
             throw new IllegalArgumentException( "Unable to load." );
         }
         return rebuiltNations;
-    }
+    } */
 }
