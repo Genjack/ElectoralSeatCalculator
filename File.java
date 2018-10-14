@@ -1,7 +1,9 @@
 /* Name: Tim J. Dempsey
    Student ID: 19390664
    Unit and Time: DSA @ Wednesdays, 12pm
-   Tutors: Unknown
+   File Name: File.java
+   Contents: Java for the File class for the DSA assignment, with methods
+   relating to file I/O.
 */
 
 import java.util.*;
@@ -26,18 +28,10 @@ public class File
     {
         String line;
         int count = 0;
-        String dodgy = "hooters, F";
-        String replacement = "hooters F"; //removes the comma.
-        String oldFile = ""; //String representation of the old file.
-        String newFile = ""; //String representation of modified file.
 
         FileInputStream fileStream = null;
         InputStreamReader rdr;
         BufferedReader bufRdr;
-        //Create a Printwriter object for modification of text file.
-        //Inspiration: javaconceptoftheday.com/modify-replace-string-in-text
-        //-file-in-java/
-        PrintWriter pw;
 
         try
         {
@@ -49,18 +43,10 @@ public class File
             
             while( ( line != null ) )
             {
-            //40 offset may as well skip some chars, 100 to be safe.
-                oldFile += line + "\n";        
-                count++;
+                splitLine( line, splitArr );
+                //do stuff
                 line = bufRdr.readLine(); 
             }
-            if( oldFile.regionMatches(40, dodgy, 0, 100) )
-            {
-                System.out.println( "hey!" );
-                newFile = oldFile.replaceAll( dodgy, replacement );
-            }
-            writer = new FileWriter( fileName );
-            writer.write( newFile );
         }
         catch( IOException e )
         {
