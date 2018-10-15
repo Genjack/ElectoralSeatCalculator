@@ -6,7 +6,7 @@
     store a political candidate.
     Previous guidance: The template for this code is loosely based on my
     MeatClass for  OOPD Assignment, Semester One 2018.
-    Date Last Modified: 14th October, 2018
+    Date Last Modified: 16th October, 2018
 */
 
 import java.util.*;
@@ -76,164 +76,176 @@ public class Candidate
 
 //********************************** ACCESSORS *******************************//
 
-    public String getCut()
+    public String getStateAb()
     {
-        return cut;
+        return stateAb;
     }
 
-    public double getWeight()
+    public int getDivID()
     {
-        return weight;
+        return divID;
     }
 
-    public DateClass getDate()
+    public String getDivName()
     {
-        DateClass copyDate = useByDate.clone();
-        return copyDate;
+        return divName;
     }
-
-//*********************** EQUALS AND TOSTRING MODULES **********************//
-
-/*****************************************************************************
- * SUBMODULE equals                                                          *
- * IMPORT: inObject ( Object )                                               *
- * EXPORT: isEqual ( Boolean )                                               *
- * ASSERTION: Returns true if current object traits are equal to imported.   *
- ****************************************************************************/
     
-    public boolean equals ( Object inObject )
+    public String getPartyAb()
     {
-        boolean isEquals = false;
-
-        if ( inObject instanceof MeatClass )
-        {
-            MeatClass inMeat = ( MeatClass )( inObject );
-            if ( super.equals( inMeat ) )
-            {
-                isEquals = (( cut.equals ( inMeat.getCut() )) &&
-                ( Math.abs ( weight - inMeat.getWeight() ) < 0.01 ) &&
-                ( useByDate.equals ( inMeat.getDate() ) ));
-            }
-        }
-        return isEquals;
+        return partyAb;
     }
 
+    public String getPartyName()
+    {
+        return partyName;
+    }
+
+    public int getCndID()
+    {
+        return cndID;
+    }
+
+    public String getSurname()
+    {
+        return cndSurname;
+    }
+
+    public String getGivenName()
+    {
+        return cndGivenName;
+    }
+
+    public boolean getElected()
+    {
+        return elected;
+    }
+
+    public boolean getHistElected()
+    {
+        return histElected;
+    }
+
+//********************************** MUTATORS *******************************//
+/* Why have a mutator? Because I haven't really though through my TDD, so not
+   currently sure how validation's going to work. I'll build some in here now,
+   so that if they try to create an imitation file, it will handle it. */
+
+    public void setStateAb( String inAb )
+    {
+        //Checking that the state abbreviation is a maximum of 3 letters.
+        if( !( validateString( inAb ) ) || inAb.length() > 3 )
+        {
+            throw new IllegalArgumentException( "Empty state Abbreviation." );
+        }
+        else
+        {
+            stateAb = inAb;
+        }
+    }
+
+    public void setDivId( int inID )
+    {
+        //Validation: valid ID's are three digit integers.
+        if( inID < 100 || inID > 999 )
+        {
+            throw new IllegalArgumentException( "Invalid division ID." );
+        }
+        else
+        {
+            divID = inID;
+        }
+    }
+
+    public void setDivName( String inDName )
+    {
+        //Validation: checking for empty string.
+        if( !( validateString( inDName ) ) )
+        {
+            throw new IllegalArgumentException( "Empty division name." );
+        }
+        else
+        {
+            divName = inDName;
+        }
+    }
+
+    public void setPartyName( String inPName )
+    {
+        //Validation: Checking for empty string.
+        if( !( validateString( inPName ) ) )
+        {
+            throw new IllegalArgumentException( "Empty party name." );
+        }
+        else
+        {
+            partyName = inPName;
+        }
+    }
+
+    public void setCndID( int inCID )
+    {
+        //Validation: Check that the integer is a max length of 5 digits.
+        if( inCID > 99999 )
+        {
+            throw new IllegalArgumentException( "Invalid candidate ID." );
+        }
+        else
+        {
+            cndID = inCID;
+        }
+    }
+
+    public void setSurname( String inSurname )
+    {
+        //Validation: valid candidates are not empty strings (empty souls maybe)
+        if( !( validateString( inSurname ) ) )
+        {
+            throw new IllegalArgumentException( "Invalid candidate surname." );
+        }
+        else
+        {
+            cndSurname = inSurname;
+        }
+    }
+
+    public void setGivenName( String inGivenName )
+    {
+        //Validation: Checking for empty string.
+        if( !( validateString( inGivenName ) ) )
+        {
+            throw new IllegalArgumentException( "Invalid candidate name." );
+        }
+        else
+        {
+            cndGivenName = inGivenName;
+        }
+    }
+
+    public void setElected( inElected )
+    {
+        elected = inElected;
+    }
+
+    public void setHistElected( inHistElected )
+    {
+        histElected = inHistElected;
+    }
+
+//*************************** TOSTRING MODULE *******************************//
+
+/**
+* TO STRING METHOD
+* PURPOSE: To format information for the candidate in an easy-to-read manner.
+**/
     public String toString()
     {
-        return ( super.toStringName() + "," + cut + "," + weight + "," + 
-        super.toStringTemp() + "," + useByDate.toString() + "," + 
-        super.toStringPackaging() );
+        return ( "Name: " + cndGivenName + " " + cndSurname + ";\n ID: " +
+            cndID + ";\n Party: " + partyAb + " - " + partyName + 
+            ";\n Division: " + divName + "( " + divID + ")\n Elected: " + 
+            elected + "; Elected Previously: " + histElected + ".\n" );
     }
 
-//***************************** MUTATORS ***********************************//
-
-/*****************************************************************************
- * Public setCut                                                            *
- * IMPORT: inCut (String)                                                    *
- * EXPORT: None.                                                             *
- * ASSERTION: The cut of the meat is changed to inCut, unless it's empty.    *
- * NOTE ON DESIGN: The reasoning an exception is thrown here is because an   *
- *                 empty String makes it difficult later on in interpreting  * 
- *                 data.                                                     *
- ****************************************************************************/
-    
-    public void setCut ( String inCut )
-    {
-        if ( ! ( validateString( inCut ) ) )
-        {
-            throw new IllegalArgumentException( "Empty cut" );
-        }
-        else
-        {
-            cut = inCut;
-        }
-    }
-
-/*****************************************************************************
- * Public setWeight                                                          *
- * IMPORT: inWeight (Real)                                                   *
- * EXPORT: None.                                                             *
- * ASSERTION: The weight of the meat is changed to inWeight if valid.        *
- ****************************************************************************/
-    
-    public void setWeight ( double inWeight )
-    {  
-        if (( inWeight < Constants.getMinWV() ) &&
-        ( inWeight > Constants.getMaxWV() )) 
-        {
-            throw new IllegalArgumentException( "Error: invalid weight." );
-        }
-        else
-        {
-            weight = inWeight;
-        }
-    }
-
-/*****************************************************************************
- * Public setDate                                                            *
- * IMPORT: inDate (DateClass)                                                *
- * EXPORT: None.                                                             *
- * ASSERTION: The useByDate of the meat is changed to inDate.                *
- ****************************************************************************/
-
-    public void setDate ( DateClass inDate )
-    {
-        int tempDay = inDate.getDay();
-        int tempMonth = inDate.getMonth();
-        int tempYear = inDate.getYear();
-
-        useByDate.setDate( tempDay, tempMonth, tempYear);
-    }
- 
-//******************************* CLONE ************************************//
-
-    public MeatClass clone()
-    {
-        MeatClass meatClone = new MeatClass( this );
-        return meatClone;
-    }   
-
-/*****************************************************************************
- * SUBMODULE calcExpiry                                                      *
- * IMPORT: today (Calendar)                                                  *
- * EXPORT: isExpired (Boolean)                                               *
- * ASSERTION: Returns true if the object is expired.                         *                       
- * HOW IT WORKS: Instances of the current time are created, which are then   *
- *               used to compare with the object's DateClass classfields to  *
- *               see if the object is expired or not.                        *
- ****************************************************************************/
-
-    public boolean calcExpiry( Calendar today ) //See interface file for guide
-    {
-        int currentDay, currentMonth, currentYear;
-        DateClass objDate;
-        boolean isExpired = false;
-
-        currentDay = today.get( Calendar.DAY_OF_MONTH );
-        currentMonth = today.get( Calendar.MONTH );
-        currentYear = today.get( Calendar.YEAR );
-
-        objDate = getDate();
-
-        if ( ( objDate.getYear() ) == currentYear )
-        {
-            if ( ( objDate.getMonth() ) <= currentMonth )
-            {
-                if ( ( objDate.getDay() ) < currentDay )
-                {
-                    isExpired = true;
-                }
-            }
-        }
-        else
-        {
-            if ( ( objDate.getYear() ) < currentYear )
-            {
-                isExpired = true;
-            }
-        }
-        return isExpired;
-    } 
 
 //************************ PRIVATE SUBMODULES ******************************//
 
@@ -248,4 +260,4 @@ public class Candidate
         return isValid;
     }
 
-}//End MeatClass.
+}//END CANDIDATE

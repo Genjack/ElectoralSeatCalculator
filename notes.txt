@@ -1,0 +1,17 @@
+String stateAb
+
+int divID
+
+String divName
+
+String partyAb
+
+String partyName
+
+int cndID
+
+String cndSurname, cndGivenName
+
+boolean elected
+
+boolean histElected
