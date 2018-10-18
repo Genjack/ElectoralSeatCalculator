@@ -18,12 +18,14 @@ public class Menu
     {
         boolean exitNow = false; //Set to true when 4 is selected from menu.
         boolean fileRead = false;
-        int keyPress;
+        int keyPress, numCandidates;
         String fileName; 
         String menuMain = "Welcome. What would you like to do?\n [1]: List "
             + " Nominees\n [2]: Search Nominees\n [3]: List By Margin\n" +
             " [4]: Itinerary by Margin\n [5]: Exit";
         String c1Menu = "Would you like to Filter results?\n";
+
+        Candidate [] cndArr; //The array to fill with Candidates (case 1).
         //maybe have sub menus for filtering result choices.
         
         do
@@ -37,8 +39,12 @@ public class Menu
                     case 1:
                     {
                         fileName = User.getString( "Enter file name: ");
-                        File.sanitiseAndCount( fileName );
-                        //Declaration of initial storage arrays.
+                        numCandidates = File.countCandidates( fileName );
+                        //Declare array to store candidates from file.
+                        cndArr = new Candidate[numCandidates];
+
+                        File.getCandidates( fileName, numCandidates, cndArr );
+                        //Array complete.
                     }                
                     break;
             

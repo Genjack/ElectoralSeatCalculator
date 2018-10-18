@@ -25,7 +25,7 @@ public class Candidate
     //Party name - full name of political party
     private String partyName;
     //Candidate ID - 5 digit integer ID (less controversial than voter ID)
-    private int cndId;
+    private int cndID;
     //Candidate surname and given names
     private String cndSurname, cndGivenName;
     //Boolean value denoting electoral status
@@ -63,7 +63,7 @@ public class Candidate
         setStateAb( inStateAb );
         setDivID( inDivID );
         setDivName( inDivName );
-        setPartyAb( setPartyAb );
+        setPartyAb( inPartyAb );
         setPartyName( inPartyName );
         setCndID( inCndID );
         setSurname( inCndSurname );
@@ -144,7 +144,7 @@ public class Candidate
         }
     }
 
-    public void setDivId( int inID )
+    public void setDivID( int inID )
     {
         //Validation: valid ID's are three digit integers.
         if( inID < 100 || inID > 999 )
@@ -169,7 +169,19 @@ public class Candidate
             divName = inDName;
         }
     }
-
+    
+    public void setPartyAb( String inAb )
+    {
+        //Validation: Checking for empty string.
+        if( !( validateString( inAb ) ) )
+        {
+            throw new IllegalArgumentException( "Empty party abbreviation." );
+        }
+        else
+        {
+            partyAb = inAb;
+        }
+    }
     public void setPartyName( String inPName )
     {
         //Validation: Checking for empty string.
@@ -222,12 +234,12 @@ public class Candidate
         }
     }
 
-    public void setElected( inElected )
+    public void setElected( boolean inElected )
     {
         elected = inElected;
     }
 
-    public void setHistElected( inHistElected )
+    public void setHistElected( boolean inHistElected )
     {
         histElected = inHistElected;
     }

@@ -12,22 +12,18 @@ import java.io.*;
 
 public class File
 {
-
 /**
-* FUNCTION: sanitiseAndCount
-* IMPORTS: String - filename;
+* FUNCTION: countCandidates
+* IMPORTS: String - filename
 * PURPOSE:
+*   To count the number of lines in the csv file for storage array creation.
 * HOW IT WORKS:
-*    After I retrieve each line, I need to check for the substring, and if I 
-*    find it, replace it. Then count the line. 
-*    Checking for "Shooters, Farmers".
-*    Try reading, checking, changing and printing each line to a new file.
 * HOW IT RELATES:
 **/
-    public static int sanitiseAndCount( String fileName )
+    public static int countCandidates( String fileName )
     {
-        String line;
         int count = 0;
+        String line, trash;
 
         FileInputStream fileStream = null;
         InputStreamReader rdr;
@@ -39,12 +35,80 @@ public class File
             rdr = new InputStreamReader( fileStream );
             bufRdr = new BufferedReader( rdr );
             
-            line = bufRdr.readLine();
+            //Skip introductory lines
+            for( int ii = 0; ii < 2; ii++ )
+            {
+                trash = bufRdr.readLine();
+            }
             
+            //Now begin count, from line 3:
+            line = bufRdr.readLine(); 
             while( ( line != null ) )
             {
+                count++;
+                line = bufRdr.readLine(); 
+            }
+            System.out.println( "Total Candidates: " + count );
+        }
+        catch( IOException e )
+        {
+            if( fileStream != null )
+            {
+                try
+                {
+                    fileStream.close();
+                }
+                catch( IOException e2 )
+                {
+                    //Empty.
+                }
+            }
+            e.printStackTrace( System.out );
+        }
+        return count;
+    }
+
+
+/**
+* FUNCTION: loadCandidates
+* IMPORTS: String - filename;
+* PURPOSE:
+*    To load the list of candidates from an imported .csv file.
+* HOW IT WORKS:
+*    After I retrieve each line, I need to check for the substring, and if I 
+*    find it, replace it. Then count the line. 
+*    Checking for "Shooters, Farmers".
+* HOW IT RELATES:
+**/
+    public static void getCandidates( String fileName, int lineCount,
+        Candidate [] cndArr )
+    {
+        String line, trash;
+        String [] splitArr = new String[10];
+
+        FileInputStream fileStream = null;
+        InputStreamReader rdr;
+        BufferedReader bufRdr;
+
+        try
+        {
+            fileStream = new FileInputStream( fileName );
+            rdr = new InputStreamReader( fileStream );
+            bufRdr = new BufferedReader( rdr );
+           
+            for( int ii = 0; ii < 2; ii++ )
+            {
+                trash = bufRdr.readLine();
+            }
+
+            line = bufRdr.readLine();
+            
+            for( int ii = 2; ii < lineCount; ii++ )
+            {
                 splitLine( line, splitArr );
-                //do stuff
+
+                //Assemble Candidate object and store in array.
+                makeCandidate( splitArr, cndArr, ii );
                 line = bufRdr.readLine(); 
             }
         }
@@ -63,7 +127,6 @@ public class File
             }
             e.printStackTrace( System.out );
         }
-        return count;
     }//End Submodule.
 
     /*public static void readFile( String fileName, CountryClass []
@@ -150,70 +213,86 @@ public class File
         }
     }//After completion, all objects should be created and stored.
 
+*/
+/**
+* FUNCTION: splitLine
+* IMPORTS: String - line of the csv file to be split up.
+* PURPOSE:
+*    To parse a specific line of a file, ensure it is formatted correctly and
+*    return the data via an array to loadCandidates() for further processing.
+* HOW IT WORKS:
+* HOW IT RELATES:
+**/
 
-************ PROCESS LOCATION ***********
-
-
-    public static String processLocation( String line )
+    public static String [] splitLine( String line, String [] arr )
     {
-        String location;
-        String [] lineArray;
+        String sillyParty = "hooters, F";
+        String slightlyBetter = "hooters F";
+        String [] lineArr, shootersArr;
         
-        lineArray = line.split( ":" );
-        location = lineArray[0];
-
-        return location;
-    }
- 
-
-************ PROCESS STRING ***********
-
-    public static String [] processString( String line, String [] details, 
-        String delimiter )
-    {
-        String [] lineArr;
-        lineArr = line.split( delimiter );
-        
+        if( line.contains( sillyParty ) )
+        {
+            line = line.replaceAll( sillyParty, slightlyBetter );
+            System.out.println( "Stupid party found - formatting..." );
+        }
+        lineArr = line.split( "," ); //Should populate arr with candidate info
         for( int ii = 0; ii < lineArr.length; ii++ )
         {
-            details[ii] = lineArr[ii];
+            arr[ii] = lineArr[ii];
         }
-        return details;
+        return arr;
     }
 
-
-************ PROCESS STRING TWO ***********
-
-    public static void processStringTwo( String [] details, String [] 
-        detailsTwo )
+/**
+* FUNCTION: makeCandidate
+* IMPORTS: String [] - Array of csv comma-split attributes for a Candidate Obj
+*          Candidate [] - Array to store candidate.
+* PURPOSE:
+*    To create and store a Candidate Object from file.
+* HOW IT WORKS:
+* HOW IT RELATES:
+**/
+    public static void makeCandidate( String [] attr, Candidate []
+        storeArr, int objCount )
     {
-        String tempStore = "";
-
-        for( int ii = 0; ii < details.length; ii++ )
+        int divID;
+        boolean elected;
+        boolean histElected;
+        int cndID;
+        Candidate cnd;
+        
+        //parse booleans
+        if( attr[8].equals( "Y" ) )
         {
-            tempStore += details[ii];
-            tempStore += "=";
+            elected = true;
         }
-        processString( tempStore, detailsTwo, "=" );
+        else
+        {
+            elected = false;
+        }
+
+        if( attr[9].equals( "Y" ) )
+        {
+            histElected = true;
+        }
+        else
+        {
+            histElected = false;
+        }
+        divID = Integer.parseInt( attr[1] );
+        cndID = Integer.parseInt( attr[5] );
+
+        /* Candidate Creation - Attribute array index listings:
+            [0] = State Abbreviation; [1] = Division ID; [2] = Division name;
+            [3] = Party Abbreviation; [4] = Party Name; [5] = Candidate ID;
+            [6] = Surname; [7] = Given name; [8] = Elected Y/N;
+            [9] = Historically Elected Y/N. */
+        cnd = new Candidate( attr[0], divID, attr[2], attr[3], attr[4], cndID, 
+            attr[6], attr[7], elected, histElected );
+
+        storeArr[objCount] = cnd;
     }
-
-
-************ MAKE NATION ***********
-
-    public static CountryClass makeNation( String [] details, int numStates )
-    {
-        double area;
-        int population;
-        StateClass [] statesArr = new StateClass [numStates];
-
-        area = Double.parseDouble( details[8] );
-        population = Integer.parseInt( details[10] );
-
-        CountryClass nation = new CountryClass( details[2], details[6], area,
-            population, details[12], statesArr );
-        return nation;
-    }
-
+/*
 ************ MAKE STATE ***********
 
     public static StateClass makeState( String [] details, int numLocations )
