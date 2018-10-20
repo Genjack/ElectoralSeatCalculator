@@ -84,6 +84,7 @@ public class File
         Candidate [] cndArr )
     {
         String line, trash;
+        int objCount = 0; //Can't use ii because 2nd for loop starts at 2
         String [] splitArr = new String[10];
 
         FileInputStream fileStream = null;
@@ -106,9 +107,10 @@ public class File
             for( int ii = 2; ii < lineCount; ii++ )
             {
                 splitLine( line, splitArr );
-
+                
                 //Assemble Candidate object and store in array.
-                makeCandidate( splitArr, cndArr, ii );
+                makeCandidate( splitArr, cndArr, objCount );
+                objCount++;
                 line = bufRdr.readLine(); 
             }
         }
@@ -129,91 +131,6 @@ public class File
         }
     }//End Submodule.
 
-    /*public static void readFile( String fileName, CountryClass []
-        mainCountriesArr, StateClass [] mainStatesArr, LocationClass []
-        mainLocationsArr )
-    {
-        //Initialisation of Array to store split Strings from csv file:
-        String [] details = new String [8]; 
-        //Initialisation of second array to split for a second time:
-        String [] detailsTwo = new String[15];
-        //Declaration of String for csv file line:
-        String line;
-
-        //Initialisation of counters to keep track of where each object will
-        //be stored in the appropriate array after creation.
-        int countryCount = 0;
-        int stateCount = 0;
-        int locationCount = 0;
-        
-        //Initialisation of integers denoting length of required classfield
-        //arrays, to import and aid in construction of place objects.
-        int numStates = mainStatesArr.length;
-        int numLocations = mainLocationsArr.length;
-
-        FileInputStream flStrm = null;
-        InputStreamReader rdr;
-        BufferedReader bufRdr;
-
-        try
-        {
-            flStrm = new FileInputStream( fileName );
-            rdr = new InputStreamReader( flStrm );
-            bufRdr = new BufferedReader( rdr );
-
-            line = bufRdr.readLine();
-
-            while( ( line != null ) && (!( line.equals("") ) ) )
-            {
-                processString( line, details, ":" );
-                //Split string again on equals sign
-                processStringTwo( details, detailsTwo );
-
-                if( details[0].equals( "COUNTRY" ) )
-                {
-                    //makeNation( line, details );
-                    CountryClass newNation = makeNation(detailsTwo, numStates);
-                    mainCountriesArr[countryCount] = newNation;
-                    countryCount++;
-                }
-                else
-                {
-                    if( details[0].equals( "STATE" ) )
-                    {
-                        StateClass newState = makeState( detailsTwo,
-                            numLocations );
-                        mainStatesArr[stateCount] = newState;
-                        stateCount++;
-                    }
-                    else
-                    {
-                        LocationClass newLocation = makeLocation( detailsTwo );
-                        mainLocationsArr[locationCount] = newLocation;
-                        locationCount++;
-                    }
-                }
-                line = bufRdr.readLine();
-            } //End of while loop.
-            flStrm.close();
-        }//End Try
-        catch( IOException e )
-        {
-            if( flStrm != null )
-            {
-                try
-                {
-                    flStrm.close();
-                }
-                catch( IOException e2 )
-                {
-                    //Empty.
-                }
-            }
-            e.printStackTrace( System.out );
-        }
-    }//After completion, all objects should be created and stored.
-
-*/
 /**
 * FUNCTION: splitLine
 * IMPORTS: String - line of the csv file to be split up.
@@ -233,7 +150,6 @@ public class File
         if( line.contains( sillyParty ) )
         {
             line = line.replaceAll( sillyParty, slightlyBetter );
-            System.out.println( "Stupid party found - formatting..." );
         }
         lineArr = line.split( "," ); //Should populate arr with candidate info
         for( int ii = 0; ii < lineArr.length; ii++ )

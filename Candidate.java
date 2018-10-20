@@ -198,7 +198,7 @@ public class Candidate
     public void setCndID( int inCID )
     {
         //Validation: Check that the integer is a max length of 5 digits.
-        if( inCID > 99999 )
+        if( ( inCID > 99999 ) || ( inCID < 10000 ) )
         {
             throw new IllegalArgumentException( "Invalid candidate ID." );
         }

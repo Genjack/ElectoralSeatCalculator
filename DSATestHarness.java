@@ -19,7 +19,7 @@ public class DSATestHarness
     private Candidate [] testArr;
     int testCount;
     boolean testBool;
-    String testString;
+    String testString, testPartyAb;
     
     @Before
     public void setup()
@@ -37,6 +37,7 @@ public class DSATestHarness
             true, true );
         testCount = cnd.getCndID();
         testString = cnd.getPartyName();
+        testPartyAb = cnd.getPartyAb();
         testBool = cnd.getElected();
         assertEquals( "candidate ID", 12345, testCount );
         assertEquals( "party name", "Monster Raving Loony Party", testString );
@@ -44,12 +45,16 @@ public class DSATestHarness
     }
 
     //TEST: Just checking that an empty string throws an exception.
-    @Test( expected = IllegalArgumentException.class )
+    @Test
     public void testArray()
     {
-        cnd = new Candidate( "", 200, "Curtin University", "MRLP", 
-            "Monster Raving Loony Party", 12345, "Cleese", "John", 
-            true, true );
+        testCount = File.countCandidates( "hc.csv" );
+        testArr = new Candidate[testCount];
+        File.getCandidates( "hc.csv", testCount, testArr );
+        cnd = testArr[0];
+        testString = cnd.getPartyName();
+        System.out.println( testString );
+        assertEquals( "testing get name", "Liberal", testString );
     }
 }
 

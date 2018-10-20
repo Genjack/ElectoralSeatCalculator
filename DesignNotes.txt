@@ -1,2 +1,20 @@
 1) User.java - Originally created by me in OOPD last semester to be a generic 
    java input class; has served me well on numerous occasions.
+
+MENU.JAVA - prepareToList( Candidate [], DSALinkedList<Candidate> )
+DESCRIPTION:
+    This function will basically present a bunch of new options to the user in
+    the form of a menu, hence its inclusion within the Menu class. The user will
+    be greeted with a series of options to FILTER and/or ORDER BY certain
+    attributes contained within the Candidate class. The array will then be 
+    manipulated to put these selected entries into a linked list, which will
+    then be displayed to the user. This should end the case, and loop back to
+    the main menu. May have to add/adjust some booleans to avoid this step after
+    the file has already been read (i.e. no need to read file again).
+
+NOTE ON validateParty()
+    I chose to put these parties all in an array, because I figured it would
+    be faster to parse an array of a few dozen once, rather than have someone
+    enter LNO instead of LNP and have the program search through hundreds of 
+    entries only to find that the spelling was wrong all along.
+
