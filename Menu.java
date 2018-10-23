@@ -95,7 +95,7 @@ public class Menu
                 //Parse the string to extract chars and validate them.
                 Validate.validateChoice( userChoice );
                 /*Choice is valid if program reaches here
-                  Determine what to put into the linked list based on choice: */
+                Determine what to put into the linked list based on choice: */
                 Format.buildFilters( userChoice, cndArr, cndList );
             }
 /*            else //User wants to skip filtering - so return list of all
@@ -110,12 +110,14 @@ public class Menu
         {
             System.out.println( "Error: Invalid selection. Please ensure you " +
                 "choose a valid option, i.e. 1, or 12, 23, 123 etc." );
+            ae.printStackTrace();
             prepareToList( cndArr, cndList );
         }
         catch( IllegalArgumentException ie )
         {
             System.out.println( "Please ensure you choose a valid option, i.e. "
                 + "1, 12, 23, 123 etc." );
+            ie.printStackTrace();
             prepareToList( cndArr, cndList );
         }//End catches
     }//End prepareToList()

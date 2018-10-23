@@ -32,22 +32,25 @@ public class Validate
         if( choices.length() < 4 ) //Means this instance is for filter menu.
         {
             //Loop through length of char array (1-3) to ensure valid choices:
-            for( int ii = 0; ii < options.length; ii++ )
+            for( int ii = 0; ii < choices.length(); ii++ )
             {
-                if( ( options[ii] != '1' ) || ( options[ii] != '2' ) 
-                    || ( options[ii] != '3' ) )
+                //Work on ASCII values for validation:
+                if( ( options[ii] < '1' ) || ( options[ii] > '3' ) )
                 {
                     //Entry here means an invalid entry for filtering.
                     throw new IllegalArgumentException("Error: invalid choice");
+                }
+                else
+                {
+                    System.out.println("hey thar" + options[ii] );
                 }
             }
         }
         else //choices copy into char array is valid, so must be length 4:
         {
-            for( int ii = 0; ii < options.length; ii++ )
+            for( int ii = 0; ii < choices.length(); ii++ )
             {
-                if( ( options[ii] != '1' ) || ( options[ii] != '2' ) 
-                    || ( options[ii] != '3' ) || ( options[ii] != '4' ) )
+                if( ( options[ii] < '1' ) || ( options[ii] > '4' ) )
                 {
                     //Entry here means an invalid entry for ordering.
                     throw new IllegalArgumentException("Error: invalid choice");

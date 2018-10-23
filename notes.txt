@@ -1,17 +1,2 @@
-String stateAb
+UP TO: Checking validation for filtering still (run program to see)
 
-int divID
-
-String divName
-
-String partyAb
-
-String partyName
-
-int cndID
-
-String cndSurname, cndGivenName
-
-boolean elected
-
-boolean histElected
