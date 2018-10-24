@@ -21,15 +21,16 @@ public class Format
 *    contain these elements, and adds them to the cndList. Nice
 **/
 
-    public static void buildFilters( String userChoice, Candidate [] cndArr,
+    public static DSALinkedList<Candidate> buildFilters( String userChoice, 
         DSALinkedList<Candidate> cndList )
     {
         boolean isValidFilter, filterState, filterParty, filterDiv;
+        DSALinkedList<Candidate> filtList; //list to store filtered candidates
         //Strings to hold User selections:
         String state = ""; 
         String party = "";
         int divId = 0;
-        
+       
         //Prompts to display to user for input.
         String statePrompt = "Please enter the abbreviation for the State by " +
         "which you wish to filter (i.e. 'WA'): ";
@@ -41,6 +42,8 @@ public class Format
         filterState = false;
         filterParty = false;
         filterDiv = false;
+
+        filtList = new DSALinkedList<Candidate>();
 
         //Check the string, and trigger the flags for filter processing:
         for( int ii = 0; ii < userChoice.length(); ii++ )
@@ -75,27 +78,30 @@ public class Format
         }
 
         //Apply filters to the array, and add to the cndList:
-        for( int ii = 0; ii < cndArr.length; ii++ )
+        while( cndList.getCount() > 0 )
         {
+            Candidate compCnd;
+            //remove first
+            compCnd = ( Candidate )( cndList.removeFirst() );
             if( filterState )
             {
-                if( cndArr[ii].getStateAb().equals( state ) )
+                if( compCnd.getStateAb().equals( state ) )
                 {
                     if( filterParty )
                     {
-                        if( cndArr[ii].getPartyAb().equals( party ) )
+                        if( compCnd.getPartyAb().equals( party ) )
                         {
                             if( filterDiv ) //All three filters apply
                             {
-                                if( cndArr[ii].getDivID() == divId )
+                                if( compCnd.getDivID() == divId )
                                 {
                                     //Keys don't matter for insertLast
-                                    cndList.insertLast( cndArr[ii], state );
+                                    filtList.insertLast( compCnd, state );
                                 }
                             }
                             else //Only checking STATE and PARTY
                             {
-                                cndList.insertLast( cndArr[ii], party );
+                                filtList.insertLast( compCnd, party );
                             }
                         }
                     }
@@ -103,43 +109,44 @@ public class Format
                     {
                         if( filterDiv )
                         {
-                            if( cndArr[ii].getDivID() == divId )
+                            if( compCnd.getDivID() == divId )
                             {
-                                cndList.insertLast( cndArr[ii], state );
+                                filtList.insertLast( compCnd, state );
                             }
                         }
                         else //Only checking for STATE
                         {
-                            cndList.insertLast( cndArr[ii], state );
+                            filtList.insertLast( compCnd, state );
                         }
                     }
                 }
             }
             else if( filterParty ) //Check if it's PARTY and DIVISION
             {
-                if( cndArr[ii].getPartyAb().equals( party ) )
+                if( compCnd.getPartyAb().equals( party ) )
                 {
                     if( filterDiv )
                     {
-                        if( cndArr[ii].getDivID() == divId )
+                        if( compCnd.getDivID() == divId )
                         {
-                            cndList.insertLast( cndArr[ii], party );
+                            filtList.insertLast( compCnd, party );
                         }
                     }
                     else //Only checking for PARTY
                     {
-                        cndList.insertLast( cndArr[ii], party );
+                        filtList.insertLast( compCnd, party );
                     }
                 }
             }
             else //Just checking for DIVISION
             {
-                if( cndArr[ii].getDivID() == divId )
+                if( compCnd.getDivID() == divId )
                 {
-                    cndList.insertLast( cndArr[ii], party );
+                    filtList.insertLast( compCnd, party );
                 }
             }
         }//End For Loop
+        return filtList;
     }//End buildFilters()
 
     public static String getState( String prompt )
@@ -174,5 +181,78 @@ public class Format
         //properly before reading it in without going overboard.
         divId = User.intInput( prompt, 100, 999 );
         return divId;
+    }
+
+    public static DSALinkedList<Candidate> sortList( String choice,
+        DSALinkedList<Candidate> list )
+    {
+/*When sorting, I will always start with the largest domain, so the order
+  is as follows: 
+        > STATE
+        > DIVISION
+        > PARTY
+        > NAME
+    Any variants on the selection will follow this format accordingly. */
+        Candidate [] sortArr; //Array to fill, sort, and put back to list.
+        boolean isValidOrder, ordName, ordState, ordPty, ordDiv;
+        int objCount = 0; //For keeping track of array insertion indexing
+        
+        ordName = false;        
+        ordState = false;        
+        ordPty = false;        
+        ordDiv = false;        
+
+        for( int ii = 0; ii < choice.length(); ii++ )
+        {
+            char order = choice.charAt(ii);
+            if( order == '1' ) //Order by SURNAME
+            {
+                ordName = true;
+            }
+            if( order == '2' ) //Order by STATE
+            {
+                ordState = true;
+            }
+            if( order == '3' ) //Order by PARTY
+            {
+                ordPty = true;
+            }
+            if( order == '4' ) //Order by DIVISION
+            {
+                ordDiv = true;
+            }
+        }
+        sortArr = new Candidate[list.getCount()]; //Array size of list.
+        //Order selection/s registered. 
+        //Sorting begins - outside the loop in case the User (accidentally or
+        // otherwise enters a sort category twice (i.e. '1123', '22' etc ).
+        while( list.getCount() > 0 )
+        {
+            Candidate cnd = ( Candidate )( list.removeFirst() );
+            sortArr[objCount] = cnd;
+            objCount++;
+        }
+        //Array now contains filtered list.
+        if( ordState )
+        {
+            Sorts.mergeSortState( sortArr ); 
+        }
+        if( ordDiv )
+        {
+            Sorts.mergeSortDivision( sortArr ); 
+        }
+        if( ordPty )
+        {
+            Sorts.mergeSortParty( sortArr );
+        }
+        if( ordName )
+        {
+            Sorts.mergeSortName( sortArr );
+        } 
+        for( int ii = 0; ii < sortArr.length; ii++ )
+        {
+            System.out.println( sortArr[ii].toString() );
+        }
+        return list;
     }
 }//End Format Class

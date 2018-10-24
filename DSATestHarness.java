@@ -16,7 +16,7 @@ public class DSATestHarness
 {
     //Classfields
     private Candidate defCnd, cnd; //Test Candidate object.
-    private Candidate [] testArr;
+    private DSALinkedList<Candidate> list; //Test Candidate List
     int testCount;
     boolean testBool;
     String testString, testPartyAb;
@@ -26,6 +26,7 @@ public class DSATestHarness
     {
         testBool = false;
         defCnd = new Candidate();
+        list = new DSALinkedList<Candidate>();
     }
 
     //TEST: Alt constructor w/ setters/getters for all data types.
@@ -46,11 +47,9 @@ public class DSATestHarness
 
     //TEST: Just checking that an empty string throws an exception.
     @Test
-    public void testArray()
+    public void testList()
     {
-        testCount = File.countCandidates( "hc.csv" );
-        testArr = new Candidate[testCount];
-        File.getCandidates( "hc.csv", testCount, testArr );
+        File.loadCandidates( "hc.csv", testCount, testArr );
         cnd = testArr[0];
         testString = cnd.getPartyName();
         System.out.println( testString );

@@ -161,10 +161,11 @@ class Sorts
     {
         int pivotVal, currIdx, temp, newPivotIdx;
             
-        pivotVal = A[pivot
+        pivotVal = A[pivotIdx]
 
 		return 0;	// TEMP - Replace this when you implement QuickSort
     }//doPartitioning
 
+    
 
 }//end Sorts calss

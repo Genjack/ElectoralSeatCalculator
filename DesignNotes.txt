@@ -18,3 +18,11 @@ NOTE ON validateParty()
     enter LNO instead of LNP and have the program search through hundreds of 
     entries only to find that the spelling was wrong all along.
 
+SORTING:
+    STATE - DIVISION - PARTY - NAME
+
+So we'll sort by State, and then sort by division, then party, and lastly name
+if they select all 4; this will be the order always.
+
+- I used a linked list to start with to avoid reading the file twice, which is
+a more computationally expensive option.

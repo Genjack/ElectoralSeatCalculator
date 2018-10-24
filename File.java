@@ -13,65 +13,9 @@ import java.io.*;
 public class File
 {
 /**
-* FUNCTION: countCandidates
-* IMPORTS: String - filename
-* PURPOSE:
-*   To count the number of lines in the csv file for storage array creation.
-* HOW IT WORKS:
-* HOW IT RELATES:
-**/
-    public static int countCandidates( String fileName )
-    {
-        int count = 0;
-        String line, trash;
-
-        FileInputStream fileStream = null;
-        InputStreamReader rdr;
-        BufferedReader bufRdr;
-
-        try
-        {
-            fileStream = new FileInputStream( fileName );
-            rdr = new InputStreamReader( fileStream );
-            bufRdr = new BufferedReader( rdr );
-            
-            //Skip introductory lines
-            for( int ii = 0; ii < 2; ii++ )
-            {
-                trash = bufRdr.readLine();
-            }
-            
-            //Now begin count, from line 3:
-            line = bufRdr.readLine(); 
-            while( ( line != null ) )
-            {
-                count++;
-                line = bufRdr.readLine(); 
-            }
-            System.out.println( "Total Candidates: " + count );
-        }
-        catch( IOException e )
-        {
-            if( fileStream != null )
-            {
-                try
-                {
-                    fileStream.close();
-                }
-                catch( IOException e2 )
-                {
-                    //Empty.
-                }
-            }
-            e.printStackTrace( System.out );
-        }
-        return count;
-    }
-
-
-/**
 * FUNCTION: loadCandidates
 * IMPORTS: String - filename;
+*          DSALinkedList<Candidate> - List to load candidates into.
 * PURPOSE:
 *    To load the list of candidates from an imported .csv file.
 * HOW IT WORKS:
@@ -80,11 +24,10 @@ public class File
 *    Checking for "Shooters, Farmers".
 * HOW IT RELATES:
 **/
-    public static void getCandidates( String fileName, int lineCount,
-        Candidate [] cndArr )
+    public static DSALinkedList<Candidate> loadCandidates( String fileName,
+        DSALinkedList<Candidate> cndList )
     {
         String line, trash;
-        int objCount = 0; //Can't use ii because 2nd for loop starts at 2
         String [] splitArr = new String[10];
 
         FileInputStream fileStream = null;
@@ -104,13 +47,12 @@ public class File
 
             line = bufRdr.readLine();
             
-            for( int ii = 2; ii < lineCount; ii++ )
+            while( line != null )
             {
                 splitLine( line, splitArr );
                 
                 //Assemble Candidate object and store in array.
-                makeCandidate( splitArr, cndArr, objCount );
-                objCount++;
+                makeCandidate( splitArr, cndList );
                 line = bufRdr.readLine(); 
             }
         }
@@ -129,6 +71,7 @@ public class File
             }
             e.printStackTrace( System.out );
         }
+        return cndList;
     }//End Submodule.
 
 /**
@@ -162,14 +105,14 @@ public class File
 /**
 * FUNCTION: makeCandidate
 * IMPORTS: String [] - Array of csv comma-split attributes for a Candidate Obj
-*          Candidate [] - Array to store candidate.
+*          DSALinkedList<Candidate> - List to store Candidates in
 * PURPOSE:
 *    To create and store a Candidate Object from file.
 * HOW IT WORKS:
 * HOW IT RELATES:
 **/
-    public static void makeCandidate( String [] attr, Candidate []
-        storeArr, int objCount )
+    public static void makeCandidate( String [] attr, 
+        DSALinkedList<Candidate> list )
     {
         int divID;
         boolean elected;
@@ -206,7 +149,7 @@ public class File
         cnd = new Candidate( attr[0], divID, attr[2], attr[3], attr[4], cndID, 
             attr[6], attr[7], elected, histElected );
 
-        storeArr[objCount] = cnd;
+        list.insertLast( cnd, cnd.getSurname() );
     }
 /*
 ************ MAKE STATE ***********

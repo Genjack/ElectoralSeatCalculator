@@ -1,0 +1,4 @@
+sort into a linked list based on first choice to order by;
+find second choice - take first linked list, and then sort this linked list
+    by the second choice;
+repeat by third choice if necessary.

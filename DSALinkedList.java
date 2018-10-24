@@ -144,12 +144,14 @@ public class DSALinkedList<E> implements Iterable<E>
     
     //DSALinkedList Classfield
     private DSAListNode<E> head, tail;
+    private int count;
 
     //DEFAULT CONSTRUCTOR
     public DSALinkedList()
     {
         head = null;
         tail = null;
+        count = 0;
     }
 
     //Method for checking if the list is empty or not:
@@ -163,6 +165,11 @@ public class DSALinkedList<E> implements Iterable<E>
     }
 
 //******************************* ACCESSORS ********************************//
+
+    public int getCount()
+    {
+        return count;
+    }
 
     //Method for returning the first object in the list.
     public E peekAtFirst()
@@ -247,6 +254,7 @@ public class DSALinkedList<E> implements Iterable<E>
             head.setPrevNode( newNode );
             head = newNode;
         }
+        count++;
     }
 
     public void insertLast( E newContent, String newKey )
@@ -265,6 +273,7 @@ public class DSALinkedList<E> implements Iterable<E>
             newNode.setPrevNode( tail );
             tail = newNode;
         }
+        count++;
     }
 
     public void insertSorted( E newContent, String newKey )
@@ -315,7 +324,8 @@ public class DSALinkedList<E> implements Iterable<E>
                     }
                 } //END WHILE LOOP
             }
-        }
+        } //End If/Else blocks
+        count++;
     }
 
     public E removeFirst()
@@ -338,6 +348,7 @@ public class DSALinkedList<E> implements Iterable<E>
                 head = null;
                 tail = null;
             }
+            count--;
         }
         return nodeContent;
     }
@@ -366,6 +377,7 @@ public class DSALinkedList<E> implements Iterable<E>
                 
                 tail.setNextNode( null ); 
             }
+            count--;
         }
         return nodeContent;
     }

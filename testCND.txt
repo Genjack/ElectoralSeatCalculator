@@ -1,0 +1,12 @@
+hey
+hey
+QLD,304,Blair,ON,Pauline Hanson's One Nation,29279,AGGETT,Troy,N,N
+QLD,316,Wright,GRN,The Greens,29258,AGNOLETTO,Pietro,N,N
+SA,190,Sturt,IND,Independent,28010,AITCHISON,Neil,N,N
+NSW,121,Grayndler,ALP,Labor,29343,ALBANESE,Anthony,Y,Y
+VIC,234,Wills,SAL,Socialist Alliance,28738,ALCORN,Zane,N,N
+SA,187,Makin,IND,Independent,27986,ALDRIDGE,Mark,N,N
+NSW,105,Bennelong,LP,Liberal,28568,ALEXANDER,John,Y,Y
+NSW,105,Bennelong,GRN,The Greens,28550,ALICK,Justin,N,N
+TAS,194,Denison,LP,Liberal,28426,ALLAN,Marcus,N,N
+NSW,134,Mitchell,CDP,Christian Democratic Party (Fred Nile Group),28754,ALLEN,Darryl,N,N
