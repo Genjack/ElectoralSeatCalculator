@@ -16,3 +16,9 @@ meant over re-work of my validateChoice function
 - I understand that usually I have the invalid if block first, but this 
 inexplicably caused issues - so I'll do it this way 
     UNLESS IT WORKS WITH STRING EQUALS - TESTING
+
+NOTE ON TREE
+- Didn't use tree in the end, because was unsure how to check if a substring
+  is contained in a tree's key.
+  Plus, I think the way the tree is implemented means that a substring that
+  matched a term would just make it go left? Because there's less characters?

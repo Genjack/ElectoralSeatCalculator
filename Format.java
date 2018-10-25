@@ -285,7 +285,7 @@ System.out.println( "true? " + selections[0] );
     Any variants on the selection will follow this format accordingly. */
         Candidate [] sortArr; //Array to fill, sort, and put back to list.
         boolean [] selections = new boolean[4]; //Array to store selections.
-        int objCount = 0; //For keeping track of array insertion indexing
+        int objCount = 0; //For keeping track of array insertLastion indexing
 
 //MODIFICATION BOOLEANS
         Utility.getOrder( choice, selections );
@@ -365,7 +365,7 @@ System.out.println( "true? " + selections[0] );
 
         boolean [] selections = new boolean[2]; //Array to store selections.
         //List to store filtered objects in and return to main menu.
-        DSALinkedList<Candidate> filtList = new DSALinkedList<Candidate>();
+        DSALinkedList<Candidate> filtList= new DSALinkedList<Candidate>();
         //selections[1] = State; selections[2] = Party. 
 
         try
@@ -406,12 +406,12 @@ System.out.println( "true? " + selections[0] );
                                 {
                                     if( cnd.getPartyAb().equals( party ) )
                                     {
-                                        filtList.insertLast( cnd, party );
+                                        filtList.insertSorted( cnd, cnd.getSurname() );
                                     }
                                 }
                                 else //Just filter by STATE
                                 {
-                                    filtList.insertLast( cnd, state );
+                                    filtList.insertSorted( cnd, cnd.getSurname() );
                                 }
                             }
                         }
@@ -421,7 +421,7 @@ System.out.println( "true? " + selections[0] );
                             {
                                 if( cnd.getPartyAb().equals( party ) )
                                 {
-                                    filtList.insertLast( cnd, party );
+                                    filtList.insertSorted( cnd, cnd.getSurname() );
                                 }
                             }
                         }

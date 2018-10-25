@@ -107,9 +107,43 @@ public class Utility
 
 //******************************* SEARCH LIST *******************************//
 
-    public static void searchList( String term )
+    public static DSALinkedList<Candidate> searchList( String term, DSALinkedList<Candidate> 
+        list )
     {
-        //Maybe could use a binary search tree here to facilitate search...
+        boolean found = false;
+        boolean passed = false;
+        Candidate cnd = null;
+        char firstChar;
+        DSALinkedList<Candidate> matches = new DSALinkedList<Candidate>();
 
-
+        term = term.toUpperCase(); //Ensure in uppercase.
+        while( ( list.getCount() > 0 ) && ( ( !found ) || ( !passed ) ) )
+        {
+            cnd = list.peekAtFirst(); //Have a look:
+            firstChar = cnd.getSurname().charAt(0); //i.e. A in Abbot
+            if( firstChar == term.charAt(0) )
+            {
+                found = true; //In alphabetical, first instance of letter found
+                matches.insertLast( cnd, cnd.getSurname() );
+            }
+            if( ( firstChar != term.charAt(0) ) && found ) 
+            {
+                passed = true; //Passed all potential search matches; end.
+            }
+        }
+        if( matches.getCount() == 0 )
+        {
+            System.out.println( "Error: No results found." );
+        }
+        else
+        {
+            Iterator rator = matches.iterator();
+            while( rator.hasNext() )
+            {
+                cnd = ( Candidate )( rator.next() );
+                System.out.println( cnd.toString() );
+            }
+        }
+        return matches;
+    } 
 }

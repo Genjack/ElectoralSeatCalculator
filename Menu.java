@@ -32,8 +32,9 @@ public class Menu
 
         DSALinkedList<Candidate> cndListAll; //List to read Candidates in to.
         DSALinkedList<Candidate> cndListFilter; //List to filter into.
-        cndListAll = new DSALinkedList<Candidate>();
-        cndListFilter = new DSALinkedList<Candidate>();
+        cndListAll = new DSALinkedList<Candidate>();    //Master list.
+        cndListFilter = new DSALinkedList<Candidate>(); //For part 1.
+        DSALinkedList<Candidate> searches; //For part 2.
         
         do
         {
@@ -61,7 +62,7 @@ public class Menu
                         cndListFilter = Format.prepareToList( cndListFilter );
                         //Need:
                             //1. Option to save cndListMain to file;
-                        optionalSave( cndListFilter );                        
+                        optionalSave( cndListFilter, "Filtered List" );                        
                         while( cndListFilter.getCount() > 0 )
                         {
                             cndListFilter.removeFirst(); //Cleanse list.
@@ -78,16 +79,17 @@ public class Menu
                         }
                         else
                         {
+                            searches = new DSALinkedList<Candidate>();
                             cndListFilter = Format.prepareToSearch( cndListAll );
-                            //^ Should now be filtered (or not if skipped).
+                            //^ Should now be filtered and sorted alphabetically.
                             //Get user input of a string, and search list for matches.
                             searchTerm = User.getString( searchPrompt );
                             System.out.println( "search term EQUALS = " + searchTerm);
-                            Utility.searchList( searchTerm );
-                            //EMPTY TEMP FILTER LIST:
+                            searches = Utility.searchList( searchTerm, cndListFilter );
+                            optionalSave( searches, "Searched Candidates" );
                             while( cndListFilter.getCount() > 0 )
                             {
-                                cndListFilter.removeFirst();
+                                cndListFilter.removeFirst(); //Cleanse list.
                             }
                         }
                     }
@@ -109,7 +111,7 @@ public class Menu
 
 
 //CODE TAKEN FROM Practical 1, FileClass.java - writeFile()
-    public static void optionalSave( DSALinkedList<Candidate> list )
+    public static void optionalSave( DSALinkedList<Candidate> list, String type )
     {
         int choice;
         String fileName;
@@ -129,7 +131,8 @@ public class Menu
             {
                 flStrm = new FileOutputStream( fileName );
                 pw = new PrintWriter( flStrm );
-            
+
+                pw.println( type );
                 while( list.getCount() > 0 )
                 {
                     Candidate cnd = ( Candidate )( list.removeFirst() );
