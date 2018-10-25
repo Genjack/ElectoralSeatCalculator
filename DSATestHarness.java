@@ -49,11 +49,8 @@ public class DSATestHarness
     @Test
     public void testList()
     {
-        File.loadCandidates( "hc.csv", testCount, testArr );
-        cnd = testArr[0];
-        testString = cnd.getPartyName();
-        System.out.println( testString );
-        assertEquals( "testing get name", "Liberal", testString );
+        File.loadCandidates( "hc.csv", list );
+        Format.prepareToList( list );
     }
 }
 

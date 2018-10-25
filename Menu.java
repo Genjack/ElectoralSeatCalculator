@@ -11,6 +11,7 @@
 */
 
 import java.util.*;
+import java.io.*;
 
 public class Menu
 {
@@ -25,8 +26,14 @@ public class Menu
             + " Nominees\n [2]: Search Nominees\n [3]: List By Margin\n" +
             " [4]: Itinerary by Margin\n [5]: Exit";
         String c1Menu = "Would you like to Filter results?\n";
+        String searchTerm = "";
+        String searchPrompt = "Please enter all or part of the nominee's "
+            + "surname: ";
 
-        DSALinkedList<Candidate> cndListMain; //List to read Candidates in to.
+        DSALinkedList<Candidate> cndListAll; //List to read Candidates in to.
+        DSALinkedList<Candidate> cndListFilter; //List to filter into.
+        cndListAll = new DSALinkedList<Candidate>();
+        cndListFilter = new DSALinkedList<Candidate>();
         
         do
         {
@@ -38,11 +45,45 @@ public class Menu
                 {
                     case 1:
                     {
-                        //Create linked list, read file contents into it.
-                        cndListMain = new DSALinkedList<Candidate>();
-                        File.loadCandidates( fileName, cndListMain );
-                        prepareToList( cndListMain );
-                    }                
+                        if( ! ( fileRead ) )
+                        {
+                            //Create linked list, read file contents into it.
+                            File.loadCandidates( fileName, cndListAll );
+                        }
+                        //Copy contents to filter list for sorting, so that
+                        //the main list is intact and can be manipulated later:
+                        Iterator<Candidate> rator = cndListAll.iterator();
+                        while( rator.hasNext() )
+                        {
+                            Candidate cnd = rator.next();
+                            cndListFilter.insertLast( cnd, cnd.getSurname() );
+                        }
+                        cndListFilter = Format.prepareToList( cndListFilter );
+                        //Need:
+                            //1. Option to save cndListMain to file;
+                        optionalSave( cndListFilter );                        
+                        fileRead = true;
+                    } 
+                    break;
+                    case 2:
+                    {
+                        if( !( fileRead ) )
+                        {
+                            System.out.println( "Error: Read in file first by "
+                                + "selecting option 1." );
+                        }
+                        else
+                        {
+                            //Format. Need to create new Validation option for two
+                            //filter choices (STATE or PARTY).
+                            cndListAll = Format.prepareToSearch( cndListAll );
+                            //^ Should now be filtered (or not if skipped).
+                            //Get user input of a string, and search list for matches.
+                            searchTerm = User.getString( searchPrompt );
+                            System.out.println( "search term EQUALS = " + searchTerm);
+                            //Format.searchList( searchTerm );
+                        }
+                    }
                     break;
                     case 5:
                     {
@@ -59,61 +100,52 @@ public class Menu
         } while ( exitNow == false );
     }
 
-/**************************** MOVE TO FORMAT.JAVA **************************
-* FUNCTION: prepareToList
-* IMPORTS: DSALinkedList<Candidate> - List for filling with filtered objects
-* HOW IT WORKS:
-* HOW IT RELATES:
-**/
-    public static void prepareToList( DSALinkedList<Candidate> cndListMain )
+
+//CODE TAKEN FROM Practical 1, FileClass.java - writeFile()
+    public static void optionalSave( DSALinkedList<Candidate> list )
     {
-        try
+        int choice;
+        String fileName;
+        String savePrompt = "Would you like to write this result to file?\n" +
+        "[1] Yes\n[2] No";
+
+        choice = User.intInput( savePrompt, 1, 2 );
+
+        if( choice == 1 )
         {
-            String userChoice; //will be like "12" or "1"; need to parse chars.
-
-            String filterMenu = "Filter the list by:\n [1] State\n" + " [2] Party\n "
-            + "[3] Division\n Please enter the corresponding number of the attribute "
-            + "to sort by as a single number,\n i.e. 123 to sort by all;\n Or press 0 "
-            + "to skip: ";
-            
-            String orderMenu = "Order the list by: [1] Surname\n [2] State\n [3] " +
-            "Party\n [4] Division\n Please enter the corresponding numbers as a " +
-            "single entry i.e. 1234 to order by all\n Or press 0 to skip: ";
-
-            //Ask the user if they want to filter their results before listing:
-            userChoice = User.getString( filterMenu );
-            
-            if( userChoice.charAt(0) != '0' ) //If User wants to filter:
+            fileName = User.getString( "Please enter a name for your file:" );
+        
+            FileOutputStream flStrm = null;
+            PrintWriter pw;
+        
+            try
             {
-                //Parse the string to extract chars and validate them.
-                Validate.validateChoice( userChoice );
-                /*Choice is valid if program reaches here
-                Determine what to put into the linked list based on choice: */
-                cndListMain = Format.buildFilters( userChoice, cndListMain );
+                flStrm = new FileOutputStream( fileName );
+                pw = new PrintWriter( flStrm );
+            
+                while( list.getCount() > 0 )
+                {
+                    Candidate cnd = ( Candidate )( list.removeFirst() );
+                    pw.println( cnd.toString() );
+                }
+                pw.close();
+                flStrm.close();
             }
-            //If User does not enter above block, then no filters to be applied
-            //Now continue - Does the User want to order by anything?
-            userChoice = User.getString( orderMenu );
-            if( userChoice.charAt(0) != '0' ) //If User wants to order:
+            catch( IOException e )
             {
-                Validate.validateChoice( userChoice );
-                Format.sortList( userChoice, cndListMain );
-
-            
+                if( flStrm != null )
+                {
+                    try
+                    {
+                        flStrm.close();
+                    }
+                    catch( IOException e2 )
+                    {
+                        //Empty.
+                    }
+                }
+                System.out.println( "Exception: " + e.getMessage() );
+            }
         }
-        catch( ArrayIndexOutOfBoundsException ae )
-        {
-            System.out.println( "Error: Invalid selection. Please ensure you " +
-                "choose a valid option, i.e. 1, or 12, 23, 123 etc." );
-            ae.printStackTrace();
-            prepareToList( cndListMain );
-        }
-        catch( IllegalArgumentException ie )
-        {
-            System.out.println( "Please ensure you choose a valid option, i.e. "
-                + "1, 12, 23, 123 etc." );
-            ie.printStackTrace();
-            prepareToList( cndListMain );
-        }//End catches
-    }//End prepareToList()
+    }//End Submodule.           
 } //End Class.

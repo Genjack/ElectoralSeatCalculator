@@ -3,3 +3,16 @@ CURRENT BRANCH: ArrayToList
 UP TO: Checking validation for filtering still (run program to see)
 Idea from: Ben J., 2nd year DSA Tutor
 
+CASE 1:
+    - Creates two lists: ALL and FILTER; the first is a complete list that 
+    remains complete for usage in CASE 2.
+    - ALL receives the file input, and copies this to FILTER.
+    - FILTER is then optionally filtered, ordered and printed to screen/file.
+    - From there ALL is available for use elsewhere.
+
+FORMAT.JAVA line 348 - if validation for choice
+- Not using Validation.java because it's simple, and because it would have
+meant over re-work of my validateChoice function
+- I understand that usually I have the invalid if block first, but this 
+inexplicably caused issues - so I'll do it this way 
+    UNLESS IT WORKS WITH STRING EQUALS - TESTING

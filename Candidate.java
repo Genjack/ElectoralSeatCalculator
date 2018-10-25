@@ -254,7 +254,7 @@ public class Candidate
     {
         return ( "Name: " + cndGivenName + " " + cndSurname + ";\n ID: " +
             cndID + ";\n Party: " + partyAb + " - " + partyName + 
-            ";\n Division: " + divName + "( " + divID + ")\n Elected: " + 
+            ";\n Division: " + divName + " (" + divID + ")\n Elected: " + 
             elected + "; Elected Previously: " + histElected + ".\n" );
     }
 

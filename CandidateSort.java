@@ -133,7 +133,7 @@ class Sorts
         
     }//merge()
 
-
+/*
     // quickSort - front-end for kick-starting the recursive algorithm
     public static void quickSortCnd( Candidate [] A )
     {
@@ -167,5 +167,5 @@ class Sorts
     }//doPartitioning
 
     
-
+*/
 }//end Sorts calss

@@ -16,48 +16,37 @@ import java.util.*;
 public class Validate
 {
     //EXCEPTIONS CAUGHT IN: prepareToList -> Menu.java
-    public static void validateChoice( String choices )
-    {
-        /*Declare char array to store parsed strings. If an exception is thrown
-          here, it could be because there's too many choices in the string - we
-          should return the User to prepareToList(), where he/she can have
-          another crack. */
-        char [] options = new char[4];
 
-        //Potential error: ArrayIndexOutOfBoundsException, if string > 4 chars.
+    /*FUNCTION: Validate Choices for Filters and ordering
+      The imported max value will set the limit on array length based on the
+      function being individually validated (i.e. filter, order etc).*/
+    public static void validateChoice( String choices, char max )
+    {
+        int ii = 0; //Counter for checking the array.
+        int maxArrLen = max - '0'; //Gives the integer value of max.
+        char [] options = new char[maxArrLen]; 
+        fillArr( options, choices );
+
+        /*for( int ii = 0; ii < options.length; ii++ )*/
+        while( options[ii] != 0 ) //i.e. not null; '!= null' doesn't work
+        {
+            if( ( options[ii] < '1' ) || ( options[ii] > max ) )
+            {
+                throw new IllegalArgumentException( "Error: Invalid choice." );
+            }
+            ii++;
+        }
+    }
+
+    private static void fillArr( char [] arr, String choices )
+    {
+        //Fill the options array with these choices:
         for( int ii = 0; ii < choices.length(); ii++ )
         {
-            options[ii] = choices.charAt(ii);
+            arr[ii] = choices.charAt(ii);
         }
-        if( choices.length() < 4 ) //Means this instance is for filter menu.
-        {
-            //Loop through length of char array (1-3) to ensure valid choices:
-            for( int ii = 0; ii < choices.length(); ii++ )
-            {
-                //Work on ASCII values for validation:
-                if( ( options[ii] < '1' ) || ( options[ii] > '3' ) )
-                {
-                    //Entry here means an invalid entry for filtering.
-                    throw new IllegalArgumentException("Error: invalid choice");
-                }
-                else
-                {
-                    System.out.println("hey thar" + options[ii] );
-                }
-            }
-        }
-        else //choices copy into char array is valid, so must be length 4:
-        {
-            for( int ii = 0; ii < choices.length(); ii++ )
-            {
-                if( ( options[ii] < '1' ) || ( options[ii] > '4' ) )
-                {
-                    //Entry here means an invalid entry for ordering.
-                    throw new IllegalArgumentException("Error: invalid choice");
-                }
-            }
-        }
-    }//End validateChoice()
+        //Check for ArrayIndexOutOfBoundsException here.
+    }   
 
     //FUNCTION: Returns true if inState is equal to an Australian state/territory
     public static boolean validateState( String inState )
