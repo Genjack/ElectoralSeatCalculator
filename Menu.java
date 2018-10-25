@@ -62,6 +62,10 @@ public class Menu
                         //Need:
                             //1. Option to save cndListMain to file;
                         optionalSave( cndListFilter );                        
+                        while( cndListFilter.getCount() > 0 )
+                        {
+                            cndListFilter.removeFirst(); //Cleanse list.
+                        }
                         fileRead = true;
                     } 
                     break;
@@ -74,14 +78,17 @@ public class Menu
                         }
                         else
                         {
-                            //Format. Need to create new Validation option for two
-                            //filter choices (STATE or PARTY).
-                            cndListAll = Format.prepareToSearch( cndListAll );
+                            cndListFilter = Format.prepareToSearch( cndListAll );
                             //^ Should now be filtered (or not if skipped).
                             //Get user input of a string, and search list for matches.
                             searchTerm = User.getString( searchPrompt );
                             System.out.println( "search term EQUALS = " + searchTerm);
-                            //Format.searchList( searchTerm );
+                            Utility.searchList( searchTerm );
+                            //EMPTY TEMP FILTER LIST:
+                            while( cndListFilter.getCount() > 0 )
+                            {
+                                cndListFilter.removeFirst();
+                            }
                         }
                     }
                     break;

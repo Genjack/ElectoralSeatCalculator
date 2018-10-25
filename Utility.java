@@ -104,4 +104,12 @@ public class Utility
         arr[0] = stateBool;
         arr[1] = partyBool;
     }
+
+//******************************* SEARCH LIST *******************************//
+
+    public static void searchList( String term )
+    {
+        //Maybe could use a binary search tree here to facilitate search...
+
+
 }
