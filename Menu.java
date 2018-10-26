@@ -18,24 +18,31 @@ public class Menu
     public static void run()
     {
         boolean exitNow = false; //Set to true when 4 is selected from menu.
-        boolean fileRead = false;
+        boolean cndFileRead = false;
+        boolean seatFileRead = false;
         int keyPress;
-        //hc.csv is hardcoded in.
-        String fileName = "hc.csv";
+
+        String candidateFile = "hc.csv";
+        String seatFile = "hs.csv";
         String menuMain = "Welcome. What would you like to do?\n [1]: List "
             + " Nominees\n [2]: Search Nominees\n [3]: List By Margin\n" +
             " [4]: Itinerary by Margin\n [5]: Exit";
-        String c1Menu = "Would you like to Filter results?\n";
         String searchTerm = "";
         String searchPrompt = "Please enter all or part of the nominee's "
             + "surname: ";
-
+        //Part 1/2
         DSALinkedList<Candidate> cndListAll; //List to read Candidates in to.
-        DSALinkedList<Candidate> tempAll; //List fo copying to preserve Master
+        DSALinkedList<Candidate> tempAll; //List for copying to preserve Master
         DSALinkedList<Candidate> cndListFilter; //List to filter into.
         cndListAll = new DSALinkedList<Candidate>();    //Master list.
         cndListFilter = new DSALinkedList<Candidate>(); //For part 1.
         DSALinkedList<Candidate> searches; //For part 2.
+
+        //Part 3
+        DSALinkedList<SeatChallenger> seatListAll; //Master Seat list.
+        DSALinkedList<SeatChallenger> seatListMargins; //For party selection + filter
+        seatListAll = new DSALinkedList<SeatChallenger>();
+        marginList = new DSALinkedList<SeatChallenger>();
         
         do
         {
@@ -45,12 +52,12 @@ public class Menu
                 
                 switch( keyPress )
                 {
-                    case 1:
+                    case 1: //**** READ IN FILE/LIST NOMINEES ****//
                     {
-                        if( ! ( fileRead ) )
+                        if( ! ( cndFileRead ) )
                         {
                             //Create linked list, read file contents into it.
-                            File.loadCandidates( /*fileName*/"testLoad.txt", cndListAll );
+                            File.loadCandidates( /*candidateFile*/"testLoad.txt", cndListAll );
                         }
                         //Copy contents to filter list for sorting, so that
                         //the main list is intact and can be manipulated later:
@@ -69,19 +76,18 @@ public class Menu
                         {
                             cndListFilter.removeFirst(); //Cleanse list.
                         }
-                        fileRead = true;
+                        cndFileRead = true;
                     } 
                     break;
-                    case 2:
+                    case 2: //**** NOMINEE SEARCH ****//
                     {
-                        if( !( fileRead ) )
+                        if( !( cndFileRead ) )
                         {
                             System.out.println( "Error: Read in file first by "
                                 + "selecting option 1." );
                         }
                         else
                         {
-                System.out.println( "main 1: " + cndListAll.peekAtFirst().toString() );
                             searches = new DSALinkedList<Candidate>();
                             tempAll = new DSALinkedList<Candidate>();
                             Iterator<Candidate> rator = cndListAll.iterator();
@@ -101,6 +107,22 @@ public class Menu
                                 cndListFilter.removeFirst(); //Cleanse list.
                             }
                         }
+                    }
+                    break;
+                    case 3: //**** LIST BY MARGIN ****//
+                    {
+                        if( !( seatFileRead ) )
+                        {
+                            File.loadSeats( /*seatFile*/"testSeats.txt", seatListAll );
+                        }
+                        //File is read in. User should select a party to view:
+                        Iterator<SeatChallenger> rator = seatListAll.iterator();
+                        while( rator.hasNext() )
+                        {
+                            SeatChallenger seat = rator.next();
+                            marginList.insertLast( seat, seat.cnd.getPartyAb() );
+                        }
+                        Utility.getMarginalSeats( marginList );
                     }
                     break;
                     case 5:

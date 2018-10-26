@@ -15,7 +15,8 @@ import static org.junit.Assert.*;
 public class DSATestHarness
 {
     //Classfields
-    private Candidate defCnd, cnd; //Test Candidate object.
+    private Candidate defCnd, cnd, cnd2; //Test Candidate object.
+    private SeatChallenger seat;
     private DSALinkedList<Candidate> list; //Test Candidate List
     int testCount;
     boolean testBool;
@@ -27,6 +28,7 @@ public class DSATestHarness
         testBool = false;
         defCnd = new Candidate();
         list = new DSALinkedList<Candidate>();
+        seat = new SeatChallenger();
     }
 
     //TEST: Alt constructor w/ setters/getters for all data types.
@@ -35,7 +37,7 @@ public class DSATestHarness
     {
         cnd = new Candidate( "WA", 200, "Curtin University", "MRLP", 
             "Monster Raving Loony Party", 12345, "Cleese", "John", 
-            true, true );
+            true, true, 3 );
         testCount = cnd.getCndID();
         testString = cnd.getPartyName();
         testPartyAb = cnd.getPartyAb();
@@ -48,7 +50,7 @@ public class DSATestHarness
 //************************* FILE.JAVA CASES (3) ******************************//
 
     //TEST: loadCandidates() - test file, valid, 10 Candidates.
-    @Test
+//    @Test
     public void testLoad()
     {
         File.loadCandidates( "testLoad.txt", list );
@@ -60,7 +62,7 @@ public class DSATestHarness
     }
 
     //TEST: loadCandidates() - 'van GEUNS' surname (non-conventional format)
-    @Test
+  //  @Test
     public void testGeuns()
     {
         File.loadCandidates( "testLoad.txt", list );
@@ -72,7 +74,7 @@ public class DSATestHarness
 
     //TEST: loadCandidates() - Invalid file; No buffer lines at the top.
     //Outcome: Ignores top two lines, so first candidate should be ABLETT
-    @Test
+   // @Test
     public void testInvalid()
     {
         File.loadCandidates( "tfNoBuffer", list );
@@ -84,7 +86,7 @@ public class DSATestHarness
 /* This Test Case doesn't print anything except "Test Print" - unsure why; it 
    works when running the program normally.*/
     //TEST: optionalSave() - in Menu.java.
-    @Test
+  //  @Test
     public void testSave()
     {
         System.out.println( "TEST: Select [1] State; \"SA\"; any order" );
@@ -99,7 +101,7 @@ public class DSATestHarness
 
     //TEST: prepareToList - valid file, 10 candidates.
     //SORT: State(1). ORDER: None(0).
-    @Test
+  //  @Test
     public void testPrepareList10()
     {
         System.out.println( "TEST: Select [1] State; \"WA\"; skip order." );
@@ -110,7 +112,7 @@ public class DSATestHarness
     }
 
     //TEST: pTL Valid: Party(2). ORDER: Division.
-    @Test
+  //  @Test
     public void testPrepareList24()
     {
         System.out.println( "TEST: Select [2] Party; \"GRN\"; [4] Division." );
@@ -122,7 +124,7 @@ public class DSATestHarness
     }
 
     //TEST: pTL Valid: Division(3). ORDER: State.
-    @Test
+  //  @Test
     public void testPrepareList32()
     {
         System.out.println( "TEST: Select [3] Division; \"101\"; [1] Name." );
@@ -134,7 +136,7 @@ public class DSATestHarness
 
     //TEST: prepareToSearch - ASSIGNMENT PART 2
     //Checking that we can search for all candidates with surnames A*
-    @Test
+  //  @Test
     public void testPrepareToSearch()
     {
         //Need to call option 1 first to retrieve the file.
@@ -149,7 +151,7 @@ public class DSATestHarness
     }
 
     //TEST: prepareToSearch - Name doesn't exist
-    @Test
+  //  @Test
     public void testPrepareToSearchNE()
     {
         System.out.println( "Select option 1; skip filter/order" );
@@ -159,6 +161,25 @@ public class DSATestHarness
         Menu.run();
         System.out.println( "=== EXPECTED === " );
         System.out.println( "Should have received\nError: Not found" );
+    }
+
+//************************* SEAT CHALLENGER TEST *****************************//
+
+    //TEST: seatChallenger Alternate Constructor
+    @Test
+    public void testSCAltCon()
+    {
+        cnd = new Candidate( "WA", 200, "Curtin University", "MRLP", 
+            "Monster Raving Loony Party", 12345, "Cleese", "John", 
+            true, true, 3 );
+        seat = new SeatChallenger( cnd, 1234, "Winthrop", 5000, 99.9 );
+        testName = seat.getPollName();
+        testCount = seat.getPollID();
+        cnd2 = seat.getCnd();
+        System.out.println( seat.toString() );
+        assertEquals( "name", "Winthrop", testName );
+        assertEquals( "poll count", 1234, testCount );
+        assertEquals( "cnd name", "John", cnd2.getGivenName() );
     }
 }
 

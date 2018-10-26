@@ -186,7 +186,8 @@ public class Candidate
         //Validation: Checking for empty string.
         if( !( validateString( inAb ) ) )
         {
-            throw new IllegalArgumentException( "Empty party abbreviation." );
+            inAb = null; //Should account for the ' ,, ' of the Informal lines
+            partyAb = inAb;
         }
         else
         {
@@ -209,9 +210,14 @@ public class Candidate
     public void setCndID( int inCID )
     {
         //Validation: Check that the integer is a max length of 5 digits.
+        //Some informal seats have a candidate ID of 999 (makes it hard as key).
         if( ( inCID > 99999 ) || ( inCID < 10000 ) )
         {
-            throw new IllegalArgumentException( "Invalid candidate ID." );
+            if( inCID != 999 ) //Lets 999 past
+            {
+                System.out.println( "Candidate ID: " + inCID );
+                throw new IllegalArgumentException( "Invalid candidate ID." );
+            }
         }
         else
         {
@@ -261,6 +267,16 @@ public class Candidate
         ballotPos = inPos;
     }
 
+//******************************** CLONE *************************************//
+
+    public Candidate clone()
+    {
+        Candidate cnd = new Candidate( stateAb, divID, divName, partyAb, 
+            partyName, cndID, cndSurname, cndGivenName, elected, histElected,
+            ballotPos );
+        return cnd;
+    }
+
 //*************************** TOSTRING MODULE *******************************//
 
 /**
@@ -283,7 +299,7 @@ public class Candidate
     private boolean validateString ( String inString )
     {
         boolean isValid = false;
-        if ( ! ( inString.length() == 0 ) )
+        if ( ! ( inString.length() == 0 ) || ( inString != null ) )
         {
             isValid = true;
         }

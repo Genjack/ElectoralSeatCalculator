@@ -1,0 +1,27 @@
+skip
+skip
+WA,235,Brand,7488,Hillman,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,284,-7.1
+WA,317,Burt,7467,Armadale,28756,KEOGH,Matt,1,Y,N,ALP,Australian Labor Party,1169,24.99
+WA,317,Burt,8279,Thornlie,28781,O'SULLIVAN,Matt,3,N,N,LP,Liberal,1014,-8.7
+WA,236,Canning,30227,Divisional Office (PREPOLL),29149,TURNER,Jason,1,N,N,NP,The Nationals,0,-4.6
+WA,237,Cowan,36411,Darch,28323,YOUNG,Sheridan,4,N,N,GRN,The Greens (WA),178,-0.81
+WA,238,Curtin,7591,City Beach,28746,BISHOP,Julie,5,Y,Y,LP,Liberal,1188,0.92
+WA,312,Durack,8000,Carnamah,999,Informal,Informal,999,N,N,,Informal,5,-4.07
+WA,239,Forrest,7475,Binningup,28824,DABROWSKI,Edward,2,N,N,AUC,Australian Christians,9,-1.04
+WA,239,Forrest,7475,Binningup,28560,MARINO,Nola,5,Y,Y,LP,Liberal,327,-0.26
+WA,239,Forrest,34343,Dalyellup,28556,LOUD,Lorrae,7,N,N,ALP,Australian Labor Party,757,1.43
+WA,240,Fremantle,7778,North Fremantle,28752,WILSON,Josh,5,Y,N,ALP,Australian Labor Party,359,-7.04
+WA,305,Hasluck,7546,Kenwick,28749,WYATT,Ken,1,Y,Y,LP,Liberal,723,-4.14
+WA,305,Hasluck,7550,Maida Vale,28719,LEADBETTER,Bill,3,N,N,ALP,Australian Labor Party,626,3.44
+WA,248,Tangney,11635,Winthrop,23853,JENSEN,Dennis Geoffrey,1,N,Y,IND,Independent,382,10.82
+WA,248,Tangney,34088,Special Hospital Team 1,28314,KERR,Thor,3,N,N,GRN,The Greens (WA),17,-4.58
+WA,248,Tangney,7774,Melville (Tangney),23853,JENSEN,Dennis Geoffrey,1,N,Y,IND,Independent,98,9.59
+WA,248,Tangney,65478,BLV Tangney PPVC,23853,JENSEN,Dennis Geoffrey,1,N,Y,IND,Independent,2,14.29
+WA,248,Tangney,65478,BLV Tangney PPVC,28847,WIESKE,John,2,N,N,AUC,Australian Christians,1,-3.36
+WA,248,Tangney,65478,BLV Tangney PPVC,28314,KERR,Thor,3,N,N,GRN,The Greens (WA),0,-1.5
+WA,248,Tangney,65478,BLV Tangney PPVC,28742,BOSWELL,Marion,4,N,N,ALP,Australian Labor Party,3,-6.08
+WA,248,Tangney,65478,BLV Tangney PPVC,28771,MORTON,Ben,5,Y,N,LP,Liberal,8,7
+WA,248,Tangney,65478,BLV Tangney PPVC,999,Informal,Informal,999,N,N,,Informal,0,-0.06
+WA,247,Swan,65590,BLV Swan PPVC,28840,KLOMP,Steve,2,N,N,AUC,Australian Christians,1,3.11
+WA,246,Stirling,8193,Osborne East,28838,HOST,Kevin,4,N,N,AUC,Australian Christians,26,0.64
+WA,236,Canning,7483,Dwellingup,999,Informal,Informal,999,N,N,,Informal,25,0

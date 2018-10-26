@@ -162,4 +162,22 @@ public class Utility
         }
         return matches;
     } 
+
+//************************** GET MARGINAL SEATS ******************************//
+
+    public static void getMarginalSeats( DSALinkedList<SeatChallenger> list )
+    {
+        String party;
+        String partyPrompt = "Please enter the abbreviation for the party" +
+        " (i.e. 'GRN', 'ON'): ";
+        try
+        {
+            party = User.getString( partyPrompt );
+            
+        }
+        catch( IllegalArgumentException ie )
+        {
+            System.out.println( "Error: Party not found. Please try again." );
+            getMarginalSeats( list );
+        }
 }

@@ -29,6 +29,7 @@ public class File
     {
         String line, trash;
         String [] splitArr = new String[10];
+        Candidate cnd;
 
         FileInputStream fileStream = null;
         InputStreamReader rdr;
@@ -52,7 +53,8 @@ public class File
                 splitLine( line, splitArr );
                 
                 //Assemble Candidate object and store in array.
-                makeCandidate( splitArr, cndList );
+                cnd = makeCandidate( splitArr, 0 );
+                cndList.insertLast( cnd, cnd.getSurname() );
                 line = bufRdr.readLine(); 
             }
         }
@@ -106,13 +108,14 @@ public class File
 * FUNCTION: makeCandidate
 * IMPORTS: String [] - Array of csv comma-split attributes for a Candidate Obj
 *          DSALinkedList<Candidate> - List to store Candidates in
+*    int bp: The ballot position, not contained in hc.csv; imported so the 
+*    method can be reused for hs.csv.
 * PURPOSE:
 *    To create and store a Candidate Object from file.
 * HOW IT WORKS:
 * HOW IT RELATES:
 **/
-    public static void makeCandidate( String [] attr, 
-        DSALinkedList<Candidate> list )
+    public static Candidate makeCandidate( String [] attr, int bp )
     {
         int divID;
         boolean elected;
@@ -148,68 +151,113 @@ public class File
             [9] = Historically Elected Y/N.
            Adding a value of 0 to account for ballot position.*/
         cnd = new Candidate( attr[0], divID, attr[2], attr[3], attr[4], cndID, 
-            attr[6], attr[7], elected, histElected, 0 );
-
-        list.insertLast( cnd, cnd.getSurname() );
+            attr[6], attr[7], elected, histElected, bp );
+        return cnd;
     }
-/*
 
-    SAVE COUNTRIES***********************
+//**************************** LOAD SEATS FROM FILE **************************//
 
-    public static void saveCountries( CountryClass [] containerArr )
+    public static DSALinkedList<SeatChallenger> loadSeats( String file, 
+        DSALinkedList<SeatChallenger> list )
     {
-        FileOutputStream flStrm;
-        ObjectOutputStream objStrm;
+        int ballotPosition;
+        int totalInformalVotes = 0;
+        int informalOccurrences = 0;
+        String line, trash;
+        String [] splitArr = new String[15]; //All Seat & candidate info.
+        String [] makeArr = new String[10]; //For using in makeCandidate()
+        //Need a linked list because I don't know the size of the file
+        //Just storing in here while the file is read in.
+        Candidate cnd;
+        SeatChallenger seat;
+
+        FileInputStream fileStream = null;
+        InputStreamReader rdr;
+        BufferedReader bufRdr;
 
         try
         {
-            String fileName = User.getString( "Please enter a file name: ");
+            fileStream = new FileInputStream( file );
+            rdr = new InputStreamReader( fileStream );
+            bufRdr = new BufferedReader( rdr );
+           
+            for( int ii = 0; ii < 2; ii++ )
+            {
+                trash = bufRdr.readLine();
+            }
+
+            line = bufRdr.readLine();
             
-            flStrm = new FileOutputStream( fileName );
-            objStrm = new ObjectOutputStream( flStrm );
-            
-            objStrm.writeObject( containerArr );
-            objStrm.close();
+            while( line != null )
+            {
+                splitLine( line, splitArr );
+                
+                //Turn ballot position index into integer for processing:
+                ballotPosition = Integer.parseInt( splitArr[8] );
+                //Need to reformat array indexes to match makeCandidate():
+                for( int ii = 0; ii < 3; ii++ )
+                {
+                    makeArr[ii] = splitArr[ii];
+                }
+                makeArr[3] = splitArr[11];
+                makeArr[4] = splitArr[12];
+                for( int ii = 5; ii < 8; ii++ )
+                {
+                    makeArr[ii] = splitArr[ii];
+                }
+                makeArr[8] = splitArr[9];
+                makeArr[9] = splitArr[10];
+                //Check for informal votes/squandering of democratic privilege
+                if( makeArr[6].equals( "Informal" ) )
+                {
+                    totalInformalVotes += Integer.parseInt( splitArr[13] );
+                    informalOccurrences++;
+                }
+                else
+                {
+                    //Assemble Candidate object and store in array.
+                    cnd = makeCandidate( makeArr, ballotPosition );
+                    seat = makeSeat( splitArr, cnd );
+                    list.insertLast( seat, seat.getPollName() );
+                }
+
+                line = bufRdr.readLine(); 
+            }
+            System.out.println( "Total informal votes found: " +
+                totalInformalVotes + "\nTotal occurrences: " +
+                informalOccurrences );
         }
         catch( IOException e )
         {
-            e.printStackTrace();
+            if( fileStream != null )
+            {
+                try
+                {
+                    fileStream.close();
+                }
+                catch( IOException e2 )
+                {
+                    //Empty.
+                }
+            }
+            e.printStackTrace( System.out );
         }
-    }
+        return list;
+    }//End Submodule.       
 
-SUBMODULE: load
-IMPORT: None.
-EXPORT: containerArr (ARRAY OF CountryClass)
-DESCRIPTION: This is the serialization method for the existing place objects.
-             The User enters a file name, and the objects are de-serialised 
-             and returned.
+//****************************** MAKE SEATCHALLENGER *************************//
 
-    public static CountryClass [] load() throws IllegalArgumentException
+    public static SeatChallenger makeSeat( String [] arr, Candidate cnd )
     {
-        FileInputStream flStrm;
-        ObjectInputStream objStrm;
-        CountryClass [] rebuiltNations = null;
-
-        try
-        {
-            String fileName = User.getString( "Please enter a file name: ");
-            
-            flStrm = new FileInputStream( fileName );
-            objStrm = new ObjectInputStream( flStrm );
-            
-            rebuiltNations = (CountryClass [])objStrm.readObject();
-            
-            objStrm.close();
-        }
-        catch( ClassNotFoundException e )
-        {
-            System.out.println( "Error: Class not found" );
-            e.printStackTrace();
-        }
-        catch( Exception e2 )
-        {
-            throw new IllegalArgumentException( "Unable to load." );
-        }
-        return rebuiltNations;
-    } */
+        int votes, pollID;
+        double swing;
+        /*arr contents: [3] pollID; [4] pollName; [14] votes; [15] swing */
+        SeatChallenger seat;
+        swing = Double.parseDouble( arr[14] );
+        votes = Integer.parseInt( arr[13] );
+        pollID = Integer.parseInt( arr[3] );
+        
+        seat = new SeatChallenger( cnd, pollID, arr[4], votes, swing );
+        return seat;
+    }
 }
