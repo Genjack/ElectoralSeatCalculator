@@ -10,6 +10,9 @@ import java.util.*;
 
 public class Utility
 {
+
+//**************************** GET FILTERS ***********************************//
+
     //Function: Parse user choice string and adjust array of booleans.
     public static void getFilters( String choices, boolean [] arr )
     {
@@ -41,6 +44,8 @@ public class Utility
         arr[1] = partyBool;
         arr[2] = divBool;
     } //Pass by reference.
+
+//******************************* GET ORDER **********************************//
 
     public static void getOrder( String choices, boolean [] arr )
     {
@@ -79,6 +84,8 @@ public class Utility
         arr[3] = divBool;
     }
 
+//************************** GET SEARCH FILTERS ******************************//
+
     //Function: Parse user choice string and adjust array of booleans.
     public static void getSearchFilters( String choices, boolean [] arr )
     {
@@ -115,21 +122,30 @@ public class Utility
         Candidate cnd = null;
         char firstChar;
         DSALinkedList<Candidate> matches = new DSALinkedList<Candidate>();
+        Iterator rator = list.iterator();
 
         term = term.toUpperCase(); //Ensure in uppercase.
-        while( ( list.getCount() > 0 ) && ( ( !found ) || ( !passed ) ) )
+        
+        while( ( rator.hasNext() ) && ( ( !found ) || ( !passed ) ) )
         {
-            cnd = list.peekAtFirst(); //Have a look:
+            cnd = ( Candidate )( rator.next() ); 
             firstChar = cnd.getSurname().charAt(0); //i.e. A in Abbot
             if( firstChar == term.charAt(0) )
             {
                 found = true; //In alphabetical, first instance of letter found
+            }
+            //So if the first letter of surname equals first letter of search
+            //term, AND the whole search term is contained in the surname:
+            if( ( cnd.getSurname().charAt(0) == ( term.charAt(0) ) &&
+                ( cnd.getSurname().contains( term ) ) ) )
+            {
+                //Then add it.
                 matches.insertLast( cnd, cnd.getSurname() );
             }
             if( ( firstChar != term.charAt(0) ) && found ) 
             {
                 passed = true; //Passed all potential search matches; end.
-            }
+            } //Just saves searching an alphabetical list redundantly.
         }
         if( matches.getCount() == 0 )
         {
@@ -137,10 +153,10 @@ public class Utility
         }
         else
         {
-            Iterator rator = matches.iterator();
-            while( rator.hasNext() )
+            Iterator ratorM = matches.iterator();
+            while( ratorM.hasNext() )
             {
-                cnd = ( Candidate )( rator.next() );
+                cnd = ( Candidate )( ratorM.next() );
                 System.out.println( cnd.toString() );
             }
         }

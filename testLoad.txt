@@ -1,0 +1,27 @@
+Fluff line 1
+Fluff line 2 - Just simulating admin stuff at top of "hc.csv"
+NSW,151,Warringah,LP,Liberal,28624,ABBOTT,Tony,Y,Y
+VIC,203,Calwell,GRN,The Greens,28134,ABBOUD,Natalie,N,N
+QLD,163,Griffith,LDP,Liberal Democrats,29359,ABLETT,Bronwyn,N,N
+ACT,101,Canberra,ALP,Australian Labor Party,28189,BRODTMANN,Gai,Y,Y
+ACT,101,Canberra,LP,Liberal,28989,ADELAN-LANGFORD,Jessica,N,N
+SA,190,Sturt,IND,Independent,28010,AITCHISON,Neil,N,N
+WA,243,O'Connor,RUA,Rise Up Australia Party,28417,CARSON,Stephen,N,N
+NT,306,Lingiari,IND,Independent,28016,EARLEY,Braedon,N,N
+TAS,192,Bass,ALP,Australian Labor Party,28451,HART,Ross,Y,N
+NT,307,Solomon,ASP,"Shooters, Fishers and Farmers",28844,REINHOLD,Marty,N,N
+SA,180,Barker,LP,Liberal,29568,PASIN,Tony,Y,Y
+QLD,160,Fairfax,ON,Pauline Hanson's One Nation,29233,PASQUALI,Robert,N,N
+VIC,207,Corangamite,GRN,The Greens,28127,PATERSON,Patchouli,N,N
+WA,246,Stirling,ALP,Australian Labor Party,28731,PEARSON,Robert,N,N
+NT,306,Lingiari,GRN,The Greens,28555,HOAD,Rob,N,N
+SA,182,Boothby,XEN,Nick Xenophon Team,29120,HOCKLEY,Karen,N,N
+TAS,193,Braddon,CDP,Christian Democratic Party (Fred Nile Group),29353,HODGE,Graham,N,N
+QLD,176,Rankin,CRNT,Consumer Rights & No-Tolls,28371,HODGES,Jeffrey Dale,N,N
+VIC,230,Melbourne Ports,GRN,The Greens,28126,HODGINS-MAY,Steph,N,N
+NSW,138,Page,NP,The Nationals,29177,HOGAN,Kevin,Y,Y
+VIC,211,Flinders,GRN,The Greens,28132,HOGARTH,Willisa,N,N
+WA,240,Fremantle,LP,Liberal,28779,KELLY,Pierrette,N,N
+QLD,302,Longman,KAP,Katter's Australian Party,29380,KENNEDY,Brad,N,N
+VIC,215,Higgins,LDP,Liberal Democrats,28764,KENNEDY,Robert,N,N
+QLD,164,Groom,GRN,The Greens,29564,van GEUNS,Antonia,N,N

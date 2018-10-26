@@ -22,3 +22,23 @@ NOTE ON TREE
   is contained in a tree's key.
   Plus, I think the way the tree is implemented means that a substring that
   matched a term would just make it go left? Because there's less characters?
+- Considered making the key the first character of the Candidate surname, which
+  would allow me to find the node each time - but then I would have to check the
+  whole surname against the rest of the key, and THEN if it's not right, it would
+  have to unwind, come back, and dive back in all the way down the tree for 
+  another go. With a list iterator, the spot in the list is maintained, which
+  means we don't have to keep re-finding our spot each time. I just couldn't see
+  a way to make the tree work more effectively here.
+
+NOTE ON SEARCH
+- I don't think I'll bother throwing the list into an array to sort alphabetically,
+  because that would be O(N) - although... the search would have to perform an
+  additional contains() operation on each one, so it mightttt be better...
+- Yeah let's do it.
+- If I had more time, I'd have a crack at a hash table. I could use a combination
+of name and either division or candidate ID for the key (not guaranteed to be unique
+with the former, but it's not an int), and then I'd implement a similar search
+system to what I already have.
+
+NOTE ON PART 3
+- Using linked list sigh.

@@ -2,7 +2,7 @@
 ** Software Technology 152
 ** Class to hold various static sort methods.
 */
-class Sorts
+class AllSorts
 {
     // bubble sort
     public static void bubbleSort(int[] A)

@@ -1,0 +1,6 @@
+***OPTIONAL***
+1) Perhaps change file input to user input, rather than hardcoded.
+
+*** IMPORTANT ***
+1) Ensure that when inserting surnames, they are in Upper Case.
+    - Doesn't seem to work - 'van GEUNS' is still lowercase for 'van'.

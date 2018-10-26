@@ -68,14 +68,12 @@ public class Format
         {
             System.out.println( "Error: Invalid selection. Please ensure you " +
                 "choose a valid option, i.e. 1, or 12, 23, 123 etc." );
-            ae.printStackTrace();
             prepareToList( cndListMain );
         }
         catch( IllegalArgumentException ie )
         {
             System.out.println( "Please ensure you choose a valid option, i.e. "
-                + "1, 12, 23, 123 etc." );
-            ie.printStackTrace();
+                + "WA-NT-QLD-VIC-ACT-NSW-TAS-SA" );
             prepareToList( cndListMain );
         }//End catches
         return cndListMain;
@@ -114,50 +112,24 @@ public class Format
         String divPrompt = "Please enter the division ID for the division by " +
         "which you wish to filter (3-digit number): ";
 
-//MODIFICATION
-System.out.println( "HERE" );
         Utility.getFilters( userChoice, selections );
-System.out.println( "true? " + selections[0] );
 //selections Array now contains booleans: [0] name [1] state [2] party [3] div
-        /*filterState = false;
-        filterParty = false;
-        filterDiv = false;*/
-
         filtList = new DSALinkedList<Candidate>();
-/*
-        //Check the string, and trigger the flags for filter processing:
-        for( int ii = 0; ii < userChoice.length(); ii++ )
-        {
-            char filter = userChoice.charAt(ii);
-            if( filter == '1' ) //Filter by STATE
-            {
-                filterState = true;
-            }
-            if( filter == '2' ) //Filter by PARTY
-            {
-                filterParty = true;
-            }
-            if( filter == '3' ) //Filter by DIVISION
-            {
-                filterDiv = true;
-            }
-        } */
-        //So now we have our filter selections registered. Time to filter.
 
-        if( selections[0] ) //STATE boolean
+        if( selections[0] ) //User wants to filter by STATE
         {
             state = getState( statePrompt );
         }
-        if( selections[1] ) //PARTY boolean
+        if( selections[1] ) //User wants to filter by PARTY
         {
             party = getParty( partyPrompt );
         }
-        if( selections[2] ) //DIV boolean
+        if( selections[2] ) //User wants to filter by DIVISION
         {
             divId = getDiv( divPrompt );
         }
 
-        //Apply filters to the array, and add to the cndList:
+        //Apply filters to the array, and add to the filtList:
         while( cndList.getCount() > 0 )
         {
             Candidate compCnd;
@@ -290,26 +262,7 @@ System.out.println( "true? " + selections[0] );
 //MODIFICATION BOOLEANS
         Utility.getOrder( choice, selections );
 
-        /*for( int ii = 0; ii < choice.length(); ii++ )
-        {
-            char order = choice.charAt(ii);
-            if( order == '1' ) //Order by SURNAME
-            {
-                ordName = true;
-            }
-            if( order == '2' ) //Order by STATE
-            {
-                ordState = true;
-            }
-            if( order == '3' ) //Order by PARTY
-            {
-                ordPty = true;
-            }
-            if( order == '4' ) //Order by DIVISION
-            {
-                ordDiv = true;
-            }
-        }*/
+
         sortArr = new Candidate[list.getCount()]; //Array size of list.
         //Order selection/s registered. 
         //Sorting begins - outside the loop in case the User (accidentally or
@@ -356,16 +309,11 @@ System.out.println( "true? " + selections[0] );
             "Party\n Please enter the corresponding number of " +
             "the attribute to sort by as a single number,\n i.e. 12 to sort by"
             + " all;\n Or press 0 to skip: ";
-        String statePrompt = "Please enter the abbreviation for the State by " +
-        "which you wish to filter (i.e. 'WA'): ";
-        String partyPrompt = "Please enter the abbreviation for the party by " +
-        "which you wish to filter (i.e. 'GRN', 'ON'): ";
-        String state = "";
-        String party = "";
 
-        boolean [] selections = new boolean[2]; //Array to store selections.
+        int objCount = 0;
+        Candidate [] sortArr = new Candidate[list.getCount()];
         //List to store filtered objects in and return to main menu.
-        DSALinkedList<Candidate> filtList= new DSALinkedList<Candidate>();
+        DSALinkedList<Candidate> list2= new DSALinkedList<Candidate>();
         //selections[1] = State; selections[2] = Party. 
 
         try
@@ -375,58 +323,22 @@ System.out.println( "true? " + selections[0] );
 
             if( choice.charAt(0) != '0' ) //If User chooses to filter:
             {
-                //String should now contain '1', '2', or '12': VALIDATE:
-                //Skipping use of Validate class owing to simplicity:
-                if( ! ( ( choice.equals("1") ) || ( choice.equals( "2" ) ) || 
-                    ( choice.equals( "12" ) ) ) ) //INVALID
+                filter( choice, list, list2 );
+            }
+            else //Skip filtering, return entirety.
+            {
+                while( list.getCount() > 0 )
                 {
-                    throw new IllegalArgumentException( "Error: Choice must be "
-                    + "either '1', '2', '12' or '0' to skip." );
-                }
-                else //VALID - choice is either, 1, 2 or both.
+                    Candidate cnd = ( Candidate )( list.removeFirst() );
+                    sortArr[objCount] = cnd;
+                    objCount++;
+                }//Array filled; send to Sort.
+                Sorts.mergeSortName( sortArr );
+                //Put back into list:
+                for( int ii = 0; ii < sortArr.length; ii++ )
                 {
-                    Utility.getSearchFilters( choice, selections );
-                    if( selections[0] )
-                    {
-                        state = getState( statePrompt );
-                    }
-                    if( selections[1] )
-                    {
-                        party = getParty( partyPrompt );
-                    }
-                    //Filters chosen and set - now to apply:
-                    while( list.getCount() > 0 )
-                    {
-                        Candidate cnd = list.removeFirst();
-                        if( selections[0] )
-                        {
-                            if( cnd.getStateAb().equals( state ) )
-                            {
-                                if( selections[1] )
-                                {
-                                    if( cnd.getPartyAb().equals( party ) )
-                                    {
-                                        filtList.insertSorted( cnd, cnd.getSurname() );
-                                    }
-                                }
-                                else //Just filter by STATE
-                                {
-                                    filtList.insertSorted( cnd, cnd.getSurname() );
-                                }
-                            }
-                        }
-                        else 
-                        {
-                            if( selections[1] ) //Just filtering by Party
-                            {
-                                if( cnd.getPartyAb().equals( party ) )
-                                {
-                                    filtList.insertSorted( cnd, cnd.getSurname() );
-                                }
-                            }
-                        }
-                    }//End While Loop.
-                }//End If/Else
+                    list2.insertLast( sortArr[ii], sortArr[ii].getSurname() );
+                } //List sorted alphabetically.
             }  
         }//End Try
         catch( IllegalArgumentException e )
@@ -434,6 +346,89 @@ System.out.println( "true? " + selections[0] );
             e.printStackTrace();
             prepareToSearch( list );
         }
-        return filtList;
+        return list2;
     }//End prepareToSearch
+
+//**************************** FILTERED SEARCH *******************************//
+
+    public static DSALinkedList<Candidate> filter( String choice, 
+        DSALinkedList<Candidate> list, DSALinkedList<Candidate> filtList )
+    {
+        //Already in a try catch from above
+        Candidate [] sortArr;
+        boolean [] selections = new boolean[2]; //Array to store selections.
+        int objCount = 0;
+        
+        String statePrompt = "Please enter the abbreviation for the State by " +
+        "which you wish to filter (i.e. 'WA'): ";
+        String partyPrompt = "Please enter the abbreviation for the party by " +
+        "which you wish to filter (i.e. 'GRN', 'ON'): ";
+        String state = "";
+        String party = "";
+        
+        if( ! ( ( choice.equals("1") ) || ( choice.equals( "2" ) ) || 
+                   ( choice.equals( "12" ) ) ) ) //INVALID
+        {
+            throw new IllegalArgumentException( "Error: Choice must be "
+            + "either '1', '2', '12' or '0' to skip." );
+        }
+        else //VALID - choice is either, 1, 2 or both.
+        {
+            Utility.getSearchFilters( choice, selections );
+            if( selections[0] )
+            {
+                state = getState( statePrompt );
+            }
+            if( selections[1] )
+            {
+                party = getParty( partyPrompt );
+            }
+            //Filters chosen and set - now to apply:
+            while( list.getCount() > 0 )
+            {
+                Candidate cnd = list.removeFirst();
+                if( selections[0] )
+                {
+                    if( cnd.getStateAb().equals( state ) )
+                    {
+                        if( selections[1] )
+                        {
+                            if( cnd.getPartyAb().equals( party ) )
+                            {
+                                filtList.insertLast( cnd, cnd.getSurname() );
+                            }
+                        }
+                        else //Just filter by STATE
+                        {
+                            filtList.insertLast( cnd, cnd.getSurname() );
+                        }
+                    }
+                }
+                else 
+                {
+                    if( selections[1] ) //Just filtering by Party
+                    {
+                        if( cnd.getPartyAb().equals( party ) )
+                        {
+                            filtList.insertLast( cnd, cnd.getSurname() );
+                        }
+                    }
+                }
+            }//End While Loop.
+            sortArr = new Candidate[filtList.getCount()];
+            while( filtList.getCount() > 0 )
+            {
+                Candidate cnd = ( Candidate )( filtList.removeFirst() );
+                sortArr[objCount] = cnd;
+                objCount++;
+            }//Array filled; send to Sort.
+            Sorts.mergeSortName( sortArr );
+            //Put back into list:
+            for( int ii = 0; ii < sortArr.length; ii++ )
+            {
+                filtList.insertLast( sortArr[ii], sortArr[ii].getSurname() );
+            }
+        }//End If/Else 
+        return filtList;
+    }
 }//End Format Class

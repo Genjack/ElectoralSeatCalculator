@@ -145,9 +145,10 @@ public class File
             [0] = State Abbreviation; [1] = Division ID; [2] = Division name;
             [3] = Party Abbreviation; [4] = Party Name; [5] = Candidate ID;
             [6] = Surname; [7] = Given name; [8] = Elected Y/N;
-            [9] = Historically Elected Y/N. */
+            [9] = Historically Elected Y/N.
+           Adding a value of 0 to account for ballot position.*/
         cnd = new Candidate( attr[0], divID, attr[2], attr[3], attr[4], cndID, 
-            attr[6], attr[7], elected, histElected );
+            attr[6], attr[7], elected, histElected, 0 );
 
         list.insertLast( cnd, cnd.getSurname() );
     }

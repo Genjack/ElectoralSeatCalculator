@@ -1,0 +1,8 @@
+FILE.JAVA
+    1) loadCandidates - create test file, check returned list.
+        > Use a file without two dodgy lines at the top to see. DONE
+        > Include a shooters/farmers bit DONE
+
+FORMAT.JAVA
+    1) prepareToList
+    2) 

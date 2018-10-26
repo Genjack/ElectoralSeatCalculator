@@ -33,6 +33,9 @@ public class Candidate
     //Boolean value denoting whether this candidate has been elected before
     private boolean histElected;
 
+    //ballotPos - Integer; used only for Seats. Set to null for parts 1 and 2.
+    private int ballotPos;
+
 /**
 * DEFAULT CONSTRUCTOR
 * Purpose: Creates a default instance of Candidate.
@@ -49,6 +52,7 @@ public class Candidate
         cndGivenName = "null";
         elected = false;
         histElected = false;
+        ballotPos = 0; //0 = N/A
     }
 
 /**
@@ -58,7 +62,8 @@ public class Candidate
 
     public Candidate( String inStateAb, int inDivID, String inDivName, 
         String inPartyAb, String inPartyName, int inCndID, String inCndSurname,
-        String inCndGivenName, boolean inElected, boolean inHistElected )
+        String inCndGivenName, boolean inElected, boolean inHistElected, int
+        inPos )
     {
         setStateAb( inStateAb );
         setDivID( inDivID );
@@ -70,6 +75,7 @@ public class Candidate
         setGivenName( inCndGivenName );
         setElected( inElected );
         setHistElected( inHistElected );
+        setBallotPos( inPos );
     }
 
 //Won't need a copy constructor - no point duplicating a unique candidate
@@ -124,6 +130,11 @@ public class Candidate
     public boolean getHistElected()
     {
         return histElected;
+    }
+
+    public int getPosition()
+    {
+        return ballotPos;
     }
 
 //********************************** MUTATORS *******************************//
@@ -244,6 +255,12 @@ public class Candidate
         histElected = inHistElected;
     }
 
+    public void setBallotPos( int inPos )
+    {
+        //Ballot positions seem to be 1-5, and then 999; skip validation now
+        ballotPos = inPos;
+    }
+
 //*************************** TOSTRING MODULE *******************************//
 
 /**
@@ -255,7 +272,8 @@ public class Candidate
         return ( "Name: " + cndGivenName + " " + cndSurname + ";\n ID: " +
             cndID + ";\n Party: " + partyAb + " - " + partyName + 
             ";\n Division: " + divName + " (" + divID + ")\n Elected: " + 
-            elected + "; Elected Previously: " + histElected + ".\n" );
+            elected + "; Elected Previously: " + histElected + ";\n " +
+            "Ballot position: " + ballotPos + ".\n" );
     }
 
 

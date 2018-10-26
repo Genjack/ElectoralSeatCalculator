@@ -61,6 +61,20 @@ public class Sorts
                 tempArr[nextFreeTempIdx] = A[leftFront];
                 leftFront += 1;
             }
+            else if( A[leftFront].getSurname().compareTo( A[rightFront].getSurname() ) == 0 )
+            {
+                //Same surname - check firstname
+                if( A[leftFront].getGivenName().compareTo( A[rightFront].getGivenName() ) <= 0 )
+                {
+                    tempArr[nextFreeTempIdx] = A[leftFront];
+                    leftFront += 1;
+                }
+                else
+                {
+                    tempArr[nextFreeTempIdx] = A[rightFront];
+                    rightFront += 1;
+                }
+            }
             else
             {
                 tempArr[nextFreeTempIdx] = A[rightFront];

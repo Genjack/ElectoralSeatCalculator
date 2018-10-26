@@ -31,6 +31,7 @@ public class Menu
             + "surname: ";
 
         DSALinkedList<Candidate> cndListAll; //List to read Candidates in to.
+        DSALinkedList<Candidate> tempAll; //List fo copying to preserve Master
         DSALinkedList<Candidate> cndListFilter; //List to filter into.
         cndListAll = new DSALinkedList<Candidate>();    //Master list.
         cndListFilter = new DSALinkedList<Candidate>(); //For part 1.
@@ -49,7 +50,7 @@ public class Menu
                         if( ! ( fileRead ) )
                         {
                             //Create linked list, read file contents into it.
-                            File.loadCandidates( fileName, cndListAll );
+                            File.loadCandidates( /*fileName*/"testLoad.txt", cndListAll );
                         }
                         //Copy contents to filter list for sorting, so that
                         //the main list is intact and can be manipulated later:
@@ -58,6 +59,7 @@ public class Menu
                         {
                             Candidate cnd = rator.next();
                             cndListFilter.insertLast( cnd, cnd.getSurname() );
+
                         }
                         cndListFilter = Format.prepareToList( cndListFilter );
                         //Need:
@@ -79,12 +81,19 @@ public class Menu
                         }
                         else
                         {
+                System.out.println( "main 1: " + cndListAll.peekAtFirst().toString() );
                             searches = new DSALinkedList<Candidate>();
-                            cndListFilter = Format.prepareToSearch( cndListAll );
+                            tempAll = new DSALinkedList<Candidate>();
+                            Iterator<Candidate> rator = cndListAll.iterator();
+                            while( rator.hasNext() )
+                            {
+                                Candidate cnd = rator.next();
+                                tempAll.insertLast( cnd, cnd.getSurname() );
+                            }
+                            cndListFilter = Format.prepareToSearch( tempAll );
                             //^ Should now be filtered and sorted alphabetically.
                             //Get user input of a string, and search list for matches.
                             searchTerm = User.getString( searchPrompt );
-                            System.out.println( "search term EQUALS = " + searchTerm);
                             searches = Utility.searchList( searchTerm, cndListFilter );
                             optionalSave( searches, "Searched Candidates" );
                             while( cndListFilter.getCount() > 0 )
@@ -108,7 +117,6 @@ public class Menu
             }
         } while ( exitNow == false );
     }
-
 
 //CODE TAKEN FROM Practical 1, FileClass.java - writeFile()
     public static void optionalSave( DSALinkedList<Candidate> list, String type )
