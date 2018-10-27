@@ -98,7 +98,12 @@ array is passed by reference, and no list is returned.
 
 7) If so, add to a linked list.
 
-
+NOTE ON PART 2
+If I had time, I'd go back and implement the search with a hash table. I'd use
+a key, the key being the first letter of the candidate surname, and have an
+array sorted alphabetically. I'd retrieve the key from the hashtable, which 
+would store an index of where these surnames start - say all names beginning
+with "D" - and then I'd check just those.
 
 
 

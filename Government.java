@@ -11,7 +11,7 @@
 
 import java.util.*;
 
-public class TheTrail
+public class Government
 {
     public static void main( String [] args )
     {

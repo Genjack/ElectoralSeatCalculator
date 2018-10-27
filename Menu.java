@@ -117,7 +117,7 @@ public class Menu
                     {
                         if( !( seatFileRead ) )
                         {
-                            File.loadSeats( /*seatFile*/"testMarginal.txt", seatListAll );
+                            File.loadSeats( seatFile/*"testMarginal.txt"*/, seatListAll );
                         }
                         //File is read in. Transfer to array and build hash table
                         seatArr = new SeatChallenger[seatListAll.getCount()];

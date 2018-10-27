@@ -8,7 +8,7 @@ import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import static org.junit.Assert.*;
-import io.ConsoleRedirect; 
+// import io.ConsoleRedirect; 
 // import org.mockito.Mockito.*; //in case I need mock objects later.
 
 @RunWith ( JUnit4.class )

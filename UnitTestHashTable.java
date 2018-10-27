@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 // import org.mockito.Mockito.*; //in case I need mock objects later.
 
 @RunWith ( JUnit4.class )
-public class DSAHashTableTestHarness
+public class UnitTestHashTable
 {
     private DSAHashTable table;
     private int testCount;
@@ -21,7 +21,7 @@ public class DSAHashTableTestHarness
     private String cwgName;
     private int cwgYear;
     private TestClass testObj1, testObj2, testObj3, testObj4, testObj5, 
-       testObj6, testObj7, testObj8, testObj9, testObj10;
+       testObj6, testObj7, testObj8, testObj9, testObj10, obj;
     private TestClass testGetObj;
     private boolean testContains;
 
@@ -55,28 +55,15 @@ public class DSAHashTableTestHarness
     }  
     //Tested functions: Constructor, put(), hash(), stepHash()
     
-    //TESTING: More put(), and some get!
-    @Test
-    public void testPrint()
-    {
-        table.put( "A", testObj1 ); //Jackson
-        table.put( "B", testObj2 ); //Jackson
-        table.put( "C", testObj3 ); //Jackson
-        testCount = table.getCount();
-        System.out.println( testCount );
-    }
-
     @Test
     public void testGet()
     {
         table.put( "A", testObj1 ); //Jackson
         table.put( "B", testObj2 ); //Sherman
         table.put( "C", testObj3 ); //Lee
-        testGetObj = (TestClass)(table.get( "A" ));
-        cwgName = testGetObj.getName();
-        cwgYear = testGetObj.getNumber();
-        assertEquals( "Jackson extricated", "TJ Jackson", cwgName );
-        assertEquals( "Jackson extricated", 1863, cwgYear );
+        obj = (TestClass)(table.get( "A" ));
+        assertEquals( "Jackson extricated", "TJ Jackson", obj.getName() );
+        assertEquals( "Jackson extricated", 1863, obj.getNumber() );
     }
 
     @Test
@@ -92,11 +79,9 @@ public class DSAHashTableTestHarness
         table.put( "H", testObj8 ); //King
         table.put( "I", testObj9 ); //Johnston
         table.put( "J", testObj10 ); //Berdan
-        testGetObj = (TestClass)(table.remove( "F" ));
-        cwgName = testGetObj.getName();
-        cwgYear = testGetObj.getNumber();
-        assertEquals( "Stuart extricated", "JEB Stuart", cwgName );
-        assertEquals( "Stuart extricated", 1776, cwgYear );       
+        obj = (TestClass)(table.remove( "F" ));
+        assertEquals( "Stuart extricated", "JEB Stuart", obj.getName() );
+        assertEquals( "Stuart extricated", 1776, obj.getNumber() );       
     }
     
     @Test
@@ -117,22 +102,6 @@ public class DSAHashTableTestHarness
     } //Find() has been tested implicitly.
 
     @Test
-    public void testResize()
-    {
-        table.put( "A", testObj1 ); //Jackson
-        table.put( "B", testObj2 ); //Sherman
-        table.put( "C", testObj3 ); //Lee
-        table.put( "D", testObj4 ); //McClellan
-        table.put( "E", testObj5 ); //Grant
-        table.put( "F", testObj6 ); //Stuart
-        table.put( "G", testObj7 ); //Pickett
-        table.put( "H", testObj8 ); //King
-        table.put( "I", testObj9 ); //Johnston
-        table.put( "J", testObj10 ); //Berdan
-        System.out.println( "Load factor: " + table.calcLoad() );
-    }
-
-    @Test
     public void testShrink()
     {
         table.put( "A", testObj1 ); //Jackson
@@ -146,7 +115,6 @@ public class DSAHashTableTestHarness
         table.put( "I", testObj9 ); //Johnston
         table.put( "J", testObj10 ); //Berdan
         table.printTable();
-        System.out.println( table.calcLoad() );
         System.out.println( "==== ^ Pre remove == V post remove ==== " );
         table.remove( "A" );
         table.remove( "B" );

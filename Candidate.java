@@ -213,10 +213,14 @@ public class Candidate
         //Some informal seats have a candidate ID of 999 (makes it hard as key).
         if( ( inCID > 99999 ) || ( inCID < 10000 ) )
         {
-            if( inCID != 999 ) //Lets 999 past
+            if( !( inCID == 999 ) ) //Lets 999 past
             {
                 System.out.println( "Candidate ID: " + inCID );
                 throw new IllegalArgumentException( "Invalid candidate ID." );
+            }
+            else
+            {
+                cndID = inCID;
             }
         }
         else

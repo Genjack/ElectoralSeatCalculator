@@ -175,18 +175,28 @@ public class Utility
         int ii = 0;
         double votesFor = 0;
         double votesAgainst = 0;
+        double threshold;
         DSALinkedList<Integer> divsToCheck = new DSALinkedList<Integer>();
         String partyPrompt = "Please enter the abbreviation for the party" +
         " (i.e. 'GRN', 'ON'): ";
+        String marginPrompt = "Please enter the margin threshold as a number\n" + 
+            " (Min: -50; max: 50; include sign): ";
+
         try
         {
             party = User.getString( partyPrompt );
-            ptyIdx = (int)(table.get( party ));
-            
+            threshold = User.realInput( marginPrompt, -50.0, 50.0 );
+
+            ptyIdx = (int)(table.get( party )); //Test: GRN index = 64.
             while( arr[ptyIdx].getCnd().getPartyAb().equals( party ) )
             {
+                //Finds all instances of Green party candidates in divisions.
                 divID = arr[ptyIdx].getCnd().getDivID();
-                divsToCheck.insertLast( divID, party );
+                if( ( divsToCheck.getCount() == 0 ) || 
+                    ( (int)(divsToCheck.peekAtLast() ) != divID) )
+                {
+                    divsToCheck.insertLast( divID, party );
+                }
                 ptyIdx++;
             }
             //Sort array by division
@@ -199,9 +209,8 @@ public class Utility
             while( rator.hasNext() )
             {
                 int div = (int)(rator.next()); //Say it's 200
-                while( arr[ii].getCnd().getDivID() == div )
+                while( ( ii < arr.length ) && ( arr[ii].getCnd().getDivID() == div ) )
                 {
-System.out.println( ii );
                     if( arr[ii].getCnd().getPartyAb().equals( party ) )
                     {
                         votesFor += arr[ii].getVotes();
@@ -213,14 +222,19 @@ System.out.println( ii );
                     ii++;
                 }
                 //Div finished; print this set of results:
-                double totalPct = ( votesFor/(votesFor+votesAgainst)*100.0);
-                double margin = totalPct - 50.0;
-                if( ( margin > 6.0 ) || ( margin < 6.0 ) )
+                double totalPct = ( (votesFor/(votesFor+votesAgainst))*100.0);
+                double margin = totalPct - 50.0; 
+                if( ( margin < threshold ) && ( margin > -threshold ) )
                 {
                     System.out.println( "=== DIVISION " + div + " === " );
                     System.out.println( "Marginal seat for: " + party );
-                    System.out.println( "Total votes: " + votesFor );
-                    System.out.println( "Margin: " + margin );
+                    System.out.println( "Total votes: " + (int)votesFor );
+                    System.out.println( "Margin: " + margin + "%" );
+                }
+                else
+                {
+                    System.out.print( "Checking division " + div + "..." );
+                    System.out.println( " Outside Threshold." );
                 }
             }
             
