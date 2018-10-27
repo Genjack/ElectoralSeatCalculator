@@ -47,7 +47,10 @@ public class File
             }
 
             line = bufRdr.readLine();
-            
+            if( line == null )
+            {
+                throw new IllegalArgumentException( "Error: File is empty." );
+            }
             while( line != null )
             {
                 splitLine( line, splitArr );
@@ -86,7 +89,7 @@ public class File
 * HOW IT RELATES:
 **/
 
-    public static String [] splitLine( String line, String [] arr )
+    private static String [] splitLine( String line, String [] arr )
     {
         String sillyParty = "hooters, F";
         String slightlyBetter = "hooters F";
@@ -260,4 +263,4 @@ public class File
         seat = new SeatChallenger( cnd, pollID, arr[4], votes, swing );
         return seat;
     }
-}
+} //END FILE CLASS

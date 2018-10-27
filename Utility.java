@@ -173,10 +173,9 @@ public class Utility
         String party;
         int ptyIdx, divID;
         int ii = 0;
-        double votesFor = 0;
-        double votesAgainst = 0;
-        double threshold;
+        double votesFor, votesAgainst, threshold;
         DSALinkedList<Integer> divsToCheck = new DSALinkedList<Integer>();
+        DSALinkedList<String> marginLog = new DSALinkedList<String>();
         String partyPrompt = "Please enter the abbreviation for the party" +
         " (i.e. 'GRN', 'ON'): ";
         String marginPrompt = "Please enter the margin threshold as a number\n" + 
@@ -206,8 +205,11 @@ public class Utility
                if the div changes, add up the previous div's votes and check if
                it's a marginal seat - if so, add to the marginalList. */
             Iterator rator = divsToCheck.iterator();
+System.out.println( arr.length );
             while( rator.hasNext() )
             {
+                votesFor = 0.0;
+                votesAgainst = 0.0;
                 int div = (int)(rator.next()); //Say it's 200
                 while( ( ii < arr.length ) && ( arr[ii].getCnd().getDivID() == div ) )
                 {
@@ -220,16 +222,18 @@ public class Utility
                         votesAgainst += arr[ii].getVotes();
                     }
                     ii++;
+System.out.println( votesFor );
                 }
                 //Div finished; print this set of results:
                 double totalPct = ( (votesFor/(votesFor+votesAgainst))*100.0);
                 double margin = totalPct - 50.0; 
                 if( ( margin < threshold ) && ( margin > -threshold ) )
                 {
-                    System.out.println( "=== DIVISION " + div + " === " );
-                    System.out.println( "Marginal seat for: " + party );
-                    System.out.println( "Total votes: " + (int)votesFor );
-                    System.out.println( "Margin: " + margin + "%" );
+                    String log = "===DIVISION " + div + "===\nMarginal Seat " +
+                        "for: " + party +"\nTotal votes: " + (int)votesFor +
+                        "\nMargin: " + margin + "%";
+                    marginLog.insertLast( log, log );
+                    System.out.println( log );
                 }
                 else
                 {

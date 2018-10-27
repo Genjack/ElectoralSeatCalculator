@@ -21,6 +21,8 @@ public class Menu
         boolean cndFileRead = false;
         boolean seatFileRead = false;
         int keyPress;
+        int [] validIdx; //An array to have the first index used for validation
+        String filters, order;
 
         String candidateFile = "hc.csv";
         String seatFile = "hs.csv";
@@ -30,6 +32,7 @@ public class Menu
         String searchTerm = "";
         String searchPrompt = "Please enter all or part of the nominee's "
             + "surname: ";
+        
         //Part 1/2
         DSALinkedList<Candidate> cndListAll; //List to read Candidates in to.
         DSALinkedList<Candidate> tempAll; //List for copying to preserve Master
@@ -73,8 +76,6 @@ public class Menu
 
                         }
                         cndListFilter = Format.prepareToList( cndListFilter );
-                        //Need:
-                            //1. Option to save cndListMain to file;
                         optionalSave( cndListFilter, "Filtered List" );                        
                         while( cndListFilter.getCount() > 0 )
                         {
@@ -117,13 +118,17 @@ public class Menu
                     {
                         if( !( seatFileRead ) )
                         {
-                            File.loadSeats( seatFile/*"testMarginal.txt"*/, seatListAll );
+                            File.loadSeats( /*seatFile*/"testMarginal.txt", seatListAll );
                         }
                         //File is read in. Transfer to array and build hash table
                         seatArr = new SeatChallenger[seatListAll.getCount()];
                         ptyTable = Format.makeSeatArray( seatArr, seatListAll );
                         //Table is returned, array is passed by reference.
                         Utility.getMarginalSeats( seatArr, ptyTable );
+                        while( seatListAll.getCount() > 0 )
+                        {
+                            seatListAll.removeFirst();
+                        }
                     }
                     break;
                     case 5:
@@ -134,9 +139,14 @@ public class Menu
                     }
                 }
             }
-            catch ( NullPointerException e )
+            catch( NullPointerException e )
             {
                 e.printStackTrace( System.out );
+            }
+            catch( IllegalArgumentException ie )
+            {
+                System.out.println( ie.getMessage() );
+                System.out.println( "Restarting Menu..." );
             }
         } while ( exitNow == false );
     }

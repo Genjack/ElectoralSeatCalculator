@@ -42,12 +42,12 @@ public class Candidate
 **/
     public Candidate()
     {
-        stateAb = "null";
-        divID = 000;
+        stateAb = "abc";
+        divID = 100;
         divName = "null";
         partyAb = "N/A";
         partyName = "null";
-        cndID = 00000;
+        cndID = 999;
         cndSurname = "null";
         cndGivenName = "null";
         elected = false;

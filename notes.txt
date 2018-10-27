@@ -105,14 +105,4 @@ array sorted alphabetically. I'd retrieve the key from the hashtable, which
 would store an index of where these surnames start - say all names beginning
 with "D" - and then I'd check just those.
 
-
-
-
-
-
-
-
-
-
-
-
+DID NOT TEST OPTIONAL SAVE BECAUSE IT'S SO EASY TO TEST.

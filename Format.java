@@ -19,37 +19,35 @@ public class Format
     public static DSALinkedList<Candidate> prepareToList( 
         DSALinkedList<Candidate> cndListMain )
     {
+        String choice;
         try
         {
-            String userChoice; //will be like "12" or "1"; need to parse chars.
-
             String filterMenu = "Filter the list by:\n [1] State\n [2] " +
-            "Party\n [3] Division\n Please enter the corresponding number of " +
-            "the attribute to sort by as a single number,\n i.e. 123 to sort by"
-            + " all;\n Or press 0 to skip: ";
+                "Party\n [3] Division\n Please enter the corresponding number of " +
+                "the attribute to sort by as a single number,\n i.e. 123 to sort by"
+                + " all;\n Or press 0 to skip: ";
             
             String orderMenu = "Order the list by:\n [1] Surname\n [2] State\n"+
-            " [3] Party\n [4] Division\nPlease enter the corresponding numbers "
-            + "as a single entry i.e. 1234 to order by all\n Or press 0 to skip: ";
+                " [3] Party\n [4] Division\nPlease enter the corresponding numbers "
+                + "as a single entry i.e. 1234 to order by all\n Or press 0 to skip: ";
+                
+            choice = User.getString( filterMenu );
 
-            //Ask the user if they want to filter their results before listing:
-            userChoice = User.getString( filterMenu );
-            
-            if( userChoice.charAt(0) != '0' ) //If User wants to filter:
+            if( choice.charAt(0) != '0' ) //If User wants to filter:
             {
                 //Parse the string to extract chars and validate them.
-                Validate.validateChoice( userChoice, '3' );
+                Validate.validateChoice( choice, '3' );
                 /*Choice is valid if program reaches here
                 Determine what to put into the linked list based on choice: */
-                cndListMain = buildFilters( userChoice, cndListMain );
+                cndListMain = buildFilters( choice, cndListMain );
             }
             //If User does not enter above block, then no filters to be applied
             //Now continue - Does the User want to order by anything?
-            userChoice = User.getString( orderMenu );
-            if( userChoice.charAt(0) != '0' ) //If User wants to order:
+            choice = User.getString( orderMenu );
+            if( choice.charAt(0) != '0' ) //If User wants to order:
             {
-                Validate.validateChoice( userChoice, '4' );
-                sortList( userChoice, cndListMain );
+                Validate.validateChoice( choice, '4' );
+                sortList( choice, cndListMain );
             }
             //Print list
             Iterator<Candidate> printer = cndListMain.iterator();
