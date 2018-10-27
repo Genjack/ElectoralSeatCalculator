@@ -431,4 +431,43 @@ public class Format
         }//End If/Else 
         return filtList;
     }
+
+//****************************** MAKE SEAT ARRAY *****************************//
+
+    public static DSAHashTable makeSeatArray( SeatChallenger [] masterArr,
+        DSALinkedList<SeatChallenger> list )
+    {
+        int objCount = 0;
+        String pty;
+        DSAHashTable table = new DSAHashTable();
+        Iterator<SeatChallenger> rator = list.iterator();
+
+        //1. Transfer the list to the array.
+        while( rator.hasNext() )
+        {
+            SeatChallenger seat = rator.next();
+            masterArr[objCount] = seat;
+            objCount++;
+        }
+        //2. Sort the array alphabetically by party name.
+        Sorts.mergeSortPtySeat( masterArr );
+
+        /*3. Make a pass through the array, retrieving the index of the first
+             instance of each party, and creating a new hash table entry with
+             this index and the associated party name abbreviation. */
+        pty = masterArr[0].getCnd().getPartyAb(); 
+        table.put( pty, 0 );
+
+        for( int ii = 1; ii < masterArr.length; ii++ )
+        {
+            //Check if previous index is same as current; keep going until diff
+            pty = masterArr[ii].getCnd().getPartyAb(); //i.e. 'LP'.
+            if( !( pty.equals( masterArr[ii-1].getCnd().getPartyAb() ) ) )
+            {
+                //New party found due to alphabetical order - add to table.
+                table.put( pty, ii );
+            }
+        }
+        return table;
+    } //End makeSeatArray
 }//End Format Class

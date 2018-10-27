@@ -34,15 +34,19 @@ public class Menu
         DSALinkedList<Candidate> cndListAll; //List to read Candidates in to.
         DSALinkedList<Candidate> tempAll; //List for copying to preserve Master
         DSALinkedList<Candidate> cndListFilter; //List to filter into.
+        DSALinkedList<Candidate> searches; //For part 2.
         cndListAll = new DSALinkedList<Candidate>();    //Master list.
         cndListFilter = new DSALinkedList<Candidate>(); //For part 1.
-        DSALinkedList<Candidate> searches; //For part 2.
 
         //Part 3
         DSALinkedList<SeatChallenger> seatListAll; //Master Seat list.
-        DSALinkedList<SeatChallenger> seatListMargins; //For party selection + filter
         seatListAll = new DSALinkedList<SeatChallenger>();
-        marginList = new DSALinkedList<SeatChallenger>();
+        //Array to store SeatChallenger objects.
+        SeatChallenger [] seatArr; //Create AFTER file is read in.
+        /* This hashtable will store a reference to the party and a corresponding
+           index to an array, which tells the user where the party begins in
+           an alphabetically stored array. This can be used to find it in a list*/
+        DSAHashTable ptyTable; //Created inside makeSeatArray
         
         do
         {
@@ -113,16 +117,13 @@ public class Menu
                     {
                         if( !( seatFileRead ) )
                         {
-                            File.loadSeats( /*seatFile*/"testSeats.txt", seatListAll );
+                            File.loadSeats( /*seatFile*/"testMarginal.txt", seatListAll );
                         }
-                        //File is read in. User should select a party to view:
-                        Iterator<SeatChallenger> rator = seatListAll.iterator();
-                        while( rator.hasNext() )
-                        {
-                            SeatChallenger seat = rator.next();
-                            marginList.insertLast( seat, seat.cnd.getPartyAb() );
-                        }
-                        Utility.getMarginalSeats( marginList );
+                        //File is read in. Transfer to array and build hash table
+                        seatArr = new SeatChallenger[seatListAll.getCount()];
+                        ptyTable = Format.makeSeatArray( seatArr, seatListAll );
+                        //Table is returned, array is passed by reference.
+                        Utility.getMarginalSeats( seatArr, ptyTable );
                     }
                     break;
                     case 5:

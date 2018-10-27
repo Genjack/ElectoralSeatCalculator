@@ -1,0 +1,194 @@
+skip
+skip
+WA,235,Brand,64591,Baldivis East,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,107,4.22
+WA,235,Brand,64591,Baldivis East,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,1058,8.3
+WA,235,Brand,64591,Baldivis East,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,86,0.65
+WA,235,Brand,64591,Baldivis East,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),242,3.53
+WA,235,Brand,64591,Baldivis East,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,825,-6.07
+WA,235,Brand,64591,Baldivis East,999,Informal,Informal,999,N,N,,Informal,89,-0.38
+WA,235,Brand,65679,Baldivis North,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,141,4.69
+WA,235,Brand,65679,Baldivis North,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,1243,9.76
+WA,235,Brand,65679,Baldivis North,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,109,0.02
+WA,235,Brand,65679,Baldivis North,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),335,5.82
+WA,235,Brand,65679,Baldivis North,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,891,-9.1
+WA,235,Brand,65679,Baldivis North,999,Informal,Informal,999,N,N,,Informal,140,-0.31
+WA,235,Brand,38449,Bertram,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,142,5.21
+WA,235,Brand,38449,Bertram,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,1302,8.53
+WA,235,Brand,38449,Bertram,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,102,1.66
+WA,235,Brand,38449,Bertram,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),289,4.2
+WA,235,Brand,38449,Bertram,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,651,-8.67
+WA,235,Brand,38449,Bertram,999,Informal,Informal,999,N,N,,Informal,106,-0.8
+WA,235,Brand,65586,BLV Brand PPVC,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,1,7.69
+WA,235,Brand,65586,BLV Brand PPVC,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,6,-12.18
+WA,235,Brand,65586,BLV Brand PPVC,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,1,7.69
+WA,235,Brand,65586,BLV Brand PPVC,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),2,7.05
+WA,235,Brand,65586,BLV Brand PPVC,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,3,-1.92
+WA,235,Brand,65586,BLV Brand PPVC,999,Informal,Informal,999,N,N,,Informal,0,-7.69
+WA,235,Brand,7478,Calista,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,142,5.53
+WA,235,Brand,7478,Calista,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,1227,5.7
+WA,235,Brand,7478,Calista,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,106,2.4
+WA,235,Brand,7478,Calista,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),284,4.46
+WA,235,Brand,7478,Calista,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,496,-5.29
+WA,235,Brand,7478,Calista,999,Informal,Informal,999,N,N,,Informal,105,-4.18
+WA,235,Brand,7480,Cooloongup,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,146,6.77
+WA,235,Brand,7480,Cooloongup,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,1196,6.2
+WA,235,Brand,7480,Cooloongup,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,48,0.73
+WA,235,Brand,7480,Cooloongup,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),259,5.72
+WA,235,Brand,7480,Cooloongup,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,413,-6.98
+WA,235,Brand,7480,Cooloongup,999,Informal,Informal,999,N,N,,Informal,127,-2.47
+WA,235,Brand,30226,Divisional Office (PREPOLL),28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,0,-1.79
+WA,235,Brand,30226,Divisional Office (PREPOLL),29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,0,-37.5
+WA,235,Brand,30226,Divisional Office (PREPOLL),29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,0,-8.93
+WA,235,Brand,30226,Divisional Office (PREPOLL),28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),0,-12.5
+WA,235,Brand,30226,Divisional Office (PREPOLL),29138,BUCHANAN,Craig,5,N,N,LP,Liberal,0,-32.14
+WA,235,Brand,30226,Divisional Office (PREPOLL),999,Informal,Informal,999,N,N,,Informal,0,-6.67
+WA,235,Brand,32064,Golden Bay,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,85,6.29
+WA,235,Brand,32064,Golden Bay,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,500,8.29
+WA,235,Brand,32064,Golden Bay,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,44,2.49
+WA,235,Brand,32064,Golden Bay,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),155,3.19
+WA,235,Brand,32064,Golden Bay,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,419,-10.38
+WA,235,Brand,32064,Golden Bay,999,Informal,Informal,999,N,N,,Informal,42,-0.49
+WA,235,Brand,7488,Hillman,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,78,5.52
+WA,235,Brand,7488,Hillman,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,715,9.62
+WA,235,Brand,7488,Hillman,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,41,1.65
+WA,235,Brand,7488,Hillman,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),126,2.48
+WA,235,Brand,7488,Hillman,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,284,-7.1
+WA,235,Brand,7488,Hillman,999,Informal,Informal,999,N,N,,Informal,81,0.18
+WA,235,Brand,11896,Leda,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,112,4.03
+WA,235,Brand,11896,Leda,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,1309,7.74
+WA,235,Brand,11896,Leda,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,88,1.4
+WA,235,Brand,11896,Leda,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),302,4.61
+WA,235,Brand,11896,Leda,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,515,-5.84
+WA,235,Brand,11896,Leda,999,Informal,Informal,999,N,N,,Informal,121,-2.53
+WA,235,Brand,7496,Medina,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,108,5
+WA,235,Brand,7496,Medina,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,993,8.26
+WA,235,Brand,7496,Medina,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,53,1.12
+WA,235,Brand,7496,Medina,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),251,4.46
+WA,235,Brand,7496,Medina,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,303,-8.49
+WA,235,Brand,7496,Medina,999,Informal,Informal,999,N,N,,Informal,83,-3.31
+WA,235,Brand,65161,Other Mobile Team 1,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,0,0
+WA,235,Brand,65161,Other Mobile Team 1,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,2,33.34
+WA,235,Brand,65161,Other Mobile Team 1,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,0,0
+WA,235,Brand,65161,Other Mobile Team 1,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),1,33.33
+WA,235,Brand,65161,Other Mobile Team 1,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,0,-66.67
+WA,235,Brand,65161,Other Mobile Team 1,999,Informal,Informal,999,N,N,,Informal,1,25
+WA,235,Brand,7501,Parmelia,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,115,5.42
+WA,235,Brand,7501,Parmelia,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,1093,5.94
+WA,235,Brand,7501,Parmelia,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,55,1.54
+WA,235,Brand,7501,Parmelia,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),230,4.64
+WA,235,Brand,7501,Parmelia,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,377,-4.02
+WA,235,Brand,7501,Parmelia,999,Informal,Informal,999,N,N,,Informal,96,-0.42
+WA,235,Brand,31674,Port Kennedy,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,118,4.88
+WA,235,Brand,31674,Port Kennedy,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,1183,8.27
+WA,235,Brand,31674,Port Kennedy,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,81,2.54
+WA,235,Brand,31674,Port Kennedy,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),232,3.72
+WA,235,Brand,31674,Port Kennedy,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,657,-5.68
+WA,235,Brand,31674,Port Kennedy,999,Informal,Informal,999,N,N,,Informal,82,-3.37
+WA,235,Brand,34336,Port Kennedy East,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,91,5.37
+WA,235,Brand,34336,Port Kennedy East,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,809,11
+WA,235,Brand,34336,Port Kennedy East,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,51,0.7
+WA,235,Brand,34336,Port Kennedy East,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),170,2.99
+WA,235,Brand,34336,Port Kennedy East,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,430,-7.84
+WA,235,Brand,34336,Port Kennedy East,999,Informal,Informal,999,N,N,,Informal,71,-2.76
+WA,235,Brand,7503,Rockingham,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,125,5.07
+WA,235,Brand,7503,Rockingham,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,1036,4.66
+WA,235,Brand,7503,Rockingham,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,67,1.89
+WA,235,Brand,7503,Rockingham,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),232,4.69
+WA,235,Brand,7503,Rockingham,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,630,-6.5
+WA,235,Brand,7503,Rockingham,999,Informal,Informal,999,N,N,,Informal,131,-1.56
+WA,235,Brand,7504,Rockingham Beach,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,58,2.49
+WA,235,Brand,7504,Rockingham Beach,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,777,2.86
+WA,235,Brand,7504,Rockingham Beach,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,50,1.25
+WA,235,Brand,7504,Rockingham Beach,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),248,5.85
+WA,235,Brand,7504,Rockingham Beach,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,723,-2.71
+WA,235,Brand,7504,Rockingham Beach,999,Informal,Informal,999,N,N,,Informal,86,-1.2
+WA,235,Brand,34335,Rockingham Central,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,53,4.31
+WA,235,Brand,34335,Rockingham Central,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,631,4.73
+WA,235,Brand,34335,Rockingham Central,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,52,0.51
+WA,235,Brand,34335,Rockingham Central,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),164,5.55
+WA,235,Brand,34335,Rockingham Central,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,276,-6.41
+WA,235,Brand,34335,Rockingham Central,999,Informal,Informal,999,N,N,,Informal,79,-1.62
+WA,235,Brand,58768,Rockingham PPVC,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,735,5.51
+WA,235,Brand,58768,Rockingham PPVC,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,5541,6.3
+WA,235,Brand,58768,Rockingham PPVC,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,338,0.9
+WA,235,Brand,58768,Rockingham PPVC,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),1151,3.93
+WA,235,Brand,58768,Rockingham PPVC,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,4033,-7.42
+WA,235,Brand,58768,Rockingham PPVC,999,Informal,Informal,999,N,N,,Informal,445,-0.81
+WA,235,Brand,7507,Safety Bay,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,125,4.05
+WA,235,Brand,7507,Safety Bay,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,1227,5.88
+WA,235,Brand,7507,Safety Bay,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,90,1.53
+WA,235,Brand,7507,Safety Bay,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),358,4.51
+WA,235,Brand,7507,Safety Bay,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,925,-6.21
+WA,235,Brand,7507,Safety Bay,999,Informal,Informal,999,N,N,,Informal,106,-3.25
+WA,235,Brand,7508,Safety Bay Central,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,78,3.67
+WA,235,Brand,7508,Safety Bay Central,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,905,6.66
+WA,235,Brand,7508,Safety Bay Central,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,60,1.32
+WA,235,Brand,7508,Safety Bay Central,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),230,4.61
+WA,235,Brand,7508,Safety Bay Central,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,666,-6.02
+WA,235,Brand,7508,Safety Bay Central,999,Informal,Informal,999,N,N,,Informal,103,-0.02
+WA,235,Brand,32057,Secret Harbour,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,129,4.21
+WA,235,Brand,32057,Secret Harbour,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,1269,8.66
+WA,235,Brand,32057,Secret Harbour,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,71,1.08
+WA,235,Brand,32057,Secret Harbour,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),292,3.17
+WA,235,Brand,32057,Secret Harbour,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,1125,-6.31
+WA,235,Brand,32057,Secret Harbour,999,Informal,Informal,999,N,N,,Informal,143,-1.8
+WA,235,Brand,65761,Secret Harbour South,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,48,3.84
+WA,235,Brand,65761,Secret Harbour South,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,524,10.92
+WA,235,Brand,65761,Secret Harbour South,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,28,1.08
+WA,235,Brand,65761,Secret Harbour South,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),158,6.33
+WA,235,Brand,65761,Secret Harbour South,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,383,-11.4
+WA,235,Brand,65761,Secret Harbour South,999,Informal,Informal,999,N,N,,Informal,39,-2.75
+WA,235,Brand,7510,Singleton,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,94,5.17
+WA,235,Brand,7510,Singleton,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,683,8.77
+WA,235,Brand,7510,Singleton,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,40,1
+WA,235,Brand,7510,Singleton,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),194,2.01
+WA,235,Brand,7510,Singleton,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,560,-4.9
+WA,235,Brand,7510,Singleton,999,Informal,Informal,999,N,N,,Informal,60,-1.03
+WA,235,Brand,34077,Special Hospital Team 1,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,11,5.16
+WA,235,Brand,34077,Special Hospital Team 1,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,88,-7.98
+WA,235,Brand,34077,Special Hospital Team 1,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,11,2.28
+WA,235,Brand,34077,Special Hospital Team 1,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),7,-0.33
+WA,235,Brand,34077,Special Hospital Team 1,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,93,3.85
+WA,235,Brand,34077,Special Hospital Team 1,999,Informal,Informal,999,N,N,,Informal,13,-2.17
+WA,235,Brand,34205,Special Hospital Team 2,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,9,5.09
+WA,235,Brand,34205,Special Hospital Team 2,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,101,8.17
+WA,235,Brand,34205,Special Hospital Team 2,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,6,0.49
+WA,235,Brand,34205,Special Hospital Team 2,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),15,4.96
+WA,235,Brand,34205,Special Hospital Team 2,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,43,-15.73
+WA,235,Brand,34205,Special Hospital Team 2,999,Informal,Informal,999,N,N,,Informal,29,6.29
+WA,235,Brand,11895,Waikiki,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,66,1.93
+WA,235,Brand,11895,Waikiki,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,1135,8.39
+WA,235,Brand,11895,Waikiki,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,87,1.32
+WA,235,Brand,11895,Waikiki,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),304,3.76
+WA,235,Brand,11895,Waikiki,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,832,-3.04
+WA,235,Brand,11895,Waikiki,999,Informal,Informal,999,N,N,,Informal,129,-0.72
+WA,235,Brand,34337,Waikiki East,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,130,5.38
+WA,235,Brand,34337,Waikiki East,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,1153,7.35
+WA,235,Brand,34337,Waikiki East,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,110,1.88
+WA,235,Brand,34337,Waikiki East,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),216,4.46
+WA,235,Brand,34337,Waikiki East,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,538,-8.19
+WA,235,Brand,34337,Waikiki East,999,Informal,Informal,999,N,N,,Informal,103,-3.58
+WA,235,Brand,46575,Wandi,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,42,4.12
+WA,235,Brand,46575,Wandi,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,315,6.36
+WA,235,Brand,46575,Wandi,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,36,0.88
+WA,235,Brand,46575,Wandi,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),108,0.39
+WA,235,Brand,46575,Wandi,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,479,-1.64
+WA,235,Brand,46575,Wandi,999,Informal,Informal,999,N,N,,Informal,45,-1.2
+WA,235,Brand,7511,Warnbro,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,174,5.72
+WA,235,Brand,7511,Warnbro,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,1444,7.57
+WA,235,Brand,7511,Warnbro,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,88,1.46
+WA,235,Brand,7511,Warnbro,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),321,2.68
+WA,235,Brand,7511,Warnbro,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,796,-5.43
+WA,235,Brand,7511,Warnbro,999,Informal,Informal,999,N,N,,Informal,163,-0.56
+WA,235,Brand,31474,Warnbro East,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,135,6.21
+WA,235,Brand,31474,Warnbro East,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,1056,8.43
+WA,235,Brand,31474,Warnbro East,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,61,0.99
+WA,235,Brand,31474,Warnbro East,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),228,4.43
+WA,235,Brand,31474,Warnbro East,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,430,-5.75
+WA,235,Brand,31474,Warnbro East,999,Informal,Informal,999,N,N,,Informal,112,-0.74
+WA,235,Brand,32585,Wellard,28420,SCOTT,Philip,1,N,N,RUA,Rise Up Australia Party,58,4.23
+WA,235,Brand,32585,Wellard,29103,KING,Madeleine,2,Y,N,ALP,Australian Labor Party,476,4.42
+WA,235,Brand,32585,Wellard,29173,BURDETT,Robert,3,N,N,AUC,Australian Christians,41,0.19
+WA,235,Brand,32585,Wellard,28303,JECKS,Dawn,4,N,N,GRN,The Greens (WA),152,5.76
+WA,235,Brand,32585,Wellard,29138,BUCHANAN,Craig,5,N,N,LP,Liberal,432,-2.73
+WA,235,Brand,32585,Wellard,999,Informal,Informal,999,N,N,,Informal,51,-2.64

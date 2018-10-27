@@ -42,3 +42,72 @@ system to what I already have.
 
 NOTE ON PART 3
 - Using linked list sigh.
+- Hash Table: Giving it a go; I felt like I was going through the motions just
+using linked lists, so I wanted to give this a go. Not sure if it will work, or
+if it will destroy my chances at finishing the assignment, but I'm here to learn
+above all else, so sod it.
+
+PART 3 PLAN
+PRE
+- Create linked list with file in loadCandidates, return to menu;
+
+1) I pass an integer array (size known) and the list into makeArray.
+
+3) Transfer the list to the array, and create a new hash table.
+
+4) Chuck into merge sort.
+
+5) Make a pass through the array, retrieving the array index of the first 
+   instance of each party, and creating a new Hash Table entry with this index
+   and the String abbreviation of the associated party.
+
+6) Return the hash table (array is passed by reference).
+
+7) User calls getMarginalSeat which imports the array and hash table.
+
+8) User enters party abbreviation; hash table is searched for appropriate entry,
+   and a for loop iterates through the array until the party name changes.
+   - Could possibly loop until NEXT party index, but hard to do maybe?
+   - Take the computational hit in the interest of saving time (SATURDAY!!)
+
+9) Votes are tallied in the loop; whatever calculations needed are done.
+
+WAIT!!
+
+I can import a hash table and the array into the read file. I create a list
+inside the read function, read the file into the list, transfer to the array, 
+sort that array, and then make a pass through it to retrieve the indexes and 
+create the hash table entries inside. Then I return the hash table, and the 
+array is passed by reference, and no list is returned.
+
+
+1) Retrieve party, and get index from hash table.
+
+2) iterate through array, retrieving all divisions where the party is.
+- So for Greens/Libs/Labour would be most if not all.
+
+3) Put these divisions into an array?
+
+4) Sort the array by division.
+
+5) Go through the array by division, tallying up votes for the party against 
+   the other votes.
+
+6) At the end of each division, check the total, and percentage of votes for
+   party - see if within default (or custom) threshold.
+
+7) If so, add to a linked list.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -165,19 +165,70 @@ public class Utility
 
 //************************** GET MARGINAL SEATS ******************************//
 
-    public static void getMarginalSeats( DSALinkedList<SeatChallenger> list )
+    /* Function: Searches the array of seats for a particular party using a 
+       hash table, and calculates any marginal seats by division.*/
+    public static void getMarginalSeats( SeatChallenger [] arr,
+        DSAHashTable table )
     {
         String party;
+        int ptyIdx, divID;
+        int ii = 0;
+        double votesFor = 0;
+        double votesAgainst = 0;
+        DSALinkedList<Integer> divsToCheck = new DSALinkedList<Integer>();
         String partyPrompt = "Please enter the abbreviation for the party" +
         " (i.e. 'GRN', 'ON'): ";
         try
         {
             party = User.getString( partyPrompt );
+            ptyIdx = (int)(table.get( party ));
+            
+            while( arr[ptyIdx].getCnd().getPartyAb().equals( party ) )
+            {
+                divID = arr[ptyIdx].getCnd().getDivID();
+                divsToCheck.insertLast( divID, party );
+                ptyIdx++;
+            }
+            //Sort array by division
+            Sorts.mergeSortDivSeat( arr );
+            /* Go through array, checking the divs stored in the list, and 
+               tallying the votes for the party chosen and others. Then,
+               if the div changes, add up the previous div's votes and check if
+               it's a marginal seat - if so, add to the marginalList. */
+            Iterator rator = divsToCheck.iterator();
+            while( rator.hasNext() )
+            {
+                int div = (int)(rator.next()); //Say it's 200
+                while( arr[ii].getCnd().getDivID() == div )
+                {
+System.out.println( ii );
+                    if( arr[ii].getCnd().getPartyAb().equals( party ) )
+                    {
+                        votesFor += arr[ii].getVotes();
+                    }
+                    else
+                    {
+                        votesAgainst += arr[ii].getVotes();
+                    }
+                    ii++;
+                }
+                //Div finished; print this set of results:
+                double totalPct = ( votesFor/(votesFor+votesAgainst)*100.0);
+                double margin = totalPct - 50.0;
+                if( ( margin > 6.0 ) || ( margin < 6.0 ) )
+                {
+                    System.out.println( "=== DIVISION " + div + " === " );
+                    System.out.println( "Marginal seat for: " + party );
+                    System.out.println( "Total votes: " + votesFor );
+                    System.out.println( "Margin: " + margin );
+                }
+            }
             
         }
         catch( IllegalArgumentException ie )
         {
             System.out.println( "Error: Party not found. Please try again." );
-            getMarginalSeats( list );
+            getMarginalSeats( arr, table );
         }
+    }
 }

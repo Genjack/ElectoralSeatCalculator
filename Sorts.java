@@ -303,4 +303,142 @@ public class Sorts
             A[nextFreeTempIdx] = tempArr[nextFreeTempIdx - leftIdx];
         }
     }//merge()
+
+//***************************** SEAT SORTS ***********************************//    
+
+    //SORTING BY PARTY NAME ALPHABETICALLY
+    public static void mergeSortPtySeat( SeatChallenger [] A )
+    {
+        int leftIdx = 0;
+        int rightIdx = A.length - 1;
+        mergeSortSeatRecurse( A, leftIdx, rightIdx );
+         
+    }//mergeSort()
+    private static void mergeSortSeatRecurse( SeatChallenger [] A, int leftIdx, 
+        int rightIdx)
+    {
+        if( leftIdx < rightIdx )
+        {
+            int midIdx = (leftIdx + rightIdx) / 2;
+
+            mergeSortSeatRecurse( A, leftIdx, midIdx );
+            mergeSortSeatRecurse( A, midIdx + 1, rightIdx );
+
+            mergeSeat( A, leftIdx, midIdx, rightIdx );
+        }
+    }//mergeSortRecurse()
+    private static void mergeSeat( SeatChallenger [] A, int leftIdx, int midIdx, 
+        int rightIdx)
+    {
+        SeatChallenger [] tempArr = new SeatChallenger[rightIdx-leftIdx +1];
+        int leftFront, rightFront, nextFreeTempIdx;
+
+        SeatChallenger midIdxSeat = A[midIdx];
+
+        leftFront = leftIdx; //ii in pseudo
+        rightFront = midIdx+1; //jj in pseudo
+        nextFreeTempIdx = 0; //kk in pseudo
+
+        while( ( leftFront <= midIdx ) && ( rightFront <= rightIdx ) )
+        {
+            //Merge sub-arrays into tempArr
+
+            if( A[leftFront].getCnd().getPartyAb().compareTo( A[rightFront].getCnd().getPartyAb() ) <= 0 )
+            {
+                tempArr[nextFreeTempIdx] = A[leftFront];
+                leftFront += 1;
+            }
+            else
+            {
+                tempArr[nextFreeTempIdx] = A[rightFront];
+                rightFront += 1;
+            }
+            nextFreeTempIdx += 1;
+        }
+        for( int ii = leftFront; ii <= midIdx; ii++ )
+        {
+            tempArr[nextFreeTempIdx] = A[ii];
+            nextFreeTempIdx += 1;
+        }
+        for( int jj = rightFront; jj <= rightIdx; jj++ )
+        {
+            tempArr[nextFreeTempIdx] = A[jj];
+            nextFreeTempIdx += 1;
+        }
+//Copy the sorted array back to the actual array.
+        for( nextFreeTempIdx = leftIdx; nextFreeTempIdx <= rightIdx; 
+            nextFreeTempIdx++ )
+        {
+            A[nextFreeTempIdx] = tempArr[nextFreeTempIdx - leftIdx];
+        }
+    }//merge()
+
+//****************************** SORT BY DIVISION ****************************//
+
+    //SORTING BY DIVISION ID
+    public static void mergeSortDivSeat( SeatChallenger [] A )
+    {
+        int leftIdx = 0;
+        int rightIdx = A.length - 1;
+        mergeSortDivSeatRecurse( A, leftIdx, rightIdx );
+         
+    }//mergeSort()
+    private static void mergeSortDivSeatRecurse( SeatChallenger [] A, int leftIdx, 
+        int rightIdx)
+    {
+        if( leftIdx < rightIdx )
+        {
+            int midIdx = (leftIdx + rightIdx) / 2;
+
+            mergeSortDivSeatRecurse( A, leftIdx, midIdx );
+            mergeSortDivSeatRecurse( A, midIdx + 1, rightIdx );
+
+            mergeSeatDiv( A, leftIdx, midIdx, rightIdx );
+        }
+    }//mergeSortRecurse()
+    private static void mergeSeatDiv( SeatChallenger [] A, int leftIdx, int midIdx, 
+        int rightIdx)
+    {
+        SeatChallenger [] tempArr = new SeatChallenger[rightIdx-leftIdx +1];
+        int leftFront, rightFront, nextFreeTempIdx;
+
+        SeatChallenger midIdxSeat = A[midIdx];
+
+        leftFront = leftIdx; //ii in pseudo
+        rightFront = midIdx+1; //jj in pseudo
+        nextFreeTempIdx = 0; //kk in pseudo
+
+        while( ( leftFront <= midIdx ) && ( rightFront <= rightIdx ) )
+        {
+            //Merge sub-arrays into tempArr
+
+            if( ( A[leftFront].getCnd().getDivID()) <= ( A[rightFront].getCnd().getDivID() ) )
+            {
+                tempArr[nextFreeTempIdx] = A[leftFront];
+                leftFront += 1;
+            }
+            else
+            {
+                tempArr[nextFreeTempIdx] = A[rightFront];
+                rightFront += 1;
+            }
+            nextFreeTempIdx += 1;
+        }
+        for( int ii = leftFront; ii <= midIdx; ii++ )
+        {
+            tempArr[nextFreeTempIdx] = A[ii];
+            nextFreeTempIdx += 1;
+        }
+        for( int jj = rightFront; jj <= rightIdx; jj++ )
+        {
+            tempArr[nextFreeTempIdx] = A[jj];
+            nextFreeTempIdx += 1;
+        }
+//Copy the sorted array back to the actual array.
+        for( nextFreeTempIdx = leftIdx; nextFreeTempIdx <= rightIdx; 
+            nextFreeTempIdx++ )
+        {
+            A[nextFreeTempIdx] = tempArr[nextFreeTempIdx - leftIdx];
+        }
+    }//merge()
 }//End Class
