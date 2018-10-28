@@ -5,7 +5,12 @@
    Contents: Java for the Sorts class of my DSA Assignment, containing the
    following methods:
     
-    > sortByName( Candidate [] )
+    > mergeSortName( Candidate [] )
+    > mergeSortState( Candidate [] )
+    > mergeSortDivision( Candidate [] )
+    > mergeSortParty( Candidate [] )
+    > mergeSortPtySeat( SeatChallenger [] )
+    > mergeSortDivSeat( SeatChallenger [] )
 
     Notes: This algorithm was adapted from the algorithm supplied in pseudocode
     during Practical 2 of DSA.

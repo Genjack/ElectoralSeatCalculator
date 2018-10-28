@@ -87,7 +87,9 @@ TestClass.java:
 
 User.java:
     Generic user input class so handy I've almost forgotten how to do user input
-    without it. Created last semester for OOPD, used lovingly ever since.
+    without it. Created last semester for OOPD, used lovingly ever since. I
+    didn't include a test harness for this class because it's tested implicitly
+    everywhere else.
 
 Utility.java:
     An auxiliary class for Format.java, and acts as a sort of Getter wrapper

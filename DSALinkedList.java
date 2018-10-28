@@ -203,39 +203,6 @@ public class DSALinkedList<E> implements Iterable<E>
         return nodeContent;
     }
 
-    public E find( E valToFind ) //Searches the list for an object.
-    {
-        E target = null; 
-        E compObj;
-        DSAListNode<E> currentNode;
-        boolean found;
-
-        found = false;
-        if( isEmpty() )
-        {
-            throw new NullPointerException( "Error: List is empty." );
-        }
-        else
-        {
-            currentNode = head;
-            while( ( currentNode.getContent() != null ) && ( found == false ) )
-            {
-                compObj = currentNode.getContent();
-                if( compObj.equals( valToFind ) )
-                {
-                    target = compObj;
-                    found = true;
-                }
-                currentNode = currentNode.getNextNode();
-            }
-            if( target.equals( null ) )
-            {
-                throw new IllegalArgumentException( "Error: value not found." );
-            }
-        }
-        return target;
-    }
-                
 //******************************** MUTATORS ********************************//
 
     public void insertFirst( E newContent, String newKey )

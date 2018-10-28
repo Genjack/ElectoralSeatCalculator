@@ -6,7 +6,7 @@
     store a political candidate.
     Previous guidance: The template for this code is loosely based on my
     MeatClass for  OOPD Assignment, Semester One 2018.
-    Date Last Modified: 16th October, 2018
+    Date Last Modified: 28th October, 2018
 */
 
 import java.util.*;
@@ -38,7 +38,8 @@ public class Candidate
 
 /**
 * DEFAULT CONSTRUCTOR
-* Purpose: Creates a default instance of Candidate.
+* Purpose: Creates a default instance of Candidate, with values designed to
+*    be valid but clearly default.
 **/
     public Candidate()
     {
@@ -138,9 +139,9 @@ public class Candidate
     }
 
 //********************************** MUTATORS *******************************//
-/* Why have a mutator? Because I haven't really though through my TDD, so not
-   currently sure how validation's going to work. I'll build some in here now,
-   so that if they try to create an imitation file, it will handle it. */
+
+    /* These mutators are necessary for part 3 of the assignment, when I create
+       Candidate objects as aggregated classfields for SeatChallenger objects.*/
 
     public void setStateAb( String inAb )
     {
@@ -291,9 +292,9 @@ public class Candidate
     {
         return ( "Name: " + cndGivenName + " " + cndSurname + ";\n ID: " +
             cndID + ";\n Party: " + partyAb + " - " + partyName + 
-            ";\n Division: " + divName + " (" + divID + ")\n Elected: " + 
-            elected + "; Elected Previously: " + histElected + ";\n " +
-            "Ballot position: " + ballotPos + ".\n" );
+            ";\n State: " + stateAb + ";\n Division: " + divName + " (" + 
+            divID + ")\n Elected: " + elected + "; Elected Previously: " + 
+            histElected + ";\n " + "Ballot position: " + ballotPos + ".\n" );
     }
 
 

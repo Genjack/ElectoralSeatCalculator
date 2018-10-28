@@ -32,7 +32,6 @@ public class Format
                 + "as a single entry i.e. 1234 to order by all\n Or press 0 to skip: ";
                 
             choice = User.getString( filterMenu );
-
             if( choice.charAt(0) != '0' ) //If User wants to filter:
             {
                 //Parse the string to extract chars and validate them.
@@ -66,6 +65,7 @@ public class Format
         {
             System.out.println( "Error: Invalid selection. Please ensure you " +
                 "choose a valid option, i.e. 1, or 12, 23, 123 etc." );
+            ae.printStackTrace();
             prepareToList( cndListMain );
         }
         catch( IllegalArgumentException ie )
@@ -299,6 +299,14 @@ public class Format
 //****************************************************************************//
 //************************** PREPARE TO SEARCH *******************************//
 
+/**
+* FUNCTION: prepareToSearch
+* PURPOSE: To prepare the imported list for searching for a Candidate (Option 2)
+*    The User enters a search term, and the list - filtered OR unfiltered - is
+*    searched for any Candidates with a surname matching the key, which may be
+*    a full name or partial. Any results are stored in a list, printed and 
+*    returned.
+**/
     public static DSALinkedList<Candidate> prepareToSearch( 
         DSALinkedList<Candidate> list )
     {
@@ -309,7 +317,9 @@ public class Format
             + " all;\n Or press 0 to skip: ";
 
         int objCount = 0;
+        //Create array for sorting of the list:
         Candidate [] sortArr = new Candidate[list.getCount()];
+
         //List to store filtered objects in and return to main menu.
         DSALinkedList<Candidate> list2= new DSALinkedList<Candidate>();
         //selections[1] = State; selections[2] = Party. 
@@ -323,32 +333,38 @@ public class Format
             {
                 filter( choice, list, list2 );
             }
-            else //Skip filtering, return entirety.
+            else //Skip filtering, return entirety (in IF/ELSE BLOCK )
             {
                 while( list.getCount() > 0 )
                 {
                     Candidate cnd = ( Candidate )( list.removeFirst() );
                     sortArr[objCount] = cnd;
                     objCount++;
-                }//Array filled; send to Sort.
+                }//Array filled; send to Sort. SORT ALPHABETICALLY BY SURNAME
                 Sorts.mergeSortName( sortArr );
                 //Put back into list:
                 for( int ii = 0; ii < sortArr.length; ii++ )
                 {
                     list2.insertLast( sortArr[ii], sortArr[ii].getSurname() );
-                } //List sorted alphabetically.
+                }
             }  
         }//End Try
         catch( IllegalArgumentException e )
         {
-            e.printStackTrace();
+            System.out.println( e.getMessage() );
             prepareToSearch( list );
         }
         return list2;
     }//End prepareToSearch
 
 //**************************** FILTERED SEARCH *******************************//
-
+/**
+* FUNCTION: filter
+* PURPOSE: Similar to above, but filters before sorting and returning.
+*    It works because it is called inside an if/else blcok; so if this is called,
+*    the other sorting doesn't occur and vice versa. The end result is a sorted
+*    list being returned to Menu.
+**/
     public static DSALinkedList<Candidate> filter( String choice, 
         DSALinkedList<Candidate> list, DSALinkedList<Candidate> filtList )
     {

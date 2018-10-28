@@ -151,19 +151,4 @@ public class UnitTestLinkedList
         rator = testList.iterator();
         rator.remove();
     }
-
-    //TESTING: List find() method
-    @Test
-    public void testFind()
-    {
-        testList.insertFirst( testObj1, testObj1.getName() );   
-        testList.insertFirst( testObj2, testObj2.getName() );   
-        testList.insertFirst( testObj3, testObj3.getName() );   
-        objToFind = testList.find( testObj2 );
-        compObj = objToFind;
-        testName = compObj.getName();
-        testNumber = compObj.getNumber(); 
-        assertEquals( "testObj2 is found", "Sherman", testName );
-        assertEquals( "testObj2 is found", 1944, testNumber );               
-    }
 }//End Test Harness. 

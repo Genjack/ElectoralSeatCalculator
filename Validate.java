@@ -27,14 +27,13 @@ public class Validate
         char [] options = new char[maxArrLen]; 
         fillArr( options, choices );
 
-        /*for( int ii = 0; ii < options.length; ii++ )*/
-        while( options[ii] != 0 ) //i.e. not null; '!= null' doesn't work
+        while( ( ii < options.length ) && ( options[ii] != 0 ) )
         {
             if( ( options[ii] < '1' ) || ( options[ii] > max ) )
             {
                 throw new IllegalArgumentException( "Error: Invalid choice." );
             }
-            ii++;
+            ii++; //Will catch ArrayIndexOutOfBounds exceptions in Format.java
         }
     }
 

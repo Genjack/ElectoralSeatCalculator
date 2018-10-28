@@ -2,6 +2,9 @@
    Student ID: 19390664
    Unit and Time: DSA, Tuesdays @ 12pm
    Content: Java code for DSAHashTable Class.
+   REFERENCE NOTE: This code is taken from the Hash Table practical code I 
+   submitted earlier in the semester, and the code was derived with the help
+   of pseudocode and notes of lecture 9.
 */
 
 import java.util.*;
@@ -11,8 +14,9 @@ public class DSAHashTable
     //******************* PRIVATE CLASS - DSAHashEntry ********************//
     private class DSAHashEntry
     {
-        private String m_key;
-        private Object m_value;
+        //CLASSFIELDS
+        private String m_key; //Used to find the value
+        private Object m_value; //Actual data we want to store.
         private int m_state; //0 = never used; 1 = used; -1 = formerly used.
 
         //DEFAULT CONSTRUCTOR
@@ -28,7 +32,7 @@ public class DSAHashTable
         {
             m_key = inKey;
             m_value = inValue;
-            m_state = 1;
+            m_state = 1; //Marked as used owing to present value.
         }
 
         //GETTERS
@@ -83,17 +87,21 @@ public class DSAHashTable
     //Default Con; not needed, but JUnit complains?
     public DSAHashTable()
     {
-        m_hashTable = new DSAHashEntry[100];
-        for( int ii = 0; ii < 100; ii++ )
+        int tableSize = findNextPrime( 100 );
+        //Initialise an empty table, then fill it with entries.
+        m_hashTable = new DSAHashEntry[tableSize];
+        for( int ii = 0; ii < tableSize; ii++ )
         {
             m_hashTable[ii] = new DSAHashEntry();
         }
-        count = 0;
+        count = 0; //No values currently stored.
     }
 
     //ALT CONSTRUCTOR
     public DSAHashTable( int tableSize )
     {
+        //Prime numbers are good mod values - and we mod by table length - 
+        // therefore we make the table size a prime number.
         int actualSize = findNextPrime( tableSize );
         m_hashTable = new DSAHashEntry[actualSize];
         for( int ii = 0; ii < actualSize; ii++ )
@@ -111,17 +119,17 @@ public class DSAHashTable
     public int findNextPrime( int startVal )
     {
         boolean isPrime;
-        double rootVal, prime; //is double because is good.
+        double rootVal, prime; //double for no mixed-mode arithmetic (MMA)
         int ii;
-        if( startVal % 2 == 0 )
+        if( startVal % 2 == 0 ) //Ensure the number coming in is odd.
         {
-            prime = startVal - 1;
+            prime = startVal - 1; 
         }
         else
         {
-            prime = startVal;
+            prime = startVal; 
         }
-        
+        //startVal is now an odd number.
         isPrime = false;
         do
         {
@@ -137,7 +145,7 @@ public class DSAHashTable
                 }
                 else
                 {
-                    ii += 2;
+                    ii += 2; //Seek out the next prime by incrementing.
                 }
             } while( ( ii <= rootVal ) && ( isPrime ) );
         } while( !isPrime );
@@ -145,7 +153,6 @@ public class DSAHashTable
     }
    
     //insert item into hash table.
-    //Unsure about validation currently - collisions?
     public void put( String inKey, Object inValue )
     {
         DSAHashEntry entry = new DSAHashEntry( inKey, inValue );
@@ -154,7 +161,7 @@ public class DSAHashTable
 
     public void put( DSAHashEntry entry )
     {
-        if( calcLoad() >= 0.7 )
+        if( calcLoad() >= 0.7 ) //Table is getting full; should resize.
         {
             //Assign a bigger value for a bigger reSize value.
             reSize( m_hashTable.length*2 );
@@ -166,14 +173,16 @@ public class DSAHashTable
         while( m_hashTable[putIdx].getState() == 1 ) //something already there
         {
             putIdx += stepSize; //each iteration adds the stepSize value 
-            putIdx = putIdx % m_hashTable.length;
+            putIdx = putIdx % m_hashTable.length; //Ensures it stays in table
         }
-        m_hashTable[putIdx].setKey( entry.getKey() );
+        //Exit of loop means a vacant space has been found for the value
+        m_hashTable[putIdx].setKey( entry.getKey() ); 
         m_hashTable[putIdx].setValue( entry.getValue() );
-        m_hashTable[putIdx].setState( 1 );
+        m_hashTable[putIdx].setState( 1 ); //Slot in, mark visited.
         count++;
     }
 
+    //Find a key and return the value
     public Object get( String inKey )
     {
         int reqIdx;
@@ -186,7 +195,7 @@ public class DSAHashTable
 
     public Object remove( String inKey )
     {
-        if( calcLoad() < 0.4 )
+        if( calcLoad() < 0.4 ) //Table can be safely shrunk.
         {
             reSize( m_hashTable.length/2 );
         }
@@ -195,7 +204,7 @@ public class DSAHashTable
 
         reqIdx = find( inKey );
         rescuedObj = m_hashTable[reqIdx].getValue();
-        m_hashTable[reqIdx].setState( -1 ); 
+        m_hashTable[reqIdx].setState( -1 ); //removed slot is marked prev used.
         m_hashTable[reqIdx].setValue( null ); 
         m_hashTable[reqIdx].setKey( null ); 
         count--;
@@ -217,6 +226,7 @@ public class DSAHashTable
         return contains;
     }
 
+    //Provides a rating of between 0 and 1 based on how full the table is.
     public double calcLoad()
     {
         double loadFactor;
@@ -224,6 +234,8 @@ public class DSAHashTable
         return loadFactor;
     }
 
+    //Creates a new hashtable of a different size, then moves the old contents
+    //across to the new table.
     private void reSize( int size )
     {
         DSAHashTable newTable = new DSAHashTable( size );
@@ -237,6 +249,7 @@ public class DSAHashTable
         m_hashTable = newTable.m_hashTable;
     }
 
+    //Based on the Bernstein hash function, as described in Lecture 9 slide 71
     private int hash( String key )
     {
         int hashIdx = 0;

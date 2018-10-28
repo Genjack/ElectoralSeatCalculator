@@ -114,8 +114,8 @@ public class Utility
 
 //******************************* SEARCH LIST *******************************//
 
-    public static DSALinkedList<Candidate> searchList( String term, DSALinkedList<Candidate> 
-        list )
+    public static DSALinkedList<Candidate> searchList( String term, 
+        DSALinkedList<Candidate> list )
     {
         boolean found = false;
         boolean passed = false;
@@ -167,7 +167,7 @@ public class Utility
 
     /* Function: Searches the array of seats for a particular party using a 
        hash table, and calculates any marginal seats by division.*/
-    public static void getMarginalSeats( SeatChallenger [] arr,
+    public static DSALinkedList<String> getMarginalSeats( SeatChallenger [] arr,
         DSAHashTable table )
     {
         String party;
@@ -179,12 +179,16 @@ public class Utility
         String partyPrompt = "Please enter the abbreviation for the party" +
         " (i.e. 'GRN', 'ON'): ";
         String marginPrompt = "Please enter the margin threshold as a number\n" + 
-            " (Min: -50; max: 50; include sign): ";
+            " Or press 0 for default of +/- 6: ";
 
         try
         {
             party = User.getString( partyPrompt );
             threshold = User.realInput( marginPrompt, -50.0, 50.0 );
+            if( Math.abs( threshold ) == 0 )
+            {   
+                threshold = 6.0;
+            }
 
             ptyIdx = (int)(table.get( party )); //Test: GRN index = 64.
             while( arr[ptyIdx].getCnd().getPartyAb().equals( party ) )
@@ -205,7 +209,6 @@ public class Utility
                if the div changes, add up the previous div's votes and check if
                it's a marginal seat - if so, add to the marginalList. */
             Iterator rator = divsToCheck.iterator();
-System.out.println( arr.length );
             while( rator.hasNext() )
             {
                 votesFor = 0.0;
@@ -222,16 +225,15 @@ System.out.println( arr.length );
                         votesAgainst += arr[ii].getVotes();
                     }
                     ii++;
-System.out.println( votesFor );
                 }
                 //Div finished; print this set of results:
                 double totalPct = ( (votesFor/(votesFor+votesAgainst))*100.0);
                 double margin = totalPct - 50.0; 
-                if( ( margin < threshold ) && ( margin > -threshold ) )
+                if( Math.abs( margin ) < Math.abs( threshold ) )
                 {
                     String log = "===DIVISION " + div + "===\nMarginal Seat " +
                         "for: " + party +"\nTotal votes: " + (int)votesFor +
-                        "\nMargin: " + margin + "%";
+                        "\nMargin: " + margin + "%\n";
                     marginLog.insertLast( log, log );
                     System.out.println( log );
                 }
@@ -248,5 +250,6 @@ System.out.println( votesFor );
             System.out.println( "Error: Party not found. Please try again." );
             getMarginalSeats( arr, table );
         }
+        return marginLog;
     }
 }

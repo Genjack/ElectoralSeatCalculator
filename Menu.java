@@ -43,6 +43,7 @@ public class Menu
 
         //Part 3
         DSALinkedList<SeatChallenger> seatListAll; //Master Seat list.
+        DSALinkedList<String> log; //For recording marginal seats
         seatListAll = new DSALinkedList<SeatChallenger>();
         //Array to store SeatChallenger objects.
         SeatChallenger [] seatArr; //Create AFTER file is read in.
@@ -118,16 +119,21 @@ public class Menu
                     {
                         if( !( seatFileRead ) )
                         {
-                            File.loadSeats( /*seatFile*/"testMarginal.txt", seatListAll );
+                            File.loadSeats( seatFile, seatListAll );
                         }
                         //File is read in. Transfer to array and build hash table
                         seatArr = new SeatChallenger[seatListAll.getCount()];
                         ptyTable = Format.makeSeatArray( seatArr, seatListAll );
                         //Table is returned, array is passed by reference.
-                        Utility.getMarginalSeats( seatArr, ptyTable );
+                        log = Utility.getMarginalSeats( seatArr, ptyTable );
+                        optionalSaveLog( log, "Marginal Seats" );
                         while( seatListAll.getCount() > 0 )
                         {
                             seatListAll.removeFirst();
+                        }
+                        while( log.getCount() > 0 )
+                        {
+                            log.removeFirst();
                         }
                     }
                     break;
@@ -178,6 +184,54 @@ public class Menu
                 {
                     Candidate cnd = ( Candidate )( list.removeFirst() );
                     pw.println( cnd.toString() );
+                }
+                pw.close();
+                flStrm.close();
+            }
+            catch( IOException e )
+            {
+                if( flStrm != null )
+                {
+                    try
+                    {
+                        flStrm.close();
+                    }
+                    catch( IOException e2 )
+                    {
+                        //Empty.
+                    }
+                }
+                System.out.println( "Exception: " + e.getMessage() );
+            }
+        }
+    }//End Submodule.           
+
+    public static void optionalSaveLog( DSALinkedList<String> list, String type )
+    {
+        int choice;
+        String fileName;
+        String savePrompt = "Would you like to write this result to file?\n" +
+        "[1] Yes\n[2] No";
+
+        choice = User.intInput( savePrompt, 1, 2 );
+
+        if( choice == 1 )
+        {
+            fileName = User.getString( "Please enter a name for your file:" );
+        
+            FileOutputStream flStrm = null;
+            PrintWriter pw;
+        
+            try
+            {
+                flStrm = new FileOutputStream( fileName );
+                pw = new PrintWriter( flStrm );
+
+                pw.println( type );
+                while( list.getCount() > 0 )
+                {
+                    String entry = ( String )( list.removeFirst() );
+                    pw.println( entry );
                 }
                 pw.close();
                 flStrm.close();

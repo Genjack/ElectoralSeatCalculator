@@ -20,16 +20,17 @@ public class File
 *    To load the list of candidates from an imported .csv file.
 * HOW IT WORKS:
 *    After I retrieve each line, I need to check for the substring, and if I 
-*    find it, replace it. Then count the line. 
+*    find it, replace it. Then create a Candidate object, store and return list.
 *    Checking for "Shooters, Farmers".
-* HOW IT RELATES:
+* REFERENCE NOTES:
+*    Implementation borrowed from my OOPD assignment, Semester one.
 **/
     public static DSALinkedList<Candidate> loadCandidates( String fileName,
         DSALinkedList<Candidate> cndList )
     {
-        String line, trash;
-        String [] splitArr = new String[10];
-        Candidate cnd;
+        String line, trash; //First two lines are descriptive; discard.
+        String [] splitArr = new String[10]; //Array to store csv information.
+        Candidate cnd; //Declaration of Candidate to be constructed each line.
 
         FileInputStream fileStream = null;
         InputStreamReader rdr;
@@ -39,24 +40,27 @@ public class File
         {
             fileStream = new FileInputStream( fileName );
             rdr = new InputStreamReader( fileStream );
-            bufRdr = new BufferedReader( rdr );
+            bufRdr = new BufferedReader( rdr ); //File I/O boilerplate code
            
+            //Read first two lines and leave in an unused string.
             for( int ii = 0; ii < 2; ii++ )
             {
                 trash = bufRdr.readLine();
             }
 
             line = bufRdr.readLine();
+            //Check for empty file - somewhat redundant as I hardcode it in
             if( line == null )
             {
                 throw new IllegalArgumentException( "Error: File is empty." );
             }
             while( line != null )
             {
-                splitLine( line, splitArr );
+                splitLine( line, splitArr ); //Split line on ","
                 
                 //Assemble Candidate object and store in array.
                 cnd = makeCandidate( splitArr, 0 );
+                //Store the Candidate in the list...
                 cndList.insertLast( cnd, cnd.getSurname() );
                 line = bufRdr.readLine(); 
             }
@@ -71,11 +75,12 @@ public class File
                 }
                 catch( IOException e2 )
                 {
-                    //Empty.
+                    //Empty (nothing else to do)
                 }
             }
             e.printStackTrace( System.out );
         }
+        //... And return the list.
         return cndList;
     }//End Submodule.
 
@@ -86,7 +91,10 @@ public class File
 *    To parse a specific line of a file, ensure it is formatted correctly and
 *    return the data via an array to loadCandidates() for further processing.
 * HOW IT WORKS:
-* HOW IT RELATES:
+*    Splits the line on ","; checks if the "Shooters, Farmers and Fishers" party
+*    unfortunately is a thing; if it unfortunately is a thing, then we replace
+*    the line with a name with no comma to enable it to work with our methods.
+*    Then we return the array for use in making a Candidate/SeatChallenger
 **/
 
     private static String [] splitLine( String line, String [] arr )
@@ -116,7 +124,8 @@ public class File
 * PURPOSE:
 *    To create and store a Candidate Object from file.
 * HOW IT WORKS:
-* HOW IT RELATES:
+*    Takes in the array and ballot position, formats the Strings to fit their
+*    actual data types, and then creates a Candidate object to store.
 **/
     public static Candidate makeCandidate( String [] attr, int bp )
     {
@@ -126,7 +135,7 @@ public class File
         int cndID;
         Candidate cnd;
         
-        //parse booleans
+        //parse booleans for whether Candidate is and/or was elected.
         if( attr[8].equals( "Y" ) )
         {
             elected = true;
@@ -144,6 +153,7 @@ public class File
         {
             histElected = false;
         }
+        //Turn the Division IDs and Candidate IDs into integers.
         divID = Integer.parseInt( attr[1] );
         cndID = Integer.parseInt( attr[5] );
 
@@ -160,12 +170,19 @@ public class File
 
 //**************************** LOAD SEATS FROM FILE **************************//
 
+/**
+* FUNCTION: loadSeats
+* PURPOSE: Similar to loadCandidates(), but facilitates the creation of 
+*    SeatChallenger objects instead.
+**/
     public static DSALinkedList<SeatChallenger> loadSeats( String file, 
         DSALinkedList<SeatChallenger> list )
     {
         int ballotPosition;
+        //Record disdainful expressions of apathetic idiocy:
         int totalInformalVotes = 0;
         int informalOccurrences = 0;
+
         String line, trash;
         String [] splitArr = new String[15]; //All Seat & candidate info.
         String [] makeArr = new String[10]; //For using in makeCandidate()
@@ -184,7 +201,7 @@ public class File
             rdr = new InputStreamReader( fileStream );
             bufRdr = new BufferedReader( rdr );
            
-            for( int ii = 0; ii < 2; ii++ )
+            for( int ii = 0; ii < 2; ii++ ) //Discard top two descriptive lines
             {
                 trash = bufRdr.readLine();
             }
@@ -197,24 +214,27 @@ public class File
                 
                 //Turn ballot position index into integer for processing:
                 ballotPosition = Integer.parseInt( splitArr[8] );
+
                 //Need to reformat array indexes to match makeCandidate():
                 for( int ii = 0; ii < 3; ii++ )
                 {
-                    makeArr[ii] = splitArr[ii];
+                    //state abbreviation, div ID, div Name
+                    makeArr[ii] = splitArr[ii]; 
                 }
-                makeArr[3] = splitArr[11];
-                makeArr[4] = splitArr[12];
+                makeArr[3] = splitArr[11]; //party abbreviation
+                makeArr[4] = splitArr[12]; //party name
                 for( int ii = 5; ii < 8; ii++ )
                 {
+                    //Candidate ID, surname, given name
                     makeArr[ii] = splitArr[ii];
                 }
-                makeArr[8] = splitArr[9];
-                makeArr[9] = splitArr[10];
+                makeArr[8] = splitArr[9]; //Elected Y/N
+                makeArr[9] = splitArr[10]; //Elected before Y/N
                 //Check for informal votes/squandering of democratic privilege
                 if( makeArr[6].equals( "Informal" ) )
                 {
                     totalInformalVotes += Integer.parseInt( splitArr[13] );
-                    informalOccurrences++;
+                    informalOccurrences++; //record and display, don't use
                 }
                 else
                 {
@@ -226,6 +246,7 @@ public class File
 
                 line = bufRdr.readLine(); 
             }
+            //Display number of insults to Pericles
             System.out.println( "Total informal votes found: " +
                 totalInformalVotes + "\nTotal occurrences: " +
                 informalOccurrences );
@@ -250,6 +271,7 @@ public class File
 
 //****************************** MAKE SEATCHALLENGER *************************//
 
+    //FUNCTION: Create SeatChallenger object and return.
     public static SeatChallenger makeSeat( String [] arr, Candidate cnd )
     {
         int votes, pollID;
