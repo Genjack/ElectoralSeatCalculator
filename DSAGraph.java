@@ -334,24 +334,28 @@ public class DSAGraph<E>
     public void addEdge( String vert1Label, String vert2Label, String inLabel,
         int inWeight )
     {    
-        DSAGraphEdge newEdge;
+        DSAGraphEdge newEdgeIn, newEdgeOut;
             
         if( ( exists( vert1Label ) ) && ( exists( vert2Label ) ) )
         {
             DSAGraphVertex vert1 = getVertex( vert1Label );
             DSAGraphVertex vert2 = getVertex( vert2Label );
 
-            if( ! ( edgeExists( inLabel ) ) )
+            if( ! ( isAdjacent( vert1, vert2 ) ) )
             {
                 //Vertices exist and edge doesn't, so we can connect them:
-                newEdge = new DSAGraphEdge( inLabel, inWeight );
-                newEdge.setFrom( vert1 );
-                newEdge.setTo( vert2 );
+                newEdgeIn = new DSAGraphEdge( inLabel, inWeight );
+                newEdgeIn.setFrom( vert1 );
+                newEdgeIn.setTo( vert2 );
+                vert1.addEdge( newEdgeIn );
+
+                newEdgeOut = new DSAGraphEdge( inLabel, inWeight );
+                newEdgeOut.setFrom( vert2 );
+                newEdgeOut.setTo( vert1 );
+                vert2.addEdge( newEdgeOut );
                 
-                vert1.addEdge( newEdge );
-                vert2.addEdge( newEdge );
-                
-                edges.insertSorted( newEdge, inLabel ); //don't need getter here
+                edges.insertSorted( newEdgeIn, inLabel ); //don't need getter here
+                edgeCount++;
             }
         }   
     }
