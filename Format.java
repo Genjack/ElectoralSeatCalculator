@@ -4,6 +4,8 @@
    File Name: File.java
    Contents: Java for the File class for the DSA assignment, with methods
    relating to file I/O.
+
+   REFERENCING: Actually none; this is all original work.
 */
 
 import java.util.*;

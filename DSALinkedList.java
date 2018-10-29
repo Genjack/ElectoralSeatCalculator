@@ -4,6 +4,11 @@
    Content: Java code for DSAList class, which contains the code for both
    DSALinkedList and DSAListNode as a private class. Updated to take generics
    for increased compatibility and ease of use.
+
+   REFERENCING: This code is taken from the LinkedList practical from Prac 4 and
+   a little bit of Prac 5; I added to it a few weeks ago with the addition of
+   an insertSorted() method for the graph. Idea for that one came from Nathan,
+   2nd year student and man with a plan.
 */
 
 import java.util.*;

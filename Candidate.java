@@ -4,8 +4,9 @@
     File Name: Candidate
     Contents: Java for the creation of a Candidate object, with class fields to
     store a political candidate.
-    Previous guidance: The template for this code is loosely based on my
-    MeatClass for  OOPD Assignment, Semester One 2018.
+ 
+    REFERENCING: The template for this code is loosely based on my MeatClass for  
+    OOPD Assignment, Semester One 2018.
     Date Last Modified: 28th October, 2018
 */
 

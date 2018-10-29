@@ -4,6 +4,10 @@
    File Name: File.java
    Contents: Java for the File class for the DSA assignment, with methods
    relating to file I/O.
+
+   REFERENCING: The majority of the file I/O for this assignment was based on
+   my OOPD assignment, in all contained I/O methods; anything unrelated to file
+   I/O is original for this assignment.
 */
 
 import java.util.*;
@@ -285,4 +289,10 @@ public class File
         seat = new SeatChallenger( cnd, pollID, arr[4], votes, swing );
         return seat;
     }
+
+//***************************** READ IN ELECTORATE ***************************//
+
+    //FUNCTION: parse CSV file to store and process locations from file.
+    /* Will use the linked list to check locations of marginal seats.*/
+    //Please see report - Unable to complete.
 } //END FILE CLASS

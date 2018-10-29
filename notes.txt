@@ -109,3 +109,8 @@ DID NOT TEST OPTIONAL SAVE BECAUSE IT'S SO EASY TO TEST.
 
 EDGE CLASS
 weight, label, pointer to vert1 and vert2.
+
+
+GRAPH
+    Ask for User input of which division numbers they wish to visit based on the
+    report from the list by margin. For e

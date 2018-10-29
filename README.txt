@@ -33,7 +33,9 @@ HOW TO RUN THE PROGRAM
 
 Please run 'java Government' after compiling. The program functions with a menu,
 which provides you with different options for various functions. The menu is
-operated with the number keys, as shown in the prompts.
+operated with the number keys, as shown in the prompts. The files needed are
+hardcoded; there are some testfiles - testLoad for part 1/2 and testSeats for
+part 3 - if you would like to swap them out.
 
 ====
 FILE DESCRIPTIONS
@@ -106,6 +108,10 @@ Government.java:
     The executable file which should be run to initiate the program. Simply
     calls Menu.run().
 
+DSAGraph.java:
+    The code I have written for my graph prac, plus an Edge class created more
+    recently. Not really used in the assignment.
+
 ====
 TEXT FILE DESCRIPTIONS
 ====
@@ -117,3 +123,7 @@ testCases/testLoad/testSeats/testMarginal.txt: Various shortened versions of the
     above csv files used during testing.
 tfNoBuffer: A test file without the two lines I normally skip at the top.
 Elect/Airport distances: Necessary assignment spec files.
+
+DesignNotes.txt/notes.txt/AssignmentNotes.txt: These are just note files that
+I made during my work to help focus, and may provide insight into my thought
+processes if you're interested.

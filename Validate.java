@@ -9,6 +9,8 @@
       that will not break the program.
    
    Note: Exceptions thrown need to be caught elsewhere.
+
+   REFERENCING: All original work.
 */
 
 import java.util.*;

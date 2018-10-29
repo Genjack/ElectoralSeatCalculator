@@ -2,6 +2,8 @@
    Student ID: 19390664
    Unit and Time: DSA, Tuesdays @ 12pm
    Contents: Test Harness for DSAGraph Class, Practical 6 of DSA.
+
+   REFERENCING: Loosely based on the test harness for my prac.
 */
 
 import java.util.*;
@@ -109,5 +111,77 @@ public class UnitTestGraph
         testGraph.addEdge( "E", "A", "etoa", 1500 );
         testGraph.addEdge( "E", "B", "etob", 1500 );
         testGraph.displayList();
+    }
+
+    //TESTING: display Matrix
+    @Test
+    public void testDisplayMatrix()
+    {
+        testGraph.addVertex( "A", "A" );
+        testGraph.addVertex( "B", "B" );
+        testGraph.addVertex( "C", "C" );
+        testGraph.addVertex( "D", "D" );
+        testGraph.addVertex( "E", "E" );
+        testGraph.addEdge( "A", "B", "atob", 1500 );
+        testGraph.addEdge( "A", "E", "atoe", 1500 );
+        testGraph.addEdge( "B", "A", "btoa", 1500 );
+        testGraph.addEdge( "B", "C", "btoc", 1500 );
+        testGraph.addEdge( "B", "E", "btoe", 1500 );
+        testGraph.addEdge( "B", "D", "btod", 1500 );
+        testGraph.addEdge( "C", "B", "ctob", 1500 );
+        testGraph.addEdge( "C", "D", "ctod", 1500 );
+        testGraph.addEdge( "D", "B", "dtob", 1500 );
+        testGraph.addEdge( "D", "C", "dtoc", 1500 );
+        testGraph.addEdge( "E", "A", "etoa", 1500 );
+        testGraph.addEdge( "E", "B", "etob", 1500 );
+        testGraph.displayMatrix();
+    }
+
+    //TESTING: Depth-first search
+    @Test
+    public void testDFS()
+    {
+        testGraph.addVertex( "A", "A" );
+        testGraph.addVertex( "B", "B" );
+        testGraph.addVertex( "C", "C" );
+        testGraph.addVertex( "D", "D" );
+        testGraph.addVertex( "E", "E" );
+        testGraph.addEdge( "A", "B", "atob", 1500 );
+        testGraph.addEdge( "A", "E", "atoe", 1500 );
+        testGraph.addEdge( "B", "A", "btoa", 1500 );
+        testGraph.addEdge( "B", "C", "btoc", 1500 );
+        testGraph.addEdge( "B", "E", "btoe", 1500 );
+        testGraph.addEdge( "B", "D", "btod", 1500 );
+        testGraph.addEdge( "C", "B", "ctob", 1500 );
+        testGraph.addEdge( "C", "D", "ctod", 1500 );
+        testGraph.addEdge( "D", "B", "dtob", 1500 );
+        testGraph.addEdge( "D", "C", "dtoc", 1500 );
+        testGraph.addEdge( "E", "A", "etoa", 1500 );
+        testGraph.addEdge( "E", "B", "etob", 1500 );
+        testGraph.dfs(); //Should be ABCDBCE effectively, so ABCDE
+    }
+
+    //TESTING: breadth-first search
+    @Test
+    public void testBFS()
+    {
+        testGraph.addVertex( "A", "A" );
+        testGraph.addVertex( "B", "B" );
+        testGraph.addVertex( "C", "C" );
+        testGraph.addVertex( "D", "D" );
+        testGraph.addVertex( "E", "E" );
+        testGraph.addEdge( "A", "B", "atob", 1500 );
+        testGraph.addEdge( "A", "E", "atoe", 1500 );
+        testGraph.addEdge( "B", "A", "btoa", 1500 );
+        testGraph.addEdge( "B", "C", "btoc", 1500 );
+        testGraph.addEdge( "B", "E", "btoe", 1500 );
+        testGraph.addEdge( "B", "D", "btod", 1500 );
+        testGraph.addEdge( "C", "B", "ctob", 1500 );
+        testGraph.addEdge( "C", "D", "ctod", 1500 );
+        testGraph.addEdge( "D", "B", "dtob", 1500 );
+        testGraph.addEdge( "D", "C", "dtoc", 1500 );
+        testGraph.addEdge( "E", "A", "etoa", 1500 );
+        testGraph.addEdge( "E", "B", "etob", 1500 );
+        testGraph.bfs(); //Should be ABECD
     }
 }//End Test Harness. 

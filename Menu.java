@@ -5,9 +5,11 @@
 
    File Contents: Menu.java
    Description: This is the main file for my DSA Assignment, containing the 
-   main menu which will greet the user when they run the program. Much of the
-   code here has been adapted from my Geo.java file I created for Practical 1
-   of DSA, which in turn was taken in part from my OOPD assignment.
+   main menu which will greet the user when they run the program. 
+   
+   REFERENCING: Much of the code here has been adapted from my Geo.java file I 
+   created for Practical 1 of DSA, which in turn was taken in part from my OOPD 
+   assignment.
 */
 
 import java.util.*;
@@ -43,7 +45,7 @@ public class Menu
 
         //Part 3
         DSALinkedList<SeatChallenger> seatListAll; //Master Seat list.
-        DSALinkedList<String> log; //For recording marginal seats
+        DSALinkedList<String> log; //For recording Marginal Seats.
         seatListAll = new DSALinkedList<SeatChallenger>();
         //Array to store SeatChallenger objects.
         SeatChallenger [] seatArr; //Create AFTER file is read in.
@@ -65,7 +67,7 @@ public class Menu
                         if( ! ( cndFileRead ) )
                         {
                             //Create linked list, read file contents into it.
-                            File.loadCandidates( /*candidateFile*/"testLoad.txt", cndListAll );
+                            File.loadCandidates( candidateFile, cndListAll );
                         }
                         //Copy contents to filter list for sorting, so that
                         //the main list is intact and can be manipulated later:
@@ -127,14 +129,33 @@ public class Menu
                         //Table is returned, array is passed by reference.
                         log = Utility.getMarginalSeats( seatArr, ptyTable );
                         optionalSaveLog( log, "Marginal Seats" );
-                        while( seatListAll.getCount() > 0 )
+                        /*while( seatListAll.getCount() > 0 )
                         {
                             seatListAll.removeFirst();
-                        }
+                        }*/
                         while( log.getCount() > 0 )
                         {
                             log.removeFirst();
                         }
+                        seatFileRead = true;
+                    }
+                    break;
+                    case 4: //**** ITINERARY BY MARGIN *****//
+                    {
+                        /* if( !( seatFileRead ) )
+                        {
+                            System.out.println( "Please choose option 3 first.");
+                        }
+                        else
+                        {*/
+                            System.out.println( "Please see the report." );                        
+                            System.out.println( "I can't offer you a graph, but"
+                            + " I can offer a bad joke;\n \"As I handed my " +
+                            "father his 50th birthday card, he looked at me\n " +
+                            " with tears in his eyes, and said, \'one would " +
+                            "been enough, son.\'\"" );
+                         
+                            //File.readGraph( "ElectDist1.1.csv", seatListAll ); 
                     }
                     break;
                     case 5:

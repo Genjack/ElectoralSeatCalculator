@@ -8,6 +8,9 @@
    Note: DSAGraph (this main one) has a LinkedList for the vertices.
    Then, each DSAListNode inside this LinkedList has an Object, which will
    be a DSAGraphVertex Class Object with a label and links of their own.
+
+   REFERENCING: Code for main DSAGraph and DSAGraphVertex mostly taken from my
+   practical 6 submission; DSAGraphEdge I wrote specifically for the assignment
 */
 
 import java.util.*;
@@ -55,6 +58,9 @@ public class DSAGraph<E>
         {
             return m_visited;
         }
+
+        // Used in the search functions at the end.
+        // Returns the next vertex in the edge list that hasn't yet been visited
         public DSAGraphVertex getNextUnvisited()
         {
             DSALinkedList<DSAGraphEdge> edgelist;
@@ -67,6 +73,7 @@ public class DSAGraph<E>
             nextEdge = rator.next();
             while( nextEdge != null && !exists )
             {
+                //If the vertex the current edge goes to hasn't been visited:
                 if( ! ( nextEdge.getVertTo().getVisited() ) )
                 {
                     nextUnvisited = nextEdge.getVertTo();
@@ -141,6 +148,7 @@ public class DSAGraph<E>
             e_weight = inWeight;
             e_label = inLabel;
             e_visited = false;
+            //Vertex the edge is from; bidirectional implementation however.
             e_vertFrom = null;
             e_vertTo = null;
         }
@@ -204,6 +212,8 @@ public class DSAGraph<E>
     {
         vertices = new DSALinkedList<DSAGraphVertex>();
         edges = new DSALinkedList<DSAGraphEdge>();
+        //A lot easier to have the count consistently stored for the sake of
+        //a single integer. In this case, ease/computation > storage efficiency
         edgeCount = 0;
     }
 
@@ -232,11 +242,6 @@ public class DSAGraph<E>
         return edgeCount;
     }
             
-//start with A, count all; store A away; go to B, count all; if A, don't add
-//store B away; go to C, do the same but miss A and B etc etc.
-        //Go through, count; for each count, swap around the edges and 
-        //see if you have that combo already; if yes, don't add.
-    
     //Should return the value of the node, which should be a DSAGraphVertex
     public DSAGraphVertex getVertex( String inLabel )
     {
@@ -261,6 +266,7 @@ public class DSAGraph<E>
         return outVert;
     }
 
+    //Return the edge class instance if the inLabel string matches one:
     public DSAGraphEdge getEdge( String inLabel )
     {
         boolean found = false;
@@ -290,6 +296,7 @@ public class DSAGraph<E>
         return inVert.getAdjacentEdges();
     }
 
+    //This is extremely useful in avoiding duplicate bidirectional edges
     public boolean isAdjacent( DSAGraphVertex vert1, DSAGraphVertex vert2 )
     {
         boolean isAdj = false;
@@ -303,8 +310,10 @@ public class DSAGraph<E>
         while( ( rator.hasNext() ) && ( isAdj == false ) )
         {
             compEdge = rator.next();
+            //IF: the vertex at the other end of the edge is equal to vert2
             if( compEdge.getVertTo().getLabel().equals( vert2.getLabel() ) )
             {
+                //Then it's adjacent.
                 isAdj = true;
             }
         } 
@@ -313,6 +322,7 @@ public class DSAGraph<E>
 
 //********************************* MUTATORS *********************************//
 
+    //Add a vertex to the graph:
     public void addVertex( String inLabel, E inVal )
     {
         DSAGraphVertex newVert;
@@ -326,21 +336,24 @@ public class DSAGraph<E>
             if( !( exists( inLabel ) ) ) //check if label already exists.
             {
                 newVert = new DSAGraphVertex( inLabel, inVal );
+                //Insert Sorted method ensures alphabetical storage
                 vertices.insertSorted( newVert, newVert.getLabel() );
             }
         }
     }
 
+    //Add an edge to the graph by connecting two pre-existing vertices
     public void addEdge( String vert1Label, String vert2Label, String inLabel,
         int inWeight )
     {    
         DSAGraphEdge newEdgeIn, newEdgeOut;
-            
+        //If the vertices exist; retrive them:
         if( ( exists( vert1Label ) ) && ( exists( vert2Label ) ) )
         {
             DSAGraphVertex vert1 = getVertex( vert1Label );
             DSAGraphVertex vert2 = getVertex( vert2Label );
 
+            //If they are not adjacent already, connect them:
             if( ! ( isAdjacent( vert1, vert2 ) ) )
             {
                 //Vertices exist and edge doesn't, so we can connect them:
@@ -348,13 +361,17 @@ public class DSAGraph<E>
                 newEdgeIn.setFrom( vert1 );
                 newEdgeIn.setTo( vert2 );
                 vert1.addEdge( newEdgeIn );
-
+                
+                //Create two instances of Edge class, one for each vertex
                 newEdgeOut = new DSAGraphEdge( inLabel, inWeight );
+                //Set the edge to reference the vertices:
                 newEdgeOut.setFrom( vert2 );
                 newEdgeOut.setTo( vert1 );
+                //And add it to vertex edge list
                 vert2.addEdge( newEdgeOut );
                 
                 edges.insertSorted( newEdgeIn, inLabel ); //don't need getter here
+                //Only add ONE edge to the graph list however to avoid doubling
                 edgeCount++;
             }
         }   
@@ -365,6 +382,7 @@ public class DSAGraph<E>
     /* These methods are, at this stage at least, more for enabling me to see
        what's happening under the hood in testing */
 
+    //Turns the graph into an adjacency list and prints it out.
     public void displayList()
     {
         Iterator<DSAGraphVertex> vertRator; 
@@ -373,12 +391,14 @@ public class DSAGraph<E>
         DSAGraphVertex currVert;
         DSAGraphEdge innerEdge;
         
+        //Iterator over graph vertex:
         vertRator = vertices.iterator();
         while( vertRator.hasNext() )
         {
             currVert = vertRator.next();
             System.out.print( currVert.getLabel() + "|" );
             compEdges = currVert.getAdjacentEdges();
+            //Iterator over edges connected to current vertex:
             edgeRator = compEdges.iterator();
             
             while( edgeRator.hasNext() )
@@ -386,10 +406,12 @@ public class DSAGraph<E>
                 innerEdge = edgeRator.next();
                 System.out.print( innerEdge.getVertTo().getLabel() );
             }
+            //New line, new vertex in the graph to check
             System.out.print("\n");
         }
     }
 
+    //Check that a VERTEX exists
     public boolean exists( String inLabel )
     {
         Iterator<DSAGraphVertex> rator;
@@ -407,7 +429,8 @@ public class DSAGraph<E>
         }
         return inVertExists;
     }
-
+    
+    //Check that an EDGE exists
     public boolean edgeExists( String inLabel )
     {
         Iterator<DSAGraphEdge> rator;
@@ -441,6 +464,7 @@ public class DSAGraph<E>
         DSAGraphVertex currVert, miniVert;
         
         vertRator = vertices.iterator();
+        System.out.println( "\n" ); //For Junit purposes to look pretty
         System.out.print( "  " ); //Indenting top line for alignment of matrix
         while( vertRator.hasNext() )
         {
@@ -470,6 +494,7 @@ public class DSAGraph<E>
         }
     }
 
+    //Reset all vertices to unvisited in the graph - called before display mthds
     public void clearVisited()
     {
         Iterator<DSAGraphVertex> rator;
@@ -489,7 +514,6 @@ public class DSAGraph<E>
 *   on alphabetical order, and traverses the graph based on the edges, 
 *   visiting each node in turn.
 **/
-//NOTE: post midday alterations from this point onwards.
                 
     public void dfs()
     {
@@ -499,24 +523,33 @@ public class DSAGraph<E>
         DSAGraphVertex printVert, current;
 
         current = vertices.peekAtFirst();
-
+    
+        //Put first vertex on the stack
         stack.insertLast( current, current.getLabel() );
+        //Set it to visited:
         current.setVisited();
+        //And print it to screen.
         System.out.println( current.getLabel() );
 
         while( ! ( stack.isEmpty() ) )
         {
+            //Retrieve the current stack vertex's list of adjacent vertices
             while( stack.peekAtLast().getNextUnvisited() != null )
             {
+                //Put this guy onto the stack and set visited too
                 stack.insertLast( stack.peekAtLast().getNextUnvisited(),
                     stack.peekAtLast().getNextUnvisited().getLabel() );
                 stack.peekAtLast().setVisited();
+                //And print it out
                 System.out.println( stack.peekAtLast().getLabel() );
             }
+            //If no more unvisited, pop the last one off the stack and try again
             stack.removeLast();
-        }
+        }//Stack finished means dfs finished.
     }
 
+    //Go across the graph as much as possible first, by checking all adjacencies
+    //of the first vertex before moving on.
     public void bfs()
     {
         DSALinkedList<DSAGraphVertex> queue;
@@ -525,6 +558,7 @@ public class DSAGraph<E>
 
         clearVisited();
         
+        //Similar to dfs, but use a queue, and don't 'dive in' as t'were
         current = vertices.peekAtFirst();
         queue.insertLast( current, current.getLabel() );
         current.setVisited();

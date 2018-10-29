@@ -1,6 +1,9 @@
 /* This class contains generic submodules for use in other programs.
  * Note: This file must be in the same directory as the calling program in 
- * order to be called as User.subModule(). */
+ * order to be called as User.subModule(). 
+
+   REFERENCING: Taken straight from OOPD; I created this class months ago.
+*/
 import java.util.*;
 
 public class User
